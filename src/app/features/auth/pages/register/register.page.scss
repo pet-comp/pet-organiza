@@ -1,0 +1,42 @@
+ion-content {
+    --background: var(--background-white);
+}
+
+.chupa-cubo {
+    width: 160px;
+}
+
+.title-container {
+    font-family: "Montserrat Regular";
+    color: var(--forest-green);
+    padding-bottom: 5px;
+
+    span {
+        font-family: "Montserrat Bold";
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+}
+
+.form-container {
+    width: 100%;
+    margin: 30px 0 30px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.signin-container {
+    margin-top: 25px;
+    font-family: "Montserrat Medium";
+    color: var(--plain-green);
+    font-size: 0.9rem;
+
+    a {
+        font-family: "Montserrat SemiBold";
+        color: var(--forest-green);
+        text-decoration: underline 2px;
+    }
+}

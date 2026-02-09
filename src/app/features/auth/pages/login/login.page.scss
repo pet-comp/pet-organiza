@@ -1,0 +1,112 @@
+ion-content {
+    --background: var(--background-white);
+}
+
+.welcome-chupa-cubo {
+    width: 280px;
+}
+
+.title-container {
+    font-family: "Montserrat Regular";
+    color: var(--forest-green);
+    padding-bottom: 5px;
+
+    span {
+        font-family: "Montserrat Bold";
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+}
+
+.form-container {
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.forgot-password-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+    a {
+        font-family: "Montserrat SemiBold";
+        color: var(--forest-green);
+        font-size: 0.9rem;
+        text-decoration: none;
+        margin: 10px 0 50px 0;
+    }
+}
+
+.signup-container {
+    margin-top: 25px;
+    font-family: "Montserrat Medium";
+    color: var(--plain-green);
+    font-size: 0.9rem;
+
+    a {
+        font-family: "Montserrat SemiBold";
+        color: var(--forest-green);
+        text-decoration: underline 2px;
+    }
+}
+
+.divider-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 40px;
+
+    hr {
+        width: 40px;
+        height: 2px;
+        background-color: var(--disable-gray);
+        margin: 0;
+    }
+
+    ion-text {
+        font-family: "Montserrat Bold";
+        color: var(--disable-gray);
+        font-size: 0.9rem;
+        margin: 0;
+    }
+}
+
+.social-buttons-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+
+    .social-button {
+        --border-radius: 10px;
+        --border-width: 2px;
+        --width: 60px;
+        --height: 60px;
+        --padding-start: 7px;
+        --padding-end: 7px;
+        --padding-top: 7px;
+        --padding-bottom: 7px;
+        --box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        --ripple-color: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        // Efeito visual ao clicar
+        &:active {
+            transform: scale(0.98);
+        }
+
+        img {
+            width: 1.8rem;
+        }
+    }
+}

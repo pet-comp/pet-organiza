@@ -1,0 +1,38 @@
+<ion-content [fullscreen]="true" class="ion-text-center">
+  <div class="content-wrapper ion-padding">
+
+    <img class="organiza-logo" src="assets/extended-text-logo-organiza.svg" alt="Logo do Pet Organiza" />
+    <div class="title-container">
+      <h2>Organize suas <span>tarefas</span>, construa novos <span>hábitos</span>, colecione <span>cubos</span></h2>
+    </div>
+
+    <swiper-container #swiper [pagination]="true" [spaceBetween]="-70">
+      <swiper-slide *ngFor="let slide of slides">
+        <div class="slide-content">
+          <img [src]="slide.image" class="slide-image" />
+          <ion-card class="slide-card">
+            <ion-card-header>
+              <ion-card-title>{{ slide.title }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              {{ slide.description }}
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+  </div>
+
+  <ion-toolbar class="floating-toolbar">
+    @if (currentIndex < slides.length - 1) {
+      <ion-buttons slot="start">
+        <ion-button fill="clear" (click)="finish()">Pular</ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button class="no-ripple next-button" (click)="next(swiper)">Próximo</ion-button>
+      </ion-buttons>
+    } @else {
+      <ion-button expand="block" class="no-ripple start-button" (click)="finish()">Começar agora</ion-button>
+    }
+  </ion-toolbar>
+</ion-content>

@@ -1,0 +1,57 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <div class="header-container ion-text-center">
+    <img class="welcome-chupa-cubo" src="assets/welcome-chupa-cubo.svg" alt="Chupa-cubo dizendo Bem-vinde">
+  </div>
+
+  <div class="title-container">
+    <h2><span>Faça login</span> em sua conta</h2>
+  </div>
+
+  <div class="form-container">
+    <app-organiza-input
+      icon="assets/icons/user.svg"
+      placeholder="Nome de usuário">
+    </app-organiza-input>
+
+    <app-organiza-input
+      icon="assets/icons/lock.svg"
+      type="password"
+      placeholder="Senha">
+    </app-organiza-input>
+  </div>
+
+  <div class="forgot-password-container ion-text-end">
+    <a href="#">Esqueceu sua senha?</a>
+  </div>
+
+  <div class="main-button-container">
+  <app-organiza-button
+    label="Entrar"
+    type="submit"
+    (onClick)="handleLogin()">
+  </app-organiza-button>
+  </div>
+
+  <div class="signup-container ion-text-center">
+    <ion-text>
+      Não tem uma conta? <a (click)="navigateToRegister()">Cadastre-se</a>
+    </ion-text>
+  </div>
+
+  <div class="divider-container">
+    <hr>
+    <ion-text>Ou entrar usando</ion-text>
+    <hr>
+  </div>
+
+  <div class="social-buttons-container">
+    <ion-button class="no-ripple social-button" fill="outline" color="medium" aria-label="Entrar com Facebook">
+      <img src="assets/icons/facebook.svg" alt="Facebook logo" />
+    </ion-button>
+    <ion-button class="no-ripple social-button" fill="outline" color="medium" aria-label="Entrar com Google">
+      <img src="assets/icons/google.svg" alt="Google logo" />
+    </ion-button>
+  </div>
+
+</ion-content>

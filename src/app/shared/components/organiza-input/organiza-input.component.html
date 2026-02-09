@@ -1,0 +1,8 @@
+<div class="input-wrapper">
+  <img [src]="icon" alt="Ícone do campo" class="input-icon">
+  <input
+    [type]="type"
+    [placeholder]="placeholder"
+    [(ngModel)]="value"
+    (input)="valueChange.emit(value)" />
+</div>

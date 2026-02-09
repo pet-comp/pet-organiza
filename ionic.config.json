@@ -1,0 +1,7 @@
+{
+  "name": "pet-organiza",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

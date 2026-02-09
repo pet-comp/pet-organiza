@@ -1,0 +1,169 @@
+ion-content {
+  --background: var(--pastel-green);
+  position: relative;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  overflow-y: hidden;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+swiper-container {
+  width: 100%;
+  --swiper-pagination-color: var(--middle-pink);
+  --swiper-pagination-bullet-inactive-color: var(--clear-green);
+  --swiper-pagination-bullet-inactive-opacity: 1;
+  --swiper-pagination-bottom: 0;
+
+  &::part(bullet), &::part(bullet-active) {
+    width: 14px;
+    height: 14px;
+    transition: width 0.3s ease;
+  }
+}
+
+swiper-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 0;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.organiza-logo {
+  width: 250px;
+  margin-bottom: 25px;
+  flex-shrink: 0;
+}
+
+.title-container {
+  font-family: "Montserrat Regular", sans-serif;
+  color: var(--forest-green);
+  padding-bottom: 50px;
+  flex-shrink: 0;
+  h2 { font-size: 1.3rem; }
+  span { font-family: "Montserrat Bold", sans-serif; }
+}
+
+.slide-image {
+  max-height: 175px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.slide-card {
+  border-radius: 0 0 20px 20px;
+  width: 260px;
+  height: 200px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  margin-top: -50px;
+  position: relative;
+  z-index: 1;
+  padding-top: 10px;
+  background: var(--lime-green);
+  margin-bottom: 30px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: inherit;
+    border-top-left-radius: 50% 100px;
+    border-top-right-radius: 50% 100px;
+    z-index: 0;
+    transform: scaleX(1.1);
+  }
+
+  ion-card-header {
+    padding-top: 30px;
+    text-align: center;
+  }
+  ion-card-title {
+    font-family: "Montserrat Bold";
+    font-size: 1.3rem;
+    margin: 10px;
+    color: var(--forest-green);
+  }
+  ion-card-content {
+    font-family: "Montserrat Regular";
+    text-align: center;
+    font-size: 1.15rem;
+    color: var(--forest-green);
+    padding-bottom: 40px;
+  }
+}
+
+.floating-toolbar {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  padding: 0 10px;
+  display: flex;
+  --background: transparent;
+  --padding-start: 20px;
+  --padding-end: 20px;
+  justify-content: space-between;
+  align-items: center;
+
+  ion-button {
+    text-transform: none;
+    font-size: 1rem;
+    font-family: "Montserrat Bold";
+  }
+
+  ion-button[fill="clear"] {
+    --color: var(--disable-gray);
+    --background: transparent;
+  }
+
+  .next-button {
+    --background: var(--forest-green);
+    --color: var(--pure-white);
+    width: 120px;
+    --border-radius: 15px;
+    --padding-top: 15px;
+    --padding-bottom: 15px;
+    --ripple-color: var(--forest-green);
+    transition: transform 0.1s ease-in-out;
+
+    &:active {
+      --background: var(--forest-green) !important;
+      --color: var(--pure-white) !important;
+      transform: scale(0.98);
+    }
+  }
+
+  .start-button {
+      --color: var(--forest-green) !important;
+    --background: var(--lime-green);
+    width: 260px;
+    margin: 0 auto;
+    --border-radius: 15px;
+    --padding-top: 15px;
+    --padding-bottom: 15px;
+    --ripple-color: var(--lime-green);
+    transition: transform 0.1s ease-in-out;
+
+    &:active {
+      --background: var(--lime-green) !important;
+      --color: var(--forest-green) !important;
+      transform: scale(0.98);
+    }
+  }
+}

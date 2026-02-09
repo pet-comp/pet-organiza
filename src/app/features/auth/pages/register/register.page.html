@@ -1,0 +1,53 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <div class="header-container ion-text-center">
+    <img class="chupa-cubo" src="assets/chupa-cubo.svg" alt="Chupa-cubo dizendo Bem-vinde">
+  </div>
+
+  <div class="title-container">
+    <h2><span>Criar</span> uma nova conta</h2>
+  </div>
+
+  <div class="form-container">
+    <app-organiza-input
+      icon="assets/icons/document.svg"
+      placeholder="Nome completo">
+    </app-organiza-input>
+
+    <app-organiza-input
+      icon="assets/icons/user.svg"
+      placeholder="Nome de usuário">
+    </app-organiza-input>
+
+    <app-organiza-input
+      icon="assets/icons/cake.svg"
+      placeholder="Data de nascimento">
+    </app-organiza-input>
+
+    <app-organiza-input
+      icon="assets/icons/mail.svg"
+      type="email"
+      placeholder="E-mail">
+    </app-organiza-input>
+
+    <app-organiza-input
+      icon="assets/icons/lock.svg"
+      type="password"
+      placeholder="Senha">
+    </app-organiza-input>
+  </div>
+
+  <div class="main-button-container">
+    <app-organiza-button
+    label="Cadastrar"
+    type="submit"
+    (onClick)="handleRegister()">
+  </app-organiza-button>
+  </div>
+
+  <div class="signin-container ion-text-center">
+    <ion-text>
+      Já tem uma conta? <a (click)="navigateToLogin()">Fazer login</a>
+    </ion-text>
+  </div>
+</ion-content>
