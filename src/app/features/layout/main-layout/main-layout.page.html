@@ -1,13 +1,30 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>main-layout</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">main-layout</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+    <ion-tab-button tab="cubes">
+      <ion-icon name="cube"></ion-icon>
+      <ion-label>Cubos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="missions">
+      <ion-icon name="star"></ion-icon>
+      <ion-label>Missões</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="home">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>Home</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tasks">
+      <ion-icon name="list"></ion-icon>
+      <ion-label>Tarefas</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="habits">
+      <ion-icon name="repeat"></ion-icon>
+      <ion-label>Hábitos</ion-label>
+    </ion-tab-button>
+
+  </ion-tab-bar>
+</ion-tabs>

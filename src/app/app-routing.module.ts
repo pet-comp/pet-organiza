@@ -23,11 +23,6 @@ const routes: Routes = [
     path: 'mainLayout',
     loadChildren: () => import('./features/layout/main-layout/main-layout.module').then( m => m.MainLayoutPageModule)
   },
-  {
-    path: 'cubes-list',
-    loadChildren: () => import('./features/cubes/cubes-list/cubes-list.module').then( m => m.CubesListPageModule)
-  },
-
 ];
 @NgModule({
   imports: [
