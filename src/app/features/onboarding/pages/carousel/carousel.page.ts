@@ -57,6 +57,6 @@ export class CarouselPage implements OnInit, AfterViewInit {
   }
 
   finish() {
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/mainLayout']);
   }
 }

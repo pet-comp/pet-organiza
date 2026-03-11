@@ -19,6 +19,15 @@ const routes: Routes = [
     path: 'onboarding',
     loadChildren: () => import('./features/onboarding/onboarding.module').then(m => m.OnboardingModule)
   },
+  {
+    path: 'mainLayout',
+    loadChildren: () => import('./features/layout/main-layout/main-layout.module').then( m => m.MainLayoutPageModule)
+  },
+  {
+    path: 'cubes-list',
+    loadChildren: () => import('./features/cubes/cubes-list/cubes-list.module').then( m => m.CubesListPageModule)
+  },
+
 ];
 @NgModule({
   imports: [
