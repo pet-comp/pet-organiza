@@ -79,3 +79,10 @@
 .no-ripple {
   --ripple-color: transparent !important;
 }
+
+.custom-background {
+  --background: var(--background-white);
+  
+  //padding necessário por causa da toolbar superior
+  --padding-top: 60px; 
+}

@@ -1,0 +1,62 @@
+<ion-content class="ion-padding custom-background">
+  
+  <div class="user-header">
+    <div class="user-icon-bg">
+      <ion-icon name="person" class="user-icon"></ion-icon>
+    </div>
+    <span class="user-name">Inserir Texto</span>
+    <ion-icon name="create-outline" class="edit-icon"></ion-icon>
+  </div>
+
+  <h1 class="welcome-message">
+    <span class="dark-text">Olá, </span> <span class="light-text">Inserir Texto</span><span class="dark-text">!</span>
+  </h1>
+
+  <div class="mission-card">
+    <img src="assets/main-logo-organiza-sem-nome.png" alt="Cubo" class="mission-bg-img">
+    
+    <div class="mission-tag">Missão</div>
+    <h2 class="mission-title">Desafio diário</h2>
+    
+    <div class="mission-details">
+      <ion-icon name="flag" class="mission-flag"></ion-icon>
+      <p>Conclua pelo menos uma tarefa para hoje!</p>
+    </div>
+  </div>
+
+  <div class="nav-header">
+    <h2 class="nav-title">Navegação</h2>
+  </div>
+
+  <div class="custom-grid">
+    
+    <div class="nav-card ion-activatable ripple-parent light-card" (click)="navigateToTasks()">
+      <ion-icon name="list" class="card-icon"></ion-icon>
+      <h3 class="card-title">Tarefas</h3>
+      <p class="card-desc">Liste seus afazeres e compromissos</p>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+
+    <div class="nav-card ion-activatable ripple-parent dark-card" (click)="navigateToHabits()">
+      <ion-icon name="sync" class="card-icon"></ion-icon> <h3 class="card-title">Hábitos</h3>
+      <p class="card-desc">Mantenha ações recorrentes</p>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+
+    <div class="nav-card ion-activatable ripple-parent dark-card" (click)="navigateToCubes()">
+      <ion-icon name="cube" class="card-icon"></ion-icon>
+      <h3 class="card-title">Cubos</h3>
+      <p class="card-desc">Confira sua coleção de cubos especiais</p>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+
+    <div class="nav-card ion-activatable ripple-parent light-card" (click)="navigateToMissions()">
+      <ion-icon name="star" class="card-icon"></ion-icon>
+      <h3 class="card-title">Missões</h3>
+      <p class="card-desc">Complete objetivos e ganhe arestas</p>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+
+  </div>
+
+</ion-content>

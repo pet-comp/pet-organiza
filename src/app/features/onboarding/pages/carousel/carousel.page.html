@@ -24,15 +24,14 @@
   </div>
 
   <ion-toolbar class="floating-toolbar">
-    @if (currentIndex < slides.length - 1) {
-      <ion-buttons slot="start">
-        <ion-button fill="clear" (click)="finish()">Pular</ion-button>
+    @if (currentIndex < slides.length - 1) { <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="finish()">Pular</ion-button>
       </ion-buttons>
       <ion-buttons slot="end">
         <ion-button class="no-ripple next-button" (click)="next(swiper)">Próximo</ion-button>
       </ion-buttons>
-    } @else {
+      } @else {
       <ion-button expand="block" class="no-ripple start-button" (click)="finish()">Começar agora</ion-button>
-    }
+      }
   </ion-toolbar>
 </ion-content>
