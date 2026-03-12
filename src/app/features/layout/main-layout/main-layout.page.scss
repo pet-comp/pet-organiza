@@ -1,5 +1,21 @@
+.transparent-toolbar {
+  --background: var(--background-white); 
+  --border-width: 0;
+}
+
+.header-icon {
+  font-size: 28px;
+  color: var(--forest-green);
+  margin: 0 10px;
+}
+
 ion-tab-bar {
     --background: var(--background-white);
     --color: var(--plain-green);
     --color-selected: var(--forest-green);
+}
+
+ion-label {
+    font-family: "Montserrat Regular";
+    font-weight: bold;
 }

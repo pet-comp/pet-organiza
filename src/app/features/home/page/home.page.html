@@ -1,92 +1,62 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-icon name="list"></ion-icon>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">home</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div class="userDisplayContainer">
-    <ion-icon name="person" class="userIcon"></ion-icon>
-    <h1>Inserir Texto</h1>
-    <ion-icon name="create"></ion-icon>
+<ion-content class="ion-padding custom-background">
+  
+  <div class="user-header">
+    <div class="user-icon-bg">
+      <ion-icon name="person" class="user-icon"></ion-icon>
+    </div>
+    <span class="user-name">Inserir Texto</span>
+    <ion-icon name="create-outline" class="edit-icon"></ion-icon>
   </div>
 
-  <h1 class="welcomeMessage">Olá, <strong id="userName">Inserir Texto</strong>!</h1>
+  <h1 class="welcome-message">
+    <span class="dark-text">Olá, </span> <span class="light-text">Inserir Texto</span><span class="dark-text">!</span>
+  </h1>
 
-  <div class="dailyMissionCardPosition">
-    <div class="dailyMissionCard">
-      <p class="missionDisplay">Missão</p>
-      <p class="desafioDiarioDisplay">Desafio diário</p>
-      <div class="missionDetails">
-        <ion-icon name="flag" class="missionFlagIcon"></ion-icon>
-        <p class="missionDescription">Conclua pelo menos uma tarefa para hoje!</p>
-      </div>
-      <img src="src\assets\main-logo-organiza-sem-nome.png" alt="Logo organiza" class="dailyMissionCardImage">
+  <div class="mission-card">
+    <img src="assets/main-logo-organiza-sem-nome.png" alt="Cubo" class="mission-bg-img">
+    
+    <div class="mission-tag">Missão</div>
+    <h2 class="mission-title">Desafio diário</h2>
+    
+    <div class="mission-details">
+      <ion-icon name="flag" class="mission-flag"></ion-icon>
+      <p>Conclua pelo menos uma tarefa para hoje!</p>
     </div>
   </div>
 
-  <h1 class="navigationDisplay">Navegação</h1>
+  <div class="nav-header">
+    <h2 class="nav-title">Navegação</h2>
+  </div>
 
-  <div class="buttonsContainer">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="6">
-          <ion-button expand="block" fill="outline" (click)="navigateToTasks()" class="darkButton">
+  <div class="custom-grid">
+    
+    <div class="nav-card ion-activatable ripple-parent light-card" (click)="navigateToTasks()">
+      <ion-icon name="list" class="card-icon"></ion-icon>
+      <h3 class="card-title">Tarefas</h3>
+      <p class="card-desc">Liste seus afazeres e compromissos</p>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
 
-            <div class="buttonContent">
-              <ion-icon name="list" class="buttonIcon"></ion-icon>
-              <p class="buttonTitle">Tarefas</p>
-              <p class="buttonDescription">Liste seus afazeres e compromissos</p>
-            </div>
+    <div class="nav-card ion-activatable ripple-parent dark-card" (click)="navigateToHabits()">
+      <ion-icon name="sync" class="card-icon"></ion-icon> <h3 class="card-title">Hábitos</h3>
+      <p class="card-desc">Mantenha ações recorrentes</p>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
 
-          </ion-button>
-        </ion-col>
+    <div class="nav-card ion-activatable ripple-parent dark-card" (click)="navigateToCubes()">
+      <ion-icon name="cube" class="card-icon"></ion-icon>
+      <h3 class="card-title">Cubos</h3>
+      <p class="card-desc">Confira sua coleção de cubos especiais</p>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
 
-        <ion-col size="6">
-          <ion-button expand="block" fill="outline" (click)="navigateToHabits()" class="lightButton">
+    <div class="nav-card ion-activatable ripple-parent light-card" (click)="navigateToMissions()">
+      <ion-icon name="star" class="card-icon"></ion-icon>
+      <h3 class="card-title">Missões</h3>
+      <p class="card-desc">Complete objetivos e ganhe arestas</p>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
 
-            <div class="buttonContent">
-              <ion-icon name="repeat" class="buttonIcon"></ion-icon>
-              <p class="buttonTitle">Hábitos</p>
-              <p class="buttonDescription">Mantenha ações recorrentes</p>
-            </div>
-
-          </ion-button>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col size="6">
-          <ion-button expand="block" fill="outline" (click)="navigateToCubes()" class="lightButton">
-
-            <div class="buttonContent">
-              <ion-icon name="cube" class="buttonIcon"></ion-icon>
-              <p class="buttonTitle">Cubos</p>
-              <p class="buttonDescription">Confira sua coleção de cubos especiais</p>
-            </div>
-
-          </ion-button>
-        </ion-col>
-
-        <ion-col size="6">
-          <ion-button expand="block" fill="outline" (click)="navigateToMissions()" class="darkButton">
-
-            <div class="buttonContent">
-              <ion-icon name="star" class="buttonIcon"></ion-icon>
-              <p class="buttonTitle">Missões</p>
-              <p class="buttonDescription">Complete objetivos e ganhe arestas</p>
-            </div>
-
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
   </div>
 
 </ion-content>

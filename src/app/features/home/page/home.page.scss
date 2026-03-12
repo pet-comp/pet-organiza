@@ -1,165 +1,187 @@
-ion-content {
-    --background: var(--background-white);
-    margin: 50px;
-
-    --padding-top: 50px;
-    --padding-bottom: 50px;
-    --padding-end: 50px;
-    --padding-start: 50px;
-
-    --font-family: 'Montserrat Bold';
-    --color: var(--forest-green);
+.header-icon {
+  font-size: 28px;
+  color: var(--forest-green);
+  margin: 0 10px;
 }
 
-.userDisplayContainer {
-  color: var(--forest-green);
-  font-weight: bold;
-  font-family: 'Montserrat Bold';
+.user-header {
   display: flex;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 20px;
-  font-size: 2rem;
+  gap: 12px;
+  margin-top: 10px;
+  margin-bottom: 30px;
 }
 
-.userIcon {
-    background-color: var(--clear-green);
-    padding: 5px;
-    padding-bottom: 0px;
-    padding-top: 7px;
-    border-radius: 5px;
-}
-
-.welcomeMessage {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 50px;
-  margin-top: 50px;
-}
-
-#userName {
-    color: var(--plain-green);
-}
-
-.dailyMissionCardPosition{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.dailyMissionCard {
-    background-color: var(--lime-green);
-    border-radius: 30px;
-    padding: 10px 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-}
-
-.missionDisplay {
-    font-size: 1.2rem;
-    font-weight: bold;
-    background-color: var(--clear-green);
-    border-radius: 20px;
-    color: var(--forest-green);
-    padding: 5px 20px;
-    max-width: fit-content;
-}
-
-.desafioDiarioDisplay {
-    font-weight: bold;
-    font-size: 2rem;
-    color: var(--background-white);
-    margin: 0px;
-    text-shadow: 0px 2px 2px var(--forest-green);
-}
-
-.missionDetails {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    align-items: center;
-    margin-top: 0px;
-    text-shadow: 0px 2px 2px var(--forest-green);
-}
-
-.missionFlagIcon {
-    font-size: 3rem;
-}
-
-.missionDescription {
-    font-size: 1.5rem;
-    font-family: "Montserrat Regular";
-    color: var(--background-white);
-}
-
-.dailyMissionCardImage {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-
-    width: 50px;
-    height: 50px;
-}
-
-.navigationDisplay {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 30px;
-}
-
-.buttonsContainer {
+.user-icon-bg {
+  background-color: var(--clear-green);
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
   display: flex;
-  align-items: center;     
-  justify-content: center;  
-  height: fit-content;
+  align-items: center;
+  justify-content: center;
+
+  .user-icon {
+    font-size: 24px;
+    color: var(--forest-green);
+  }
 }
 
-ion-button {
-  margin: 0; 
-  aspect-ratio: 1 / 1;
+.user-name {
+  font-family: 'Montserrat Bold';
+  font-size: 1.2rem;
   color: var(--forest-green);
-  font-weight: bold;
+}
+
+.edit-icon {
+  font-size: 20px;
+  color: var(--plain-green);
+}
+
+.welcome-message {
+  font-family: 'Montserrat Bold';
+  font-size: 1.6rem;
+  margin-bottom: 25px;
+
+  .dark-text {
+    color: var(--forest-green);
+  }
+  
+  .light-text {
+    color: var(--plain-green);
+  }
+}
+
+.mission-card {
+  background-color: var(--lime-green);
   border-radius: 20px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 10px rgba(110, 202, 74, 0.3);
 }
 
-.darkButton {
-    background-color: var(--clear-green);
-    --border-color: var(--background-white);
+.mission-bg-img {
+  position: absolute;
+  top: -10px;
+  right: -20px;
+  width: 130px;
+  opacity: 70%;
 }
 
-.lightButton{
+.mission-tag {
+  background-color: var(--clear-green);
+  color: var(--forest-green);
+  font-family: 'Montserrat Bold';
+  font-size: 0.85rem;
+  padding: 4px 16px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.mission-title {
+  font-family: 'Montserrat Bold';
+  color: var(--pure-white);
+  font-size: 1.4rem;
+  margin: 0 0 15px 0;
+}
+
+.mission-details {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  .mission-flag {
+    font-size: 2.2rem;
+    color: var(--forest-green);
+  }
+
+  p {
+    font-family: 'Montserrat Regular';
+    color: var(--pure-white);
+    font-size: 1rem;
+    margin: 0;
+    line-height: 1.2;
+    padding-right: 10px;
+  }
+}
+
+.nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .nav-title {
+    font-family: 'Montserrat Bold';
+    color: var(--forest-green);
+    font-size: 1.4rem;
+    margin: 0;
+  }
+}
+
+.custom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  padding-bottom: 30px;
+}
+
+.nav-card {
+  background-color: var(--pastel-green);
+  border-radius: 20px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  transition: filter 0.2s ease-in-out;
+
+  position: relative;
+  overflow: hidden;
+
+  .card-icon {
+    font-size: 28px;
+    color: var(--forest-green);
+    margin-bottom: 12px;
+  }
+
+  .card-title {
+    font-family: 'Montserrat Bold';
+    color: var(--forest-green);
+    font-size: 1.1rem;
+    margin: 0 0 4px 0;
+  }
+
+  .card-desc {
+    font-family: 'Montserrat Medium';
+    color: var(--forest-green);
+    font-size: 0.75rem;
+    margin: 0;
+    line-height: 1.2;
+    opacity: 0.85;
+  }
+
+  .light-card{
     background-color: var(--pastel-green);
-    --border-color: var(--background-white);
+  }
+
+  .dark-card{
+    background-color: var(--clear-green);
+  }
 }
 
-.buttonContent {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0px;
-    font-weight: bold;
-}
+.light-card{
+    background-color: var(--pastel-green);
+  }
 
-.buttonIcon {
-    font-size: 2.5rem;
-    margin: 0px;
-    margin-bottom: 20px;
-}
+  .dark-card{
+    background-color: var(--clear-green);
+  }
 
-.buttonTitle {
-    font-size: 2rem;
-    margin: 0px;
-    margin-bottom: 10px;
-}
-
-.buttonDescription {
-    margin: 0px;
-}
-
-
-
-ion-grid {
-  max-width: 400px;
-  width: 100%;
+.nav-card:hover {
+    filter: brightness(0.90);
+    cursor: pointer;
 }
