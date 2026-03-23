@@ -1,12 +1,14 @@
 <div class="group-header">
-  <ion-icon [name]="category.icon"></ion-icon>
-  <h2 class="category-name">{{category.name}}</h2>
-  <ion-icon name="chevron-forward-outline"></ion-icon>
+  <ion-icon [name]="category.icon" [style.color]="'hsl(' + category.colorHue + ', 80%, 30%)'" class="category-icon"></ion-icon>
+  
+  <h2 class="category-name" [style.color]="'hsl(' + category.colorHue + ', 80%, 30%)'"]>{{category.name}}</h2>
+  
+  <ion-icon name="chevron-forward-outline" class="chevron-icon"></ion-icon>
 </div>
 
 <div class="sub-header">
-  <span>Tarefas <ion-icon name="add-circle"></ion-icon></span>
-  <span>{{taskList.length}} Tarefas</span>
+  <span class="left-side">Tarefas <ion-icon name="add-circle"></ion-icon></span>
+  <span class="right-side">{{taskList.length}} Tarefas</span>
 </div>
 
 <ion-list>

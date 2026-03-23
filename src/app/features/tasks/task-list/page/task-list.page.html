@@ -8,7 +8,7 @@
 
     <div (click)="navigateToNewCategory()" class="new-category-button">
       <ion-icon name="add" class="new-category-icon"></ion-icon>
-      <p class="new-category-text">Criar nova categoria</p>
+      <h3 class="new-category-text">Criar nova categoria</h3>
     </div>
 
     <app-organiza-category-card *ngFor="let cat of categories" [category]="cat" [totalTasks]="7"

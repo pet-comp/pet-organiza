@@ -1,9 +1,12 @@
 <div class="category-card" [style.background-color]="'hsl('+ category.colorHue +', 80%, 85%)'">
-  <ion-icon [name]="category.icon" class="category-icon"
-    [style.color]="'hsl(' + category.hue + ', 80%, 30%)'"></ion-icon>
-  <h3 class="category-name" [style.color]="'hsl(' + category.hue + ', 80%, 30%)'">{{category.name}}</h3>
+  <ion-icon [name]="category.icon" class="category-icon" [style.color]="'hsl(' + category.colorHue + ', 80%, 30%)'">
+  </ion-icon>
 
-  <p [style.color]="'hsl(' + category.hue + ', 80%, 30%)'">
+  <h3 class="category-name" [style.color]="'hsl(' + category.colorHue + ', 80%, 30%)'">{{ category.name }}</h3>
+
+  <div class="category-stats" [style.color]="'hsl(' + category.colorHue + ', 80%, 40%)'">
     <ion-icon name="chevron-down-outline"></ion-icon>
-  <p>{{completedTasks}}/{{totalTasks}} Finalizadas</p>
+    <span>{{ completedTasks }}/{{ totalTasks }} finalizadas</span>
+  </div>
+
 </div>

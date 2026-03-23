@@ -20,18 +20,18 @@ export class TaskListPage implements OnInit {
     {
       id: "cat_1",
       name: "Estudos",
-      icone: "book-outline",
+      icon: "book-outline",
       colorHue: 288,
     },
     {
       id: "cat_2",
       name: "Saúde",
-      icone: "pulse-outline",
+      icon: "pulse-outline",
       colorHue: 220,
     }
   ];
 
-  todasAsTarefas = [
+  allTasks = [
     { id: 't_1', name: 'Revisar lista de Álgebra Linear', completed: true, categoryId: 'cat_1' },
     { id: 't_2', name: 'Mandar e-mail pra graduação', completed: false, categoryId: 'cat_1' },
     { id: 't_3', name: 'Fazer a ata da reunião', completed: false, categoryId: 'cat_1' },
@@ -44,7 +44,7 @@ export class TaskListPage implements OnInit {
   }
 
   getTasksByCategory(categoryId: string) {
-    return this.todasAsTarefas.filter(task => task.categoryId === categoryId);
+    return this.allTasks.filter(task => task.categoryId === categoryId);
   }
 
   navigateToCreateTask() {

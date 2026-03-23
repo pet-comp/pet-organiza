@@ -15,8 +15,4 @@ export class OrganizaTaskComponent {
   @Input() task!: Task;
 
   constructor() { }
-
-  toogleCompleted() {
-    this.task.completed = !this.task.completed;
-  }
 }

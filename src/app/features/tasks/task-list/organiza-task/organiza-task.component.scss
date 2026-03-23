@@ -1,0 +1,60 @@
+ion-item {
+    --padding-start: 20px;
+    --inner-padding-end: 20px;
+    --min-height: 60px;
+    --border-color: #e6e6e6;
+    --background: var(--background-white);
+
+    // Gemini fez essa parte porque eu não tava conseguindo estilizar o checkbox do Ionic, cuidado se for mexer pq nem eu sei como tá funcionando
+    ion-checkbox {
+        margin-right: 16px;
+
+        /* 1. O ESTADO DESMARCADO: Acessa o quadrado (container) direto na raiz */
+        &::part(container) {
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            border: 2px solid #b0b0b0;
+            /* O cinza clarinho que mata o preto! */
+            background: transparent;
+            transition: all 0.2s ease;
+            /* Animação suave ao clicar */
+        }
+
+        /* 2. O ESTADO MARCADO: Quando a classe checkbox-checked entra em cena */
+        &.checkbox-checked::part(container) {
+            background: var(--plain-green);
+            /* Fundo Verde exato */
+            border-color: var(--plain-green);
+            /* Borda Verde exata */
+        }
+
+        /* 3. O "V" DO CHECK */
+        &::part(mark) {
+            stroke: var(--pure-white);
+            /* Garante que o V seja branco */
+            stroke-width: 3;
+            /* Deixa o V um pouquinho mais gordinho/visível */
+        }
+    }
+
+    ion-label {
+        h2 {
+            font-size: 1rem;
+            color: #555;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+    }
+
+    .line-through h2 {
+        text-decoration: line-through;
+        color: #a5a5a5;
+    }
+
+    .menu-icon {
+        color: #999;
+        font-size: 1.2rem;
+        cursor: pointer;
+    }
+}
