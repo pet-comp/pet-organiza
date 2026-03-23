@@ -1,0 +1,14 @@
+<div class="group-header">
+  <ion-icon [name]="category.icon"></ion-icon>
+  <h2 class="category-name">{{category.name}}</h2>
+  <ion-icon name="chevron-forward-outline"></ion-icon>
+</div>
+
+<div class="sub-header">
+  <span>Tarefas <ion-icon name="add-circle"></ion-icon></span>
+  <span>{{taskList.length}} Tarefas</span>
+</div>
+
+<ion-list>
+  <app-organiza-task *ngFor="let t of taskList" [task]="t"></app-organiza-task>
+</ion-list>

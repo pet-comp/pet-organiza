@@ -1,0 +1,7 @@
+<ion-item lines="full">
+  <ion-checkbox slot="start" [(ngModel)]="task.completed" (ionChange)="toogleCompleted()"></ion-checkbox>
+
+  <ion-label [class.line-through]="task.completed">
+    <h2>{{task.name}}</h2>
+  </ion-label>
+</ion-item>
