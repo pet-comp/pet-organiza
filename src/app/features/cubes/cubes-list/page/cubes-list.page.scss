@@ -1,0 +1,126 @@
+.page-title {
+  color: #0d6b38;
+  font-weight: 800;
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-family: "Montserrat Bold";
+}
+
+.hero-card {
+  background: #d4edda;
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  margin-bottom: 40px;
+
+  .mascot-img { width: 120px; margin-bottom: 10px; }
+  h2 { color: #0d6b38; font-weight: 800; margin: 0; font-family: "Montserrat Bold";}
+  p { font-size: 16px; color: #155724; line-height: 1.4; padding: 0 10%; font-family: "Montserrat Medium";}
+}
+
+.balance-badge {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 6px 16px;
+  width: 230px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  white-space: nowrap;
+  
+  .edges-icon {width: 40px;}
+  span { color: #0d6b38; font-size: 16px; font-family: "Montserrat Medium";}
+  .m-bold { font-family: "Montserrat Bold";}
+}
+
+.cube-item {
+  text-align: center;
+  margin-bottom: 15px;
+
+  .cube-card {
+    background: #E1E5F1;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 20px 10px;
+    margin-bottom: 5px;
+    flex-direction: column;
+    gap: 10px;
+    
+    img { max-width: 100%; }
+  }
+
+  .cube-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #55596A;
+    font-family: "Montserrat Bold";
+    display: block;
+    line-height: 1.2;
+  }
+
+  &.is-locked {
+    .cube-card {
+      background: #6c757d;
+      opacity: 0.8;
+    }
+    .lock-overlay {
+      position: absolute;
+      color: white;
+      font-size: 24px;
+      display: flex;
+      background: rgba(0,0,0,0.5);
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+    }
+    .cube-name { color: #dfe3e7;}
+  }
+}
+
+.cube-img {
+    width: 60px;
+    aspect-ratio: 1/1;
+}
+
+.custom-segment {
+  --background: transparent;
+  margin-bottom: 25px;
+  border-bottom: 3px solid #e0e0e0; 
+  display: flex;
+  width: 100%;
+
+  ion-segment-button {
+    --color: #adb5bd;
+    --color-checked: #0d6b38;
+    --indicator-color: #0d6b38; 
+    --indicator-height: 4px;     
+    --padding-start: 0;         
+    --padding-end: 0;
+    min-width: auto;            
+    flex: 1;                    
+    
+    ion-label {
+      font-size: 16px;
+      font-family: "Montserrat SemiBold";
+      text-transform: capitalize; 
+      letter-spacing: 0.5px;
+      overflow: visible;         
+    }
+
+    &::part(indicator-background) {
+      margin-bottom: -2px;
+    }
+  }
+}
