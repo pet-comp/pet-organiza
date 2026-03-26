@@ -11,36 +11,46 @@
   <div class="form-container">
     <app-organiza-input
       icon="assets/icons/document.svg"
-      placeholder="Nome completo">
+      placeholder="Nome completo"
+      [value]="nome"
+      (valueChange)="nome = $event">
     </app-organiza-input>
 
     <app-organiza-input
       icon="assets/icons/user.svg"
-      placeholder="Nome de usuário">
+      placeholder="Nome de usuário"
+      [value]="username"
+      (valueChange)="username = $event">
     </app-organiza-input>
 
     <app-organiza-input
       icon="assets/icons/cake.svg"
-      placeholder="Data de nascimento">
+      placeholder="Data de nascimento"
+      [value]="nascimento"
+      (valueChange)="nascimento = $event">
     </app-organiza-input>
 
     <app-organiza-input
       icon="assets/icons/mail.svg"
       type="email"
-      placeholder="E-mail">
+      placeholder="E-mail"
+      [value]="email"
+      (valueChange)="email = $event">
     </app-organiza-input>
 
     <app-organiza-input
       icon="assets/icons/lock.svg"
       type="password"
-      placeholder="Senha">
+      placeholder="Senha"
+      [value]="senha"
+      (valueChange)="senha = $event">
     </app-organiza-input>
   </div>
 
   <div class="main-button-container">
     <app-organiza-button
     label="Cadastrar"
-    type="submit"
+    type="button"
     (onClick)="handleRegister()">
   </app-organiza-button>
   </div>
