@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { TaskListPage } from './task-list.page';
+import { TaskListPage } from './page/task-list.page';
 
 const routes: Routes = [
   {

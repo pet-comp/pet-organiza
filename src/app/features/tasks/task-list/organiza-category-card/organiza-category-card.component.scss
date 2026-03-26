@@ -1,0 +1,40 @@
+.category-card {
+    display: flex;
+    flex-direction: column;
+
+    width: 160px;
+    min-width: 160px;
+    height: 120px;
+
+    padding: 16px;
+    border-radius: 12px;
+    box-sizing: border-box;
+
+    font-weight: bold;
+}
+
+.category-name {
+    font-weight: bold;
+}
+
+.category-icon {
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin: 0; 
+  
+    margin-bottom: auto;
+}
+
+.category-stats {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  
+  font-size: 0.75rem;
+  font-weight: 500;
+  opacity: 0.8;
+  
+  ion-icon {
+    font-size: 0.9rem;
+  }
+}
