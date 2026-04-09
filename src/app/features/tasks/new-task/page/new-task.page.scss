@@ -26,8 +26,9 @@ ion-input {
     border-bottom: 2px solid var(--input-background);
     font-weight: bold;
 
-    --color: var(--forest-green);
+    --color: var(--disable-gray);
     --caret-color: var(--forest-green);
+    --highlight-color-focused: var(--forest-green);
 }
 
 .reward-card {
