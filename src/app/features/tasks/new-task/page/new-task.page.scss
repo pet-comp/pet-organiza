@@ -1,0 +1,49 @@
+h1 {
+    font-weight: 700;
+    color: var(--forest-green);
+}
+
+p {
+    color: var(--lime-green);
+    font-weight: 700;
+}
+
+h3 {
+    color: #3c3c3cb7;
+    font-weight: 700;
+}
+
+.back-btn {
+    color: var(--disable-gray);
+    font-weight: bold;
+}
+
+.task-form {
+    color: var(--disable-gray);
+}
+
+ion-input {
+    border-bottom: 2px solid var(--input-background);
+    font-weight: bold;
+
+    --color: var(--forest-green);
+    --caret-color: var(--forest-green);
+}
+
+.reward-card {
+    color: var(--forest-green);
+}
+
+.arest-display {
+    background-color: var(--lime-green);
+    border-radius: 10px;
+
+    font-weight: bolder;
+
+    padding: 5px;
+    width: fit-content;
+}
+
+.info {
+    color: var(--disable-gray);
+}

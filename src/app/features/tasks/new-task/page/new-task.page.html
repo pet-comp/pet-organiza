@@ -1,0 +1,23 @@
+<ion-content class="ion-padding custom-background">
+  <p class="back-btn" (click)="navigateToTaskList()"> &lt; Voltar ao menu de tarefas </p>
+  <form class="task-form">
+    <h1>Nova Tarefa</h1>
+    <p>informações gerais</p>
+    <ion-input label="Categoria:"></ion-input>
+    <ion-input label="Título:"></ion-input>
+    <ion-input placeholder="Descreva brevemente a tarefa (opicional)"></ion-input>
+    <input type="date">
+    <ion-input label="Prioridade:"></ion-input>
+    <ion-input label="Dificuldade:"></ion-input>
+  </form>
+  <div class="reward-card">
+    <p>Recompensa por Conclusão</p>
+    <h3>Esta tarefa atualmente concede</h3>
+    <div class="arest-display">
+      <h1>0 arestas</h1>
+    </div>
+    <h3>Se concluida no prazo determinado</h3>
+    <p class="info">Para modificar seu ganho de arestas por tarefa, acesse o menu de Configurações > Recompensas por tarefa</p>
+    <app-organiza-button label="✓" type="button"></app-organiza-button>
+  </div>
+</ion-content>
