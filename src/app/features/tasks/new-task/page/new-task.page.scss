@@ -1,50 +1,198 @@
-h1 {
-    font-weight: 700;
-    color: var(--forest-green);
+.page-container {
+  font-family: 'Montserrat SemiBold', sans-serif;
+  padding-bottom: 40px;
 }
 
-p {
-    color: var(--lime-green);
-    font-weight: 700;
+.header-section {
+  padding: 0 24px 16px 24px;
 }
 
-h3 {
-    color: #3c3c3cb7;
-    font-weight: 700;
+.menu-icon {
+  font-size: 32px;
+  color: var(--forest-green);
+  margin-bottom: 16px;
+  margin-top: 16px;
 }
 
-.back-btn {
-    color: var(--disable-gray);
-    font-weight: bold;
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #7b8390;
+  font-family: 'Montserrat Bold', sans-serif;
+  font-size: 15px;
+  cursor: pointer;
 }
 
-.task-form {
-    color: var(--disable-gray);
+.back-icon {
+  font-size: 16px;
+  font-weight: bold;
 }
 
-ion-input {
-    border-bottom: 2px solid var(--input-background);
-    font-weight: bold;
-
-    --color: var(--disable-gray);
-    --caret-color: var(--forest-green);
-    --highlight-color-focused: var(--forest-green);
+.separator-bar {
+  width: 100%;
+  height: 10px;
+  background-color: var(--input-background);
 }
 
-.reward-card {
-    color: var(--forest-green);
+.main-content {
+  padding: 24px;
+}
+
+.page-title {
+  font-family: 'Montserrat Bold', sans-serif;
+  color: var(--forest-green);
+  font-size: 22px;
+  margin: 0 0 16px 0;
+}
+
+.section-subtitle {
+  font-family: 'Montserrat Bold', sans-serif;
+  color: var(--lime-green);
+  font-size: 15px;
+  margin: 0 0 16px 0;
+}
+
+.form-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-item {
+  display: flex;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 2px solid var(--input-background);
+  gap: 8px;
+}
+
+.form-item.borderless {
+  border-bottom: none;
+}
+
+.form-item.mb-0 {
+  padding-bottom: 0px;
+}
+
+.item-label {
+  font-family: 'Montserrat Bold', sans-serif;
+  color: #5d6778;
+  font-size: 15px;
+  min-width: 90px;
+}
+
+.title-label {
+  font-family: 'Montserrat Bold', sans-serif;
+  color: #5d6778;
+  font-size: 15px;
+}
+
+.custom-input {
+  background: transparent;
+  border: none;
+  flex: 1;
+  font-family: 'Montserrat Bold', sans-serif;
+  font-size: 14px;
+  color: var(--plain-green);
+  outline: none;
+  width: 100%;
+}
+
+.custom-input::placeholder {
+  color: #9aa5b1;
+  font-family: 'Montserrat Bold', sans-serif;
+  font-size: 14px;
+}
+
+.input-icon {
+  font-size: 24px;
+  color: #5d6778;
+  margin-right: 8px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: 'Montserrat Bold', sans-serif;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.chip-icon {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.chip-pink {
+  background-color: #E6BCE6;
+  color: #a723a9;
+}
+
+.chip-red {
+  background-color: #F8A5A5;
+  color: #c71616;
+}
+
+.chip-yellow {
+  background-color: #fceea7;
+  color: #b1931a;
+}
+
+.reward-section {
+  padding-top: 24px;
+}
+
+.reward-title {
+  font-family: 'Montserrat Bold', sans-serif;
+  color: #5d6778;
+  font-size: 17px;
+  margin: 12px 0;
 }
 
 .arest-display {
-    background-color: var(--lime-green);
-    border-radius: 10px;
-
-    font-weight: bolder;
-
-    padding: 5px;
-    width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--lime-green);
+  border-radius: 8px;
+  padding: 10px 20px;
+  gap: 12px;
+  margin: 12px 0;
 }
 
-.info {
-    color: var(--disable-gray);
+.icon-circle {
+  background: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-circle .temp-icon {
+  color: var(--lime-green);
+  font-size: 22px;
+}
+
+.arest-text {
+  color: var(--forest-green);
+  font-family: 'Montserrat Bold', sans-serif;
+  font-size: 20px;
+}
+
+.info-text {
+  font-family: 'Montserrat Bold', sans-serif;
+  font-size: 12px;
+  color: #9aa5b1;
+  line-height: 1.5;
+  margin-top: 16px;
+  margin-bottom: 32px;
+}
+
+.submit-btn-wrapper {
+  max-width: 400px;
+  margin: 0 auto;
 }
