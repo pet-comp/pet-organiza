@@ -1,0 +1,82 @@
+<ion-content class="custom-background">
+  <div class="page-container">
+    <header class="header-section">
+      <div class="back-link" (click)="navigateToTaskList()">
+        <ion-icon name="chevron-back-outline" class="back-icon"></ion-icon>
+        <span>Voltar ao Menu de Tarefas</span>
+      </div>
+    </header>
+
+    <div class="separator-bar"></div>
+
+    <main class="main-content">
+      <div class="form-section">
+        <h1 class="page-title">Nova Tarefa</h1>
+        <p class="section-subtitle">Informações gerais</p>
+
+        <div class="form-list">
+          <div class="form-item">
+            <span class="item-label">Categoria:</span>
+            <div class="chip chip-pink">
+              <span class="chip-icon">×</span>
+              <span class="chip-text">Estudos</span>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <span class="title-label">Título:</span>
+            <input type="text" class="custom-input" placeholder="Insira aqui o título da tarefa">
+          </div>
+
+          <div class="form-item">
+            <ion-icon name="reorder-two-outline" class="input-icon"></ion-icon>
+            <input type="text" class="custom-input" placeholder="Descreva brevemente o conteúdo da tarefa (opcional)">
+          </div>
+
+          <div class="form-item">
+            <ion-icon name="calendar-outline" class="input-icon"></ion-icon>
+            <input type="text" class="custom-input" placeholder="Prazo de finalização da tarefa">
+          </div>
+
+          <div class="form-item">
+            <span class="item-label">Prioridade:</span>
+            <div class="chip chip-red">
+              <span class="chip-icon">×</span>
+              <span class="chip-text">Urgente</span>
+            </div>
+          </div>
+
+          <div class="form-item borderless mb-0">
+            <span class="item-label">Dificuldade:</span>
+            <div class="chip chip-yellow">
+              <span class="chip-icon">×</span>
+              <span class="chip-text">Intermediária</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="separator-bar"></div>
+
+    <section class="reward-section main-content">
+      <p class="section-subtitle">Recompensa por conclusão</p>
+      <h3 class="reward-title">Esta tarefa atualmente concede</h3>
+
+      <div class="arest-display">
+        <div class="icon-circle">
+          <ion-icon name="git-network-outline" class="temp-icon"></ion-icon>
+        </div>
+        <span class="arest-text">0 arestas</span>
+      </div>
+
+      <h3 class="reward-title">se concluída no prazo determinado.</h3>
+      <p class="info-text">Para modificar seu ganho de arestas por tarefa, acesse o menu de Configurações > Recompensas
+        por tarefa</p>
+
+      <div class="submit-btn-wrapper">
+        <app-organiza-button label="✓" type="button"></app-organiza-button>
+      </div>
+    </section>
+  </div>
+</ion-content>

@@ -16,6 +16,10 @@ const routes: Routes = [
         loadComponent: () => import('src/app/features/tasks/task-list/page/task-list.page').then(m => m.TaskListPage)
       },
       {
+        path: 'new-task',
+        loadComponent: () => import('src/app/features/tasks/new-task/page/new-task.page').then(m => m.NewTaskPage)
+      },
+      {
         path: 'habits',
         loadComponent: () => import('src/app/features/habits/habit-list/page/habit-list.page').then(m => m.HabitListPage)
       },
