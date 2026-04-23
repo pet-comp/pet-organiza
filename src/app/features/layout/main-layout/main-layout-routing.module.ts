@@ -16,6 +16,10 @@ const routes: Routes = [
         loadComponent: () => import('src/app/features/tasks/task-list/page/task-list.page').then(m => m.TaskListPage)
       },
       {
+        path: 'new-task',
+        loadComponent: () => import('src/app/features/tasks/new-task/page/new-task.page').then(m => m.NewTaskPage)
+      },
+      {
         path: 'habits',
         loadComponent: () => import('src/app/features/habits/habit-list/page/habit-list.page').then(m => m.HabitListPage)
       },
@@ -26,6 +30,14 @@ const routes: Routes = [
       {
         path: 'cubes',
         loadComponent: () => import('src/app/features/cubes/cubes-list/page/cubes-list.page').then(m => m.CubesListPage)
+      },
+      {
+        path: 'new-habit',
+        loadComponent: () => import('src/app/features/habits/new-habit/page/new-habit.page').then(m => m.NewHabitPage)
+      },
+      {
+        path: 'new-category',
+        loadComponent: () => import('src/app/features/tasks/new-category/page/new-category.page').then(m => m.NewCategoryPage)
       },
       {
         path: '',
@@ -40,4 +52,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class MainLayoutPageRoutingModule {}
+export class MainLayoutPageRoutingModule { }
