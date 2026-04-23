@@ -1,13 +1,86 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>new-category</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="custom-background">
+  <div class="page-container">
+    <header class="header-section">
+      <div class="back-link" (click)="navigateToTaskList()">
+        <ion-icon name="chevron-back-outline" class="back-icon"></ion-icon>
+        <span>Voltar ao Menu de Tarefas</span>
+      </div>
+    </header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">new-category</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <div class="separator-bar"></div>
+
+    <main class="main-content">
+      <div class="form-section">
+        <h1 class="page-title">Nova Categoria</h1>
+        <p class="section-subtitle">Informações gerais</p>
+
+        <div class="form-item">
+          <span class="title-label">Título:</span>
+          <input type="text" class="custom-input" placeholder="Insira aqui o título da categoria">
+        </div>
+
+        <div class="form-item">
+          <ion-icon name="reorder-two-outline" class="input-icon"></ion-icon>
+          <input type="text" class="custom-input" placeholder="Descreva a categoria (opcional)">
+        </div>
+
+
+        <div class="form-item color-selection-item">
+          <span class="item-label">Cor:</span>
+          <div class="color-options">
+            <div class="color-box bg-pink"></div>
+            <div class="color-box bg-blue"></div>
+            <div class="color-box bg-salmon"></div>
+            <div class="color-box bg-yellow"></div>
+            <div class="color-box bg-light-green"></div>
+            <div class="color-box bg-grey"></div>
+            <div class="color-box add-color">
+              <ion-icon name="add"></ion-icon>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-item borderless pb-0 mt-3">
+          <ion-icon name="color-palette" class="section-icon"></ion-icon>
+          <span class="item-label" style="min-width: auto;">Ícone:</span>
+        </div>
+
+        <div class="icon-grid">
+          <ion-icon name="heart" class="grid-icon"></ion-icon>
+          <ion-icon name="bandage" class="grid-icon"></ion-icon>
+          <ion-icon name="add-circle" class="grid-icon"></ion-icon>
+          <ion-icon name="laptop" class="grid-icon"></ion-icon>
+          <ion-icon name="image" class="grid-icon"></ion-icon>
+
+          <ion-icon name="rocket" class="grid-icon"></ion-icon>
+          <ion-icon name="time" class="grid-icon"></ion-icon>
+          <ion-icon name="car" class="grid-icon"></ion-icon>
+          <ion-icon name="person" class="grid-icon"></ion-icon>
+          <ion-icon name="briefcase" class="grid-icon"></ion-icon>
+
+          <ion-icon name="basketball" class="grid-icon"></ion-icon>
+          <ion-icon name="book" class="grid-icon"></ion-icon>
+          <ion-icon name="pulse" class="grid-icon"></ion-icon>
+
+          <div class="view-more-btn">Ver mais...</div>
+        </div>
+
+        <div class="form-item borderless pb-0 mt-4">
+          <span class="item-label subtitle-label">Pré-visualização:</span>
+        </div>
+
+        <div class="preview-card bg-salmon">
+          <ion-icon name="basketball" class="preview-icon"></ion-icon>
+          <div class="preview-title">Esportes</div>
+          <div class="preview-footer">
+            <ion-icon name="chevron-down-outline"></ion-icon> <span>1/1 finalizadas</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="submit-btn-wrapper">
+      <app-organiza-button label="✓" type="button"></app-organiza-button>
+    </div>
+  </div>
 </ion-content>
