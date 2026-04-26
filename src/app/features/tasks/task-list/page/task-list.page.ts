@@ -84,6 +84,6 @@ export class TaskListPage implements OnInit {
   }
 
   navigateToNewCategory() {
-    console.log('Navigate to new category');
+    this.router.navigate(['/mainLayout/new-category']);
   }
 }
