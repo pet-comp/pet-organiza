@@ -40,3 +40,20 @@ ion-content {
         text-decoration: underline 2px;
     }
 }
+
+.campo-wrapper {
+  margin-bottom: 14px;
+
+  app-organiza-input {
+    margin-bottom: 0;
+  }
+}
+
+.campo-erro {
+  color: #c82927;
+  font-size: 13px;
+  min-height: 18px;
+  display: block;
+  padding-left: 4px;
+  margin-bottom: 4px;
+}

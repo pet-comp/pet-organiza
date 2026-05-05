@@ -10,14 +10,18 @@
 
   <div class="form-container">
     <app-organiza-input
-      icon="assets/icons/user.svg"
-      placeholder="Nome de usuário">
-    </app-organiza-input>
+    icon="assets/icons/user.svg"
+    placeholder="Email ou nome de usuário"
+    [value]="identificador"
+    (valueChange)="identificador = $event">
+  </app-organiza-input>
 
     <app-organiza-input
       icon="assets/icons/lock.svg"
       type="password"
-      placeholder="Senha">
+      placeholder="Senha"
+      [value]="senha"
+      (valueChange)="senha = $event">
     </app-organiza-input>
   </div>
 
