@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { OrganizaButtonComponent } from '../../../../shared/components/organiza-button/organiza-button.component';
 import { OrganizaTaskComponent } from '../organiza-task/organiza-task.component';
 import { OrganizaCategoryCardComponent } from '../organiza-category-card/organiza-category-card.component';
@@ -65,7 +66,7 @@ export class TaskListPage implements OnInit {
     { id: 't_13', name: 'Farmar 5.000.000 no GTA', completed: false, categoryId: 'cat_5' },
   ];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
@@ -79,10 +80,10 @@ export class TaskListPage implements OnInit {
   }
 
   navigateToCreateTask() {
-    console.log('Navigate to create task');
+    this.router.navigate(['/mainLayout/new-task']);
   }
 
   navigateToNewCategory() {
-    console.log('Navigate to new category');
+    this.router.navigate(['/mainLayout/new-category']);
   }
 }

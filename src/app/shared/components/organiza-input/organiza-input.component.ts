@@ -14,6 +14,7 @@ export class OrganizaInputComponent  implements OnInit {
   @Input() type: string = 'text';
   @Input() value: string = '';
   @Output() valueChange = new EventEmitter<string>();
+  @Output() blur = new EventEmitter<void>();
 
   constructor() { }
 

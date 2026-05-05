@@ -1,0 +1,263 @@
+.page-container {
+  font-family: 'Montserrat SemiBold', sans-serif;
+  padding-bottom: 40px;
+}
+
+.header-section {
+  padding: 0 24px 16px 24px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #7b8390;
+  font-family: 'Montserrat Bold', sans-serif;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.back-icon {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.separator-bar {
+  width: 100%;
+  height: 10px;
+  background-color: var(--input-background);
+}
+
+.main-content {
+  padding: 24px;
+}
+
+.page-title {
+  font-family: 'Montserrat Bold', sans-serif;
+  color: var(--forest-green);
+  font-size: 22px;
+  margin: 0 0 16px 0;
+}
+
+.section-subtitle {
+  font-family: 'Montserrat Bold', sans-serif;
+  color: var(--lime-green);
+  font-size: 15px;
+  margin: 0 0 16px 0;
+}
+
+.form-item {
+  display: flex;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 2px solid var(--input-background);
+  gap: 8px;
+}
+
+.form-item.borderless {
+  border-bottom: none;
+}
+
+.item-label {
+  font-family: 'Montserrat Bold', sans-serif;
+  color: #5d6778;
+  font-size: 15px;
+}
+
+.title-label {
+  font-family: 'Montserrat Bold', sans-serif;
+  color: #5d6778;
+  font-size: 15px;
+}
+
+.custom-input {
+  background: transparent;
+  border: none;
+  flex: 1;
+  font-family: 'Montserrat Bold', sans-serif;
+  font-size: 14px;
+  color: var(--plain-green);
+  outline: none;
+  width: 100%;
+}
+
+.custom-input::placeholder {
+  color: #9aa5b1;
+  font-family: 'Montserrat Bold', sans-serif;
+  font-size: 14px;
+}
+
+.input-icon {
+  font-size: 24px;
+  color: #5d6778;
+  margin-right: 8px;
+}
+
+.submit-btn-wrapper {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Custom additions for New Category screen */
+.color-selection-item {
+  border-bottom: 2px solid var(--input-background);
+  gap: 8px;
+  padding-bottom: 24px;
+}
+
+.color-options {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.color-box {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.bg-pink {
+  background-color: #edb4ef;
+}
+
+.bg-blue {
+  background-color: #8ab0fc;
+}
+
+.bg-salmon {
+  background-color: #f2a6a3;
+}
+
+.bg-yellow {
+  background-color: #f7eda2;
+}
+
+.bg-light-green {
+  background-color: #ade778;
+}
+
+.bg-grey {
+  background-color: #bec0c4;
+}
+
+.add-color {
+  background-color: #5d6778;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.pb-0 {
+  padding-bottom: 0px !important;
+}
+
+.mt-3 {
+  margin-top: 16px;
+}
+
+.mt-4 {
+  margin-top: 24px;
+}
+
+.section-icon {
+  font-size: 22px;
+  color: #5d6778;
+  margin-right: -4px;
+  /* Adjust spacing with label */
+}
+
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px 12px;
+  margin-top: 24px;
+  align-items: center;
+  justify-items: center;
+}
+
+.grid-icon {
+  font-size: 42px;
+  color: #aeb2b9;
+  /* light grey icons */
+  cursor: pointer;
+}
+
+.view-more-btn {
+  grid-column: span 2;
+  background-color: #aeb2b9;
+  color: white;
+  border-radius: 8px;
+  font-family: 'Montserrat SemiBold', sans-serif;
+  font-size: 14px;
+  padding: 10px 16px;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.subtitle-label {
+  color: #5d6778;
+  font-size: 15px;
+}
+
+.preview-card {
+  margin-top: 16px;
+  border-radius: 12px;
+  padding: 16px;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-card.bg-salmon {
+  background-color: #f2a6a3;
+  color: #5e3633;
+  /* Darker tone of salmon */
+}
+
+.preview-icon {
+  font-size: 32px;
+  margin-bottom: 6px;
+  color: inherit;
+}
+
+.preview-title {
+  font-family: 'Montserrat Bold', sans-serif;
+  font-size: 18px;
+  margin-bottom: 6px;
+  color: inherit;
+}
+
+.preview-footer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Montserrat SemiBold', sans-serif;
+  font-size: 12px;
+  color: inherit;
+  opacity: 0.8;
+}
+
+.preview-footer ion-icon {
+  font-size: 14px;
+}
+
+.color-box.selected {
+  border: 3px solid var(--forest-green);
+  transform: scale(1.15);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transition: all 0.2s ease-in-out;
+}
+
+.grid-icon.selected {
+  color: var(--forest-green);
+  transform: scale(1.2);
+  border-radius: 8px;
+  padding: 4px;
+  transition: all 0.2s ease-in-out;
+}
