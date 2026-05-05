@@ -22,7 +22,11 @@ const routes: Routes = [
   {
     path: 'mainLayout',
     loadChildren: () => import('./features/layout/main-layout/main-layout.module').then( m => m.MainLayoutPageModule)
+  },  {
+    path: 'habit-create',
+    loadChildren: () => import('./features/habits/habit-create/habit-create.module').then( m => m.HabitCreatePageModule)
   },
+
 ];
 @NgModule({
   imports: [
