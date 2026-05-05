@@ -1,9 +1,9 @@
-// carousel.page.ts (VERSÃO FINAL E CORRIGIDA)
-
-import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA, NgZone, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA, NgZone, ViewChild, ElementRef, AfterViewInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Auth } from '@angular/fire/auth';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
   selector: 'app-carousel',
@@ -14,11 +14,12 @@ import { Router } from '@angular/router';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CarouselPage implements OnInit, AfterViewInit {
+  private auth = inject(Auth);
 
   @ViewChild('swiper')
   swiperRef: ElementRef | undefined;
 
-  slides = [
+  slides =   [
     {
       image: 'assets/onboarding-1.svg',
       title: 'Organização',
@@ -38,8 +39,7 @@ export class CarouselPage implements OnInit, AfterViewInit {
 
   currentIndex = 0;
 
-  constructor(private router: Router, private zone: NgZone) {}
-
+  constructor(private router: Router, private zone: NgZone, private firebaseservice: FirebaseService) {}
   ngOnInit() {}
 
   // ngAfterViewInit é chamado depois que a view (e o #swiper) é inicializada
@@ -56,7 +56,9 @@ export class CarouselPage implements OnInit, AfterViewInit {
     swiperEl.swiper.slideNext();
   }
 
-  finish() {
-    this.router.navigate(['/mainLayout']);
+  async finish() {
+    const uid = this.auth.currentUser?.uid;
+    if (uid) await this.firebaseservice.tutorialVisto(uid);
+    this.router.navigate(['mainLayout/home']);
   }
 }

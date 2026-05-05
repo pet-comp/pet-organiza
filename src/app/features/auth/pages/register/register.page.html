@@ -8,43 +8,63 @@
     <h2><span>Criar</span> uma nova conta</h2>
   </div>
 
-  <div class="form-container">
+  <div class="campo-wrapper">
     <app-organiza-input
       icon="assets/icons/document.svg"
       placeholder="Nome completo"
       [value]="nome"
-      (valueChange)="nome = $event">
+      (valueChange)="onNomeChange($event)"
+      (blur)="onNomeBlur()">
     </app-organiza-input>
+    <span class="campo-erro">{{ erros['nome'] }}</span>
 
     <app-organiza-input
       icon="assets/icons/user.svg"
       placeholder="Nome de usuário"
       [value]="username"
-      (valueChange)="username = $event">
+      (valueChange)="onUsernameChange($event)"
+      (blur)="onUsernameBlur()">
     </app-organiza-input>
+    <span class="campo-erro">{{ erros['username'] }}</span>
 
     <app-organiza-input
       icon="assets/icons/cake.svg"
       placeholder="Data de nascimento"
       [value]="nascimento"
-      (valueChange)="nascimento = $event">
+      (valueChange)="onNascimentoChange($event)"
+      (blur)="onNascimentoBlur()">
     </app-organiza-input>
+    <span class="campo-erro">{{ erros['nascimento'] }}</span>
 
     <app-organiza-input
       icon="assets/icons/mail.svg"
       type="email"
       placeholder="E-mail"
       [value]="email"
-      (valueChange)="email = $event">
+      (valueChange)="onEmailChange($event)"
+      (blur)="onEmailBlur()">
     </app-organiza-input>
+    <span class="campo-erro">{{ erros['email'] }}</span>
 
     <app-organiza-input
       icon="assets/icons/lock.svg"
       type="password"
       placeholder="Senha"
       [value]="senha"
-      (valueChange)="senha = $event">
+      (valueChange)="onSenhaChange($event)"
+      (blur)="onSenhaBlur()">
     </app-organiza-input>
+    <span class="campo-erro">{{ erros['senha'] }}</span>
+
+    <app-organiza-input
+      icon="assets/icons/lock.svg"
+      type="password"
+      placeholder="Confirmar Senha"
+      [value]="confirmarsenha"
+      (valueChange)="onConfirmarSenhaChange($event)"
+      (blur)="onConfirmarSenhaBlur()">
+    </app-organiza-input>
+    <span class="campo-erro">{{ erros['confirmarsenha'] }}</span>
   </div>
 
   <div class="main-button-container">
