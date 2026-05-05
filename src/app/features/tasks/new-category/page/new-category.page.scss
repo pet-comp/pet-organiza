@@ -246,3 +246,18 @@
 .preview-footer ion-icon {
   font-size: 14px;
 }
+
+.color-box.selected {
+  border: 3px solid var(--forest-green);
+  transform: scale(1.15);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transition: all 0.2s ease-in-out;
+}
+
+.grid-icon.selected {
+  color: var(--forest-green);
+  transform: scale(1.2);
+  border-radius: 8px;
+  padding: 4px;
+  transition: all 0.2s ease-in-out;
+}

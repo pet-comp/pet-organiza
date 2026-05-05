@@ -141,6 +141,11 @@
   color: #b1931a;
 }
 
+.chip-green {
+  background-color: var(--plain-green);
+  color: #bcf0d4;
+}
+
 .reward-section {
   padding-top: 24px;
 }
@@ -195,4 +200,54 @@
 .submit-btn-wrapper {
   max-width: 400px;
   margin: 0 auto;
+}
+
+.chip-group {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  width: 100%;
+  flex-wrap: wrap;
+  
+  /* Esconde a barra de scroll padrão mantendo a funcionalidade de arrastar/scrollar */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Opcional: Garante um cursor de clique para os chips e que fiquem opacos quando inativos */
+.chip {
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  white-space: nowrap; // Para o texto do chip não quebrar em duas linhas
+}
+
+/* Cores neutras para os chips não selecionados (inativos) */
+.chip:not(.chip-pink):not(.chip-red):not(.chip-yellow):not(.chip-green) {
+  background-color: var(--input-background, #f4f5f8);
+  color: #7b8390;
+}
+
+/* Efeito de hover para os chips não selecionados */
+.chip:hover:not(.chip-pink):not(.chip-red):not(.chip-yellow):not(.chip-green) {
+  opacity: 0.8;
+}
+
+/* Estilos do Calendário (Date Picker) */
+#open-date-picker {
+  cursor: pointer;
+  
+  .custom-input {
+    cursor: pointer;
+  }
+}
+
+.custom-datetime {
+  --ion-color-primary: var(--plain-green);
+  --ion-color-base: var(--forest-green);
+  --background: var(--input-background);
+  color: black;
+  border-radius: 12px;
 }

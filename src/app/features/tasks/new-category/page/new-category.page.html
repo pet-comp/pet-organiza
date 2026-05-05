@@ -16,7 +16,7 @@
 
         <div class="form-item">
           <span class="title-label">Título:</span>
-          <input type="text" class="custom-input" placeholder="Insira aqui o título da categoria">
+          <input [(ngModel)]="category.name" type="text" class="custom-input" placeholder="Insira aqui o título da categoria">
         </div>
 
         <div class="form-item">
@@ -28,12 +28,12 @@
         <div class="form-item color-selection-item">
           <span class="item-label">Cor:</span>
           <div class="color-options">
-            <div class="color-box bg-pink"></div>
-            <div class="color-box bg-blue"></div>
-            <div class="color-box bg-salmon"></div>
-            <div class="color-box bg-yellow"></div>
-            <div class="color-box bg-light-green"></div>
-            <div class="color-box bg-grey"></div>
+            <div (click)="setColor(340)" class="color-box bg-pink" [class.selected]="category.colorHue === 340"></div>
+            <div (click)="setColor(230)" class="color-box bg-blue" [class.selected]="category.colorHue === 230"></div>
+            <div (click)="setColor(10)" class="color-box bg-salmon" [class.selected]="category.colorHue === 10"></div>
+            <div (click)="setColor(60)" class="color-box bg-yellow" [class.selected]="category.colorHue === 60"></div>
+            <div (click)="setColor(150)" class="color-box bg-light-green" [class.selected]="category.colorHue === 150"></div>
+            <div (click)="setColor(210)" class="color-box bg-grey" [class.selected]="category.colorHue === 210"></div>
             <div class="color-box add-color">
               <ion-icon name="add"></ion-icon>
             </div>
@@ -46,21 +46,21 @@
         </div>
 
         <div class="icon-grid">
-          <ion-icon name="heart" class="grid-icon"></ion-icon>
-          <ion-icon name="bandage" class="grid-icon"></ion-icon>
-          <ion-icon name="add-circle" class="grid-icon"></ion-icon>
-          <ion-icon name="laptop" class="grid-icon"></ion-icon>
-          <ion-icon name="image" class="grid-icon"></ion-icon>
+          <ion-icon (click)="setIcon('heart')" name="heart" class="grid-icon" [class.selected]="category.icon === 'heart-outline'"></ion-icon>
+          <ion-icon (click)="setIcon('bandage')" name="bandage" class="grid-icon" [class.selected]="category.icon === 'bandage-outline'"></ion-icon>
+          <ion-icon (click)="setIcon('add-circle')" name="add-circle" class="grid-icon" [class.selected]="category.icon === 'add-circle-outline'"></ion-icon>
+          <ion-icon (click)="setIcon('laptop')" name="laptop" class="grid-icon" [class.selected]="category.icon === 'laptop-outline'"></ion-icon>
+          <ion-icon (click)="setIcon('image')" name="image" class="grid-icon" [class.selected]="category.icon === 'image-outline'"></ion-icon>
 
-          <ion-icon name="rocket" class="grid-icon"></ion-icon>
-          <ion-icon name="time" class="grid-icon"></ion-icon>
-          <ion-icon name="car" class="grid-icon"></ion-icon>
-          <ion-icon name="person" class="grid-icon"></ion-icon>
-          <ion-icon name="briefcase" class="grid-icon"></ion-icon>
+          <ion-icon (click)="setIcon('rocket')" name="rocket" class="grid-icon" [class.selected]="category.icon === 'rocket-outline'"></ion-icon>
+          <ion-icon (click)="setIcon('time')" name="time" class="grid-icon" [class.selected]="category.icon === 'time-outline'"></ion-icon>
+          <ion-icon (click)="setIcon('car')" name="car" class="grid-icon" [class.selected]="category.icon === 'car-outline'"></ion-icon>
+          <ion-icon (click)="setIcon('person')" name="person" class="grid-icon" [class.selected]="category.icon === 'person-outline'"></ion-icon>
+          <ion-icon (click)="setIcon('briefcase')" name="briefcase" class="grid-icon" [class.selected]="category.icon === 'briefcase-outline'"></ion-icon>
 
-          <ion-icon name="basketball" class="grid-icon"></ion-icon>
-          <ion-icon name="book" class="grid-icon"></ion-icon>
-          <ion-icon name="pulse" class="grid-icon"></ion-icon>
+          <ion-icon (click)="setIcon('basketball')" name="basketball" class="grid-icon" [class.selected]="category.icon === 'basketball-outline'"></ion-icon>
+          <ion-icon (click)="setIcon('book')" name="book" class="grid-icon" [class.selected]="category.icon === 'book-outline'"></ion-icon>
+          <ion-icon (click)="setIcon('pulse')" name="pulse" class="grid-icon" [class.selected]="category.icon === 'pulse-outline'"></ion-icon>
 
           <div class="view-more-btn">Ver mais...</div>
         </div>
@@ -69,13 +69,7 @@
           <span class="item-label subtitle-label">Pré-visualização:</span>
         </div>
 
-        <div class="preview-card bg-salmon">
-          <ion-icon name="basketball" class="preview-icon"></ion-icon>
-          <div class="preview-title">Esportes</div>
-          <div class="preview-footer">
-            <ion-icon name="chevron-down-outline"></ion-icon> <span>1/1 finalizadas</span>
-          </div>
-        </div>
+        <app-organiza-category-card [category]="category" [totalTasks]="0" [completedTasks]="0"></app-organiza-category-card>
       </div>
     </main>
 
