@@ -1,0 +1,208 @@
+.header-action-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+
+  .page-title {
+    font-family: 'Montserrat Bold', sans-serif;
+    font-size: 24px;
+    color: var(--forest-green);
+    margin: 0;
+  }
+  
+  .btn-create {
+    font-family: 'Montserrat Bold', sans-serif;
+    font-size: 14px;
+    text-transform: none;
+    --background: var(--plain-green);
+    --box-shadow: none;
+    height: 38px;
+  }
+}
+
+.section-title {
+  font-family: 'Montserrat Bold', sans-serif;
+  font-size: 20px;
+  color: var(--forest-green);
+  margin: 0 0 16px 0;
+}
+
+// Calendário
+.weekly-calendar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 32px;
+
+  .day-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--pure-white);
+    padding: 10px 8px;
+    border-radius: 12px;
+    gap: 6px;
+    width: 13%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    
+    .day-name { 
+      font-family: 'Montserrat SemiBold', sans-serif;
+      font-size: 12px; 
+      color: var(--forest-green); 
+    }
+    .day-number { 
+      font-family: 'Montserrat Bold', sans-serif;
+      font-size: 16px; 
+      color: var(--forest-green); 
+    }
+
+    &.active {
+      background: var(--plain-green);
+      .day-name, .day-number { color: var(--pure-white); }
+    }
+  }
+}
+
+// Cards das Metas
+.habits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .habit-card {
+    border: 2px solid; 
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform 0.1s ease-in-out;
+    background: var(--pure-white);
+
+    &:active { transform: scale(0.98); }
+
+    .card-top {
+      position: relative;
+      background: transparent;
+      min-height: 70px;
+      
+      .progress-fill {
+        position: absolute;
+        top: 0; left: 0;
+        height: 100%;
+        transition: width 0.3s ease-in-out;
+        z-index: 0; 
+      }
+
+      .card-top-content {
+        position: relative;
+        z-index: 1; 
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 20px;
+
+        h3 { 
+          margin: 0; 
+          font-family: 'Montserrat Bold', sans-serif;
+          font-size: 18px; 
+        }
+        
+        .progress-text {
+          font-family: 'Montserrat Bold', sans-serif;
+          font-size: 18px;
+          display: flex;
+          align-items: center;
+          ion-icon { font-size: 26px; margin-bottom: -2px; }
+        }
+      }
+    }
+
+    .card-bottom {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 20px;
+      color: var(--pure-white);
+
+      .stat-col {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        .stat-label { 
+          font-family: 'Montserrat Medium', sans-serif;
+          font-size: 10px; 
+          opacity: 0.95; 
+        }
+        .stat-value { 
+          font-family: 'Montserrat Bold', sans-serif;
+          font-size: 12px; 
+        }
+        
+        .icon-align {
+          display: flex;
+          align-items: center;
+          ion-icon { font-size: 16px; margin-right: 4px;}
+        }
+      }
+    }
+  }
+}
+
+// Modal do Check-in
+ion-modal {
+  --border-radius: 24px 24px 0 0;
+  
+  .modal-content {
+    --background: var(--pure-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .modal-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 24px;
+
+    .modal-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-family: 'Montserrat Bold', sans-serif;
+      font-size: 22px;
+      margin: 0 0 8px 0;
+    }
+
+    p {
+      font-family: 'Montserrat Medium', sans-serif;
+      color: var(--disable-gray);
+      margin: 0;
+      font-size: 15px;
+    }
+  }
+
+  .modal-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    ion-button {
+      height: 50px;
+      font-family: 'Montserrat Bold', sans-serif;
+      font-size: 16px;
+      text-transform: none;
+    }
+  }
+}

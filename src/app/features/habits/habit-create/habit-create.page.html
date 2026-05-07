@@ -1,0 +1,95 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="dark"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding custom-background">
+  <h1 class="page-title">Adicione um novo hábito</h1>
+
+  <div class="form-container">
+    
+    <!-- Nome -->
+    <div class="form-row inline-input">
+      <span class="label">Nome:</span>
+      <input type="text" placeholder="Insira aqui o nome do hábito" [(ngModel)]="habitName">
+    </div>
+
+    <!-- Tipo -->
+    <div class="form-row">
+      <span class="label">Tipo</span>
+      <div class="pill-group">
+        <div class="pill" [class.active]="selectedType === 'incremental'" (click)="setType('incremental')">Incremental</div>
+        <div class="pill" [class.active]="selectedType === 'recorrente'" (click)="setType('recorrente')">Recorrente</div>
+      </div>
+    </div>
+
+    <!-- Frequência -->
+    <div class="form-row">
+      <span class="label">Frequência</span>
+      <div class="pill-group frequency-group">
+        <div class="pill" [class.active]="selectedFrequency === 'diario'" (click)="setFrequency('diario')">Diário</div>
+        <div class="pill" [class.active]="selectedFrequency === 'semanal'" (click)="setFrequency('semanal')">Semanal</div>
+        <div class="pill" [class.active]="selectedFrequency === 'mensal'" (click)="setFrequency('mensal')">Mensal</div>
+        <div class="pill" [class.active]="selectedFrequency === 'anual'" (click)="setFrequency('anual')">Anual</div>
+        <div class="pill icon-pill"><ion-icon name="calendar-outline"></ion-icon></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Notificação Diária -->
+    <div class="form-row notification-row">
+      <span class="label">Notificação Diária</span>
+      <ion-toggle color="success" [(ngModel)]="notificationEnabled"></ion-toggle>
+    </div>
+
+    <!-- Seletor de Horário -->
+    <div class="time-picker-banner" *ngIf="notificationEnabled">
+      <span>Selecionar horário</span>
+      <div class="time-value">
+        {{ notificationTime }} <ion-icon name="chevron-down-outline"></ion-icon>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Cor -->
+    <div class="form-row color-row">
+      <span class="label">Cor:</span>
+      <div class="color-palette">
+        <div class="color-circle" 
+             *ngFor="let color of availableColors" 
+             [style.backgroundColor]="color"
+             [class.selected]="selectedColor === color"
+             (click)="setColor(color)">
+        </div>
+        <div class="color-circle add-color">
+          <ion-icon name="add"></ion-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Concluir Meta -->
+    <div class="form-row">
+      <span class="label">Concluir meta após</span>
+      <div class="pill-group">
+        <div class="pill" [class.active]="completionType === 'numero'" (click)="setCompletionType('numero')">Número</div>
+        <div class="pill" [class.active]="completionType === 'data'" (click)="setCompletionType('data')">Data</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Botão Flutuante de Confirmar -->
+  <div class="fab-container">
+    <ion-button class="submit-btn" shape="round" (click)="saveHabit()">
+      <ion-icon name="checkmark" slot="icon-only"></ion-icon>
+    </ion-button>
+  </div>
+
+</ion-content>
