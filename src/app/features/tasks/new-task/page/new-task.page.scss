@@ -251,3 +251,17 @@
   color: black;
   border-radius: 12px;
 }
+
+.form-item-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.campo-erro {
+  color: #c82927;;
+  font-size: 12px;
+  min-height: 16px;
+  display: block;
+  padding-left: 4px;
+  margin-bottom: 4px;
+}

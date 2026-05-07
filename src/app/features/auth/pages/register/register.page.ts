@@ -65,7 +65,7 @@ export class RegisterPage implements OnInit {
       return 'Nome de usuário deve ter no máximo 20 caracteres.';
     if (!/^[a-zA-Z0-9_]+$/.test(userLimpo)) 
       return 'Nome de usuário só pode ter letras, números e underline.';
-    if (/[\u200B-\u200D\uFEFF\u3164\u1160]/.test(username))
+    if (/[\u200B-\u200D\uFEFF\u3164\u1160]/.test(userLimpo))
       return 'Nome de usuário só pode ter letras, números e underline.';
     if (!/[a-zA-Z]/.test(userLimpo)) 
       return 'Nome de usuário deve conter pelo menos uma letra.';
@@ -160,7 +160,7 @@ export class RegisterPage implements OnInit {
     return Object.keys(this.erros).length === 0;
   }
 
-
+  //warning inline (o mini texto de erro q aparece po)
   onNomeChange(valor: string) {
   this.nome = valor;
   if (this.tocado['nome'])
