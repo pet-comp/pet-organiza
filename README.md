@@ -63,7 +63,7 @@ A estrutura do código-fonte em `/src/app` é dividida em quatro pilares fundame
 Este projeto é desenvolvido por membros do **PET Computação - ICMC/USP**:
 
 * **Kattryel Henrique Santos Rezende** (Idealizador do Projeto)
-* **João Boiago**
+* **João Pedro Boiago Gomes Santana**
 * **Guilherme Zanetti**
 
 ---
