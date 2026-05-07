@@ -2,17 +2,20 @@
   <h1 class="page-title">Missões</h1>
 
   <ion-segment [(ngModel)]="selectedCategory" mode="md" class="custom-segment">
-    <ion-segment-button value="disponiveis">
+    <ion-segment-button value="disponivel">
       <ion-label>Disponíveis</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="em-progresso">
+    <ion-segment-button value="em progresso">
       <ion-label>Em progresso</ion-label>
     </ion-segment-button>
   </ion-segment>
 
   <div>
-    <ion-list>
-      <app-mission-card *ngFor="let mission of missions" [mission]="mission"></app-mission-card>
+    <ion-list lines="none" style="background: transparent; padding: 0;">
+      <app-mission-card *ngFor="let mission of filteredMissions" [mission]="mission"></app-mission-card>
     </ion-list>
   </div>
+
+  <p class="empty-message">Não há mais missões<br>disponíveis no momento :)</p>
+
 </ion-content>
