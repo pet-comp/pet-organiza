@@ -4,4 +4,5 @@ export interface Mission {
     icon: string;
     arestas: number;
     status: string;
+    progress?: number;
 }

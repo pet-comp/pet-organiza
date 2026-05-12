@@ -44,6 +44,7 @@ export class MissionListPage implements OnInit {
       arestas: 100,
       icon: 'medal',
       status: 'em progresso',
+      progress: 50,
     },
     {
       title: 'Limpeza Total',
@@ -51,6 +52,7 @@ export class MissionListPage implements OnInit {
       arestas: 60,
       icon: 'medal',
       status: 'em progresso',
+      progress: 30,
     },
     {
       title: 'Enfrentando a Cama',
@@ -58,6 +60,7 @@ export class MissionListPage implements OnInit {
       arestas: 70,
       icon: 'medal',
       status: 'em progresso',
+      progress: 60,
     },
   ]
 
@@ -67,6 +70,15 @@ export class MissionListPage implements OnInit {
 
   get filteredMissions() {
     return this.missions.filter(mission => mission.status === this.selectedCategory);
+  }
+
+  acceptMission(mission: Mission) {
+    mission.status = 'em progresso';
+    mission.progress = 0;
+  }
+
+  cancelMission(mission: Mission) {
+    this.missions = this.missions.filter(m => m !== mission);
   }
 
 }

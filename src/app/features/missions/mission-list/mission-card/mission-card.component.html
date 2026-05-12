@@ -12,6 +12,12 @@
     <span class="arestas-text">+{{mission.arestas}} arestas</span>
   </div>
 
-  <app-organiza-button label="Aceitar Missão" type="button"></app-organiza-button>
+  @if (mission.status === 'disponivel') {
+  <app-organiza-button label="Aceitar Missão" type="button" (onClick)="onAccept()"></app-organiza-button>
+  }
+  @else if (mission.status === 'em progresso') {
+  <ion-progress-bar class="custom-progress" [value]="(mission.progress || 0) / 100"></ion-progress-bar>
+  <app-organiza-button label="Cancelar Missão" type="button" (onClick)="onCancel()"></app-organiza-button>
+  }
 
 </div>

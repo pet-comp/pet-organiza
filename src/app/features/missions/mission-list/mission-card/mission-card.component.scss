@@ -58,3 +58,14 @@
     font-family: "Montserrat SemiBold", sans-serif;
     font-size: 14px;
 }
+
+.custom-progress {
+  height: 10px; /* Aumenta a espessura da barra */
+  border-radius: 8px; /* Deixa os cantos arredondados */
+  
+  /* Cor principal do progresso */
+  --progress-background: var(--forest-green, #0d6b38); 
+  
+  /* Cor de fundo da parte vazia da barra */
+  --background: var(--input-background, #e0e0e0); 
+}
