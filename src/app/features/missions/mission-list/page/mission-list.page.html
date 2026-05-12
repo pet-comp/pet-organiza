@@ -12,7 +12,8 @@
 
   <div>
     <ion-list lines="none" style="background: transparent; padding: 0;">
-      <app-mission-card *ngFor="let mission of filteredMissions" [mission]="mission"></app-mission-card>
+      <app-mission-card *ngFor="let mission of filteredMissions" [mission]="mission" (accept)="acceptMission($event)"
+        (cancel)="cancelMission($event)"></app-mission-card>
     </ion-list>
   </div>
 
