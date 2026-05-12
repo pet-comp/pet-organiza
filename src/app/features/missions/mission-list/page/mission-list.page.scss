@@ -1,0 +1,47 @@
+.page-title {
+  color: #0d6b38;
+  font-weight: 800;
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-family: "Montserrat Bold";
+}
+
+.custom-segment {
+  --background: transparent;
+  margin-bottom: 25px;
+  border-bottom: 3px solid #e0e0e0; 
+  display: flex;
+  width: 100%;
+
+  ion-segment-button {
+    --color: #adb5bd;
+    --color-checked: #0d6b38;
+    --indicator-color: #0d6b38; 
+    --indicator-height: 4px;     
+    --padding-start: 0;         
+    --padding-end: 0;
+    min-width: auto;            
+    flex: 1;                    
+    
+    ion-label {
+      font-size: 16px;
+      font-family: "Montserrat SemiBold";
+      text-transform: capitalize; 
+      letter-spacing: 0.5px;
+      overflow: visible;         
+    }
+
+    &::part(indicator-background) {
+      margin-bottom: -2px;
+    }
+  }
+}
+
+.empty-message {
+  text-align: center;
+  color: #a0a0b2;
+  font-family: "Montserrat Medium", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-top: 40px;
+}

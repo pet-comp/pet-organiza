@@ -2,18 +2,71 @@ import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Mission } from '../mission.model';
+import { MissionCardComponent } from '../mission-card/mission-card.component';
 
 @Component({
   selector: 'app-mission-list',
   templateUrl: './mission-list.page.html',
   styleUrls: ['./mission-list.page.scss'],
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, MissionCardComponent],
+  standalone: true,
 })
+
 export class MissionListPage implements OnInit {
+  selectedCategory: string = 'disponivel';
+
+  missions: Mission[] = [
+    {
+      title: 'Maratona de Estudos',
+      description: 'Conclua 5 tarefas da categoria Estudos nesta semana.',
+      arestas: 50,
+      icon: 'medal',
+      status: 'disponivel',
+    },
+    {
+      title: 'Hábito de Ferro',
+      description: 'Mantenha um hábito diário por 7 dias seguidos.',
+      arestas: 100,
+      icon: 'medal',
+      status: 'disponivel',
+    },
+    {
+      title: 'Cozinheiro de mão cheia',
+      description: 'Faça 3 receitas saudáveis essa semana.',
+      arestas: 80,
+      icon: 'medal',
+      status: 'disponivel',
+    },
+    {
+      title: 'Explorador da Semana',
+      description: 'Explore 3 novos lugares essa semana.',
+      arestas: 100,
+      icon: 'medal',
+      status: 'em progresso',
+    },
+    {
+      title: 'Limpeza Total',
+      description: 'Faça uma limpeza completa na casa.',
+      arestas: 60,
+      icon: 'medal',
+      status: 'em progresso',
+    },
+    {
+      title: 'Enfrentando a Cama',
+      description: 'Arrume a cama logo ao acordar todos os dias desta semana.',
+      arestas: 70,
+      icon: 'medal',
+      status: 'em progresso',
+    },
+  ]
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  get filteredMissions() {
+    return this.missions.filter(mission => mission.status === this.selectedCategory);
   }
 
 }

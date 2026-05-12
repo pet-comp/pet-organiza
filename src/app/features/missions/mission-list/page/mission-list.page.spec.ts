@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MissionListPage } from '../mission-list.page';
+import { MissionListPage } from './mission-list.page';
 
 describe('MissionListPage', () => {
   let component: MissionListPage;
