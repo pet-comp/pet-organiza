@@ -1,0 +1,9 @@
+<div class="card-container">
+  <h1 class="card-title">Cancelar Missão?</h1>
+  <p class="card-message">Se você cancelar a missão <span class="green-text">{{ mission?.title }}</span>, você perderá todo o seu progresso nela. Tem certeza?</p>
+  
+  <div class="buttons-container">
+    <button class="primary-btn" (click)="onCancel()">Não, manter missão</button>
+    <button class="secondary-btn" (click)="onConfirm()">Sim, quero cancelar</button>
+  </div>
+</div>

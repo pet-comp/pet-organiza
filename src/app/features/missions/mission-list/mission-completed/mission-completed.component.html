@@ -1,0 +1,15 @@
+<div class="card-container">
+
+  <h1 class="card-title">Missão Cumprida!</h1>
+  <p class="card-message">Você dominou: <br> <span class="green-text">{{ mission.title }}.</span></p>
+  <div class="reward-card">
+    <img src="assets/chupa-cubo.svg" class="reward-image">
+    <div class="edges-display-card">
+      <img src="assets/edges.svg" alt="Arestas" class="edges-icon">
+      <p class="arestas-text"><span class="edges-number">+{{mission.arestas}}</span> arestas</p>
+    </div>
+  </div>
+  <app-organiza-button class="reward-button" label="Receber Recompensa" type="button"
+    (onClick)="onClose()"></app-organiza-button>
+
+</div>

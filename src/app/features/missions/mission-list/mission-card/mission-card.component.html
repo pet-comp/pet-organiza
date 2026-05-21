@@ -1,7 +1,8 @@
 <div class="container">
+  <ion-icon name="close" class="close-button" (click)="onCancel()"></ion-icon>
 
   <div class="title-label">
-    <ion-icon [name]="mission.icon" class="title-icon"></ion-icon>
+    <img src="assets/icons/{{mission.image}}" alt="Medalha" class="title-icon">
     <h1 class="title">{{mission.title}}</h1>
   </div>
 
@@ -17,7 +18,9 @@
   }
   @else if (mission.status === 'em progresso') {
   <ion-progress-bar class="custom-progress" [value]="(mission.progress || 0) / 100"></ion-progress-bar>
-  <app-organiza-button label="Cancelar Missão" type="button" (onClick)="onCancel()"></app-organiza-button>
+  @if (mission.progress === 100) {
+  <app-organiza-button label="Completar Missão" type="button" (onClick)="onComplete()"></app-organiza-button>
+  }
   }
 
 </div>
