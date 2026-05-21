@@ -12,10 +12,19 @@
 
   <div>
     <ion-list lines="none" style="background: transparent; padding: 0;">
-      <app-mission-card *ngFor="let mission of filteredMissions" [mission]="mission"></app-mission-card>
+      <app-mission-card *ngFor="let mission of filteredMissions" [mission]="mission" (accept)="acceptMission($event)"
+        (cancel)="cancelMission($event)" (complete)="completeMission($event)"></app-mission-card>
     </ion-list>
   </div>
 
   <p class="empty-message">Não há mais missões<br>disponíveis no momento :)</p>
+
+  <div class="overlay" *ngIf="showCompletedCard && completedMission">
+    <app-mission-completed [mission]="completedMission" (close)="closeCompletedCard()"></app-mission-completed>
+  </div>
+
+  <div class="overlay" *ngIf="showCancelCard && canceledMission">
+    <app-mission-cancel [mission]="canceledMission" (close)="closeCancelCard($event)"></app-mission-cancel>
+  </div>
 
 </ion-content>

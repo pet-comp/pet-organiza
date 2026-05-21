@@ -1,4 +1,5 @@
 .container {
+    position: relative;
     padding: 16px;
     background-color: #ffffff;
     display: flex;
@@ -57,4 +58,40 @@
     color: var(--plain-green, #10b981);
     font-family: "Montserrat SemiBold", sans-serif;
     font-size: 14px;
+}
+
+.custom-progress {
+    height: 10px;
+    /* Aumenta a espessura da barra */
+    border-radius: 8px;
+    /* Deixa os cantos arredondados */
+
+    /* Cor principal do progresso */
+    --progress-background: var(--forest-green, #0d6b38);
+
+    /* Cor de fundo da parte vazia da barra */
+    --background: var(--input-background, #e0e0e0);
+}
+
+app-organiza-button {
+    ::ng-deep .main-button {
+        padding: 10px;
+        font-size: 16px;
+    }
+}
+
+.close-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 24px;
+    color: #a0a0b2;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+    z-index: 10;
+}
+
+.close-button:active {
+    color: #4a4a68;
+    transform: scale(0.9);
 }

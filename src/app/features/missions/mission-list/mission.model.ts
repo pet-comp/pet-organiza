@@ -1,7 +1,8 @@
 export interface Mission {
     title: string;
     description: string;
-    icon: string;
+    image: string;
     arestas: number;
     status: string;
+    progress: number;
 }
