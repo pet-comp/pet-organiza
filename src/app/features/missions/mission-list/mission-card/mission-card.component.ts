@@ -15,6 +15,7 @@ export class MissionCardComponent {
   @Input() mission!: Mission;
   @Output() accept = new EventEmitter<Mission>();
   @Output() cancel = new EventEmitter<Mission>();
+  @Output() complete = new EventEmitter<Mission>();
 
   constructor() { }
 
@@ -24,6 +25,10 @@ export class MissionCardComponent {
 
   onCancel() {
     this.cancel.emit(this.mission);
+  }
+
+  onComplete() {
+    this.complete.emit(this.mission);
   }
 
 }

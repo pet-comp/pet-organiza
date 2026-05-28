@@ -1,0 +1,74 @@
+.card-container {
+  background-color: var(--pure-white, #ffffff);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  width: 90%;
+  max-width: 400px;
+}
+
+.card-title {
+  color: #0d6b38;
+  font-size: 24px;
+  font-family: "Montserrat Bold", sans-serif;
+  margin: 0 0 12px 0;
+}
+
+.card-message {
+  color: #6b6b83;
+  font-family: "Montserrat Medium", sans-serif;
+  font-size: 16px;
+  margin: 0 0 24px 0;
+  line-height: 1.5;
+}
+
+.green-text {
+  color: var(--plain-green, #10b981);
+  font-family: "Montserrat Bold", sans-serif;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.primary-btn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  background-color: var(--forest-green, #0d6b38);
+  color: var(--pure-white, #ffffff);
+  font-family: 'Montserrat SemiBold', sans-serif;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.secondary-btn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  background-color: transparent;
+  color: var(--middle-pink, #BD5ABE);
+  font-family: 'Montserrat SemiBold', sans-serif;
+  font-size: 16px;
+  border: 1px solid var(--middle-pink, #BD5ABE);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
