@@ -30,11 +30,12 @@
           <div class="form-item-wrapper">
             <div class="form-item">
               <ion-icon name="reorder-two-outline" class="input-icon"></ion-icon>
-              <input type="text" class="custom-input"
+              <textarea class="custom-input custom-textarea"
                 placeholder="Descreva a tarefa (opcional)"
                 [value]="descricao"
-                (input)="onDescricaoChange($any($event.target).value)"
-                (blur)="onDescricaoBlur()">
+                (input)="onDescricaoChange($any($event.target).value); autoResize($event)"
+                rows="1">
+              </textarea>
             </div>
             <span class="campo-erro">{{ erros['descricao'] }}</span>
           </div>
@@ -53,25 +54,29 @@
 
           <ion-popover trigger="open-date-picker" triggerAction="click">
             <ng-template>
-              <ion-datetime presentation="date"
-                [(ngModel)]="selectedDate"
-                class="custom-datetime"
-                showDefaultButtons="true"
-                doneText="Confirmar"
-                cancelText="Cancelar"
-                (ionChange)="erros['prazo'] = ''">
-              </ion-datetime>
+              <ion-datetime
+              presentation="date"
+              [(ngModel)]="selectedDate"
+              class="custom-datetime"
+              showDefaultButtons="true"
+              doneText="Confirmar"
+              cancelText="Cancelar"
+              [min]="prazoMin"
+              [max]="prazoMax"
+              (ionChange)="erros['prazo'] = ''">
+            </ion-datetime>
             </ng-template>
           </ion-popover>
 
           <div class="form-item">
             <span class="item-label">Categoria:</span>
-            <div class="chip-group">
+            <div *ngIf="carregando" class="loading-text">Carregando categorias...</div>
+            <div *ngIf="!carregando" class="chip-group chip-group-scroll">
               @for (cat of categories; track cat) {
                 <div class="chip"
-                  [style.background-color]="selectedCategory === cat.name ? 'hsl(' + cat.colorHue + ', 80%, 85%)' : null"
-                  [style.color]="selectedCategory === cat.name ? 'hsl(' + cat.colorHue + ', 80%, 30%)' : null"
-                  (click)="selectedCategory = cat.name">
+                  [style.background-color]="selectedCategory === cat.id ? 'hsl(' + cat.colorHue + ', 80%, 85%)' : null"
+                  [style.color]="selectedCategory === cat.id ? 'hsl(' + cat.colorHue + ', 80%, 30%)' : null"
+                  (click)="selectedCategory = cat.id">
                   <span class="chip-text">{{ cat.name }}</span>
                 </div>
               }

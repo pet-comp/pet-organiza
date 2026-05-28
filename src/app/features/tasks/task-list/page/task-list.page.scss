@@ -88,3 +88,34 @@
   flex-direction: column;
   gap: 24px;
 }
+
+.reorder-hint {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 4px;
+  font-size: 13px;
+  color: #cfc5c5;
+  margin-bottom: 8px;
+}
+
+.reorder-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --background: transparent;
+  margin-bottom: 8px;
+}
+
+.category-mini {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 4px;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+
+  ion-icon {
+    font-size: 1.4rem;
+  }
+}

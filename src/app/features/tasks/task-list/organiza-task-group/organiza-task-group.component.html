@@ -1,7 +1,15 @@
 <div class="group-header">
-  <ion-icon [name]="category.icon" [style.color]="'hsl(' + category.colorHue + ', 80%, 30%)'" class="category-icon"></ion-icon>
+  <ion-icon 
+    *ngIf="!category.semCategoria"
+    [name]="category.icon" 
+    [style.color]="'hsl(' + category.colorHue + ', 80%, 30%)'" 
+    class="category-icon">
+  </ion-icon>
   
-  <h2 class="category-name" [style.color]="'hsl(' + category.colorHue + ', 80%, 30%)'"]>{{category.name}}</h2>
+  <h2 class="category-name" 
+    [style.color]="category.semCategoria ? '#848b94' : 'hsl(' + category.colorHue + ', 80%, 30%)'">
+    {{category.name}}
+  </h2>
   
   <ion-icon name="chevron-forward-outline" class="chevron-icon"></ion-icon>
 </div>

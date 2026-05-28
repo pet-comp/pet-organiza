@@ -1,13 +1,22 @@
 export interface Category {
-    id: string;
-    name: string;
-    icon: string;
-    colorHue: number;
+  id: string;
+  name: string;
+  icon: string;
+  colorHue: number;
+  ordem?: number;
+  descricao?: string;
+  semCategoria?: boolean;
 }
 
 export interface Task {
-    id: string;
-    name: string;
-    completed: boolean;
-    categoryID: string;
+  id: string;
+  titulo: string;
+  descricao: string;
+  categoriaId: string;
+  prazo: string;
+  prioridade: string;
+  dificuldade: string;
+  status: string;
+  recompensaPaga: boolean;
+  criadaEm?: any;
 }

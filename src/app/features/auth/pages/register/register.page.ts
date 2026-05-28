@@ -2,7 +2,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router, TitleStrategy } from '@angular/router';
 import { OrganizaInputComponent } from '../../../../shared/components/organiza-input/organiza-input.component';
 import { OrganizaButtonComponent } from '../../../../shared/components/organiza-button/organiza-button.component';
 import { FirebaseService } from '../../../../services/firebase.service';
@@ -16,8 +16,19 @@ import { AlertController } from '@ionic/angular';
   imports: [IonicModule, CommonModule, FormsModule, OrganizaInputComponent, OrganizaButtonComponent]
 })
 export class RegisterPage implements OnInit {
-  nome: string = ''; username: string = ''; nascimento: string = ''; email: string = ''; senha: string = ''; confirmarsenha: string = '';
-  erros: {[key: string]: string} = {}; tocado: {[key: string]: boolean} = {}; 
+  nome: string = '';
+  username: string = '';
+  nascimento: string = '';
+  nascimentoDate: string = '';
+  email: string = '';
+  senha: string = '';
+  confirmarsenha: string = '';
+  
+  erros: {[key: string]: string} = {};
+  tocado: {[key: string]: boolean} = {}; 
+
+  anoMinNascimento: string = new Date(new Date().getFullYear() - 120, 0, 1).toISOString();
+  anoMaxNascimento: string = new Date(new Date().getFullYear() - 0, 11, 31).toISOString();
 
   constructor(private router: Router, private firebaseservice: FirebaseService, private alertcontroller: AlertController, private ngZone: NgZone) { }
 
@@ -95,14 +106,15 @@ export class RegisterPage implements OnInit {
     return null;
   }
 
-  formatarNascimento(valor: string) {
-    const numeros = valor.replace(/\D/g, '').slice(0, 8);
-    if (numeros.length <= 2)
-      this.nascimento = numeros;
-    else if (numeros.length <= 4)
-      this.nascimento = `${numeros.slice(0,2)}/${numeros.slice(2)}`;
-    else
-      this.nascimento = `${numeros.slice(0,2)}/${numeros.slice(2,4)}/${numeros.slice(4)}`;
+  onNascimentoDateChange(event: any) {
+    this.nascimentoDate = event.detail.value;
+    const data = new Date(this.nascimentoDate);
+    const dia = String(data.getDate()).padStart(2, '0');
+    const mes = String(data.getMonth() + 1).padStart(2, '0');
+    const ano = data.getFullYear();
+    this.nascimento = `${dia}/${mes}/${ano}`;
+    this.tocado['nascimento'] = true; // marca como tocado automaticamente
+    this.erros['nascimento'] = this.validarNascimento() ?? '';
   }
 
   validarEmail(email: string): string | null {
@@ -184,17 +196,6 @@ export class RegisterPage implements OnInit {
     this.erros['username'] = disponivel ? '' : 'Nome de usuário em uso.';
   }
 
-  onNascimentoChange(valor: string) {
-  this.formatarNascimento(valor);
-}
-  onNascimentoBlur() {
-    this.tocado['nascimento'] = true;
-    if (!this.nascimento)
-      this.erros['nascimento'] = 'Data de nascimento obrigatória.';
-    else
-      this.erros['nascimento'] = this.validarNascimento() ?? '';
-  }
-
   onEmailChange(valor: string) {
     this.email = valor;
     if (this.tocado['email'])
@@ -269,7 +270,7 @@ export class RegisterPage implements OnInit {
   }
 
   ngOnInit() {
-    this.nome = ''; this.username = ''; this.nascimento = ''; this.email = ''; this.senha = ''; this.confirmarsenha = '';
+    this.nome = ''; this.username = ''; this.nascimento = ''; this.nascimentoDate = ''; this.email = ''; this.senha = ''; this.confirmarsenha = '';
     this.erros = {}; this.tocado = {};
   }
 }

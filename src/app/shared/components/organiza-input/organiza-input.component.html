@@ -4,6 +4,7 @@
     [type]="type"
     [placeholder]="placeholder"
     [(ngModel)]="value"
+    [readonly]="readonly"
     (input)="valueChange.emit(value)"
     (blur)="blur.emit()" />
 </div>

@@ -1,24 +1,39 @@
-<ion-content class="ion-padding custom-background">
+<ion-content [fullscreen]="true" class="ion-padding custom-background" #content>
   <div class="title-div">
     <h1 class="page-title">Tarefas</h1>
     <app-organiza-button label="+ Criar Tarefa" type="button" (onClick)="navigateToCreateTask()"></app-organiza-button>
   </div>
 
-  <div class="categories-card-display">
+  <div *ngIf="carregando" class="loading-text">Carregando...</div>
 
-    <div (click)="navigateToNewCategory()" class="new-category-button">
-      <div class="new-category-button-icon">+</div>
-      <h3 class="new-category-text">Criar nova categoria</h3>
+  <div *ngIf="!carregando">
+    <div class="categories-card-display">
+      <div (click)="navigateToNewCategory()" class="new-category-button">
+        <div class="new-category-button-icon">+</div>
+        <h3 class="new-category-text">Criar nova categoria</h3>
+      </div>
+
+      <app-organiza-category-card
+        *ngFor="let cat of categories"
+        [category]="cat"
+        [totalTasks]="getTasksByCategory(cat.id).length"
+        [completedTasks]="getCompletedTasksByCategory(cat.id)">
+      </app-organiza-category-card>
     </div>
 
-    <app-organiza-category-card *ngFor="let cat of categories" [category]="cat" [totalTasks]="getTasksByCategory(cat.id).length"
-      [completedTasks]="getCompletedTasksByCategory(cat.id)"></app-organiza-category-card>
+    <div class="category-list">
+      <app-organiza-task-group
+        *ngFor="let cat of categories"
+        [category]="cat"
+        [taskList]="getTasksByCategory(cat.id)">
+      </app-organiza-task-group>
 
+      <div *ngIf="getTasksSemCategoria().length > 0">
+        <app-organiza-task-group
+          [category]="{ name: 'Sem categoria', icon: '', colorHue: 0, semCategoria: true }"
+          [taskList]="getTasksSemCategoria()">
+        </app-organiza-task-group>
+      </div>
+    </div>
   </div>
-
-  <div class="category-list">
-    <app-organiza-task-group *ngFor="let cat of categories" [category]="cat"
-      [taskList]="getTasksByCategory(cat.id)"></app-organiza-task-group>
-  </div>
-
 </ion-content>
