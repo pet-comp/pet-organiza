@@ -30,15 +30,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size="4" *ngFor="let cube of filteredCubes">
-        <div class="cube-item" [class.is-locked]="cube.locked">
-          <div class="cube-card">
-            <img [src]="cube.img" [alt]="cube.name" class="cube-img">
-            <div class="lock-overlay" *ngIf="cube.locked">
-              <ion-icon name="lock-closed"></ion-icon>
-            </div>
-            <span class="cube-name">Cubo <br>{{ cube.name }}</span>
-          </div>
-        </div>
+        <app-cube-card [cube]="cube"></app-cube-card>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-
+import { CubeCardComponent } from '../cube-card/cube-card.component';
 @Component({
   selector: 'app-cubes-list',
   templateUrl: './cubes-list.page.html',
   styleUrls: ['./cubes-list.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule],
+  imports: [IonicModule, CommonModule, FormsModule, CubeCardComponent],
 })
 export class CubesListPage implements OnInit {
   selectedCategory: string = 'todos';
