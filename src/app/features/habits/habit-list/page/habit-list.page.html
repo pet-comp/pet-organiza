@@ -19,46 +19,42 @@
 
   <h2 class="section-title">Calendário</h2>
   <div class="weekly-calendar">
-    <div class="day-item" *ngFor="let d of weekDays" [class.active]="d.isToday">
+    <div class="day-item" *ngFor="let d of weekDays" 
+         [class.active]="d.isSelected"
+         (click)="selectDate(d.dateObj)">
       <span class="day-name">{{ d.name }}</span>
       <div class="day-number">{{ d.day }}</div>
     </div>
   </div>
 
-  <h2 class="section-title">Metas</h2>
   <div class="habits-list">
-    <!-- MUDANÇA AQUI: (click)="openModal(habit)" em vez de onToggleHabit -->
     <div class="habit-card" *ngFor="let habit of habits" 
-         [style.borderColor]="habit.color" 
+         [style.borderColor]="habit.isDoneOnSelectedDate ? 'var(--plain-green)' : habit.color" 
          (click)="openModal(habit)">
       
       <div class="card-top">
-        <div class="progress-fill" [style.width.%]="habit.isInfinity ? 0 : habit.progressPercentage" [style.backgroundColor]="habit.lightColor"></div>
+        <div class="progress-fill" 
+             [style.width.%]="habit.progressPercentage" 
+             [style.backgroundColor]="habit.isDoneOnSelectedDate ? 'var(--pastel-green)' : habit.lightColor"></div>
+        
         <div class="card-top-content">
-          <h3 [style.color]="habit.color">{{ habit.title }}</h3>
-          <div class="progress-text" [style.color]="habit.color">
+          <h3 [style.color]="habit.isDoneOnSelectedDate ? 'var(--forest-green)' : habit.color">{{ habit.title }}</h3>
+          <div class="progress-text" [style.color]="habit.isDoneOnSelectedDate ? 'var(--forest-green)' : habit.color">
             <ion-icon name="infinite-outline" *ngIf="habit.isInfinity"></ion-icon>
             <span *ngIf="!habit.isInfinity">{{ habit.progressPercentage }}%</span>
           </div>
         </div>
       </div>
 
-      <div class="card-bottom" [style.backgroundColor]="habit.color">
+      <div class="card-bottom" [style.backgroundColor]="habit.isDoneOnSelectedDate ? 'var(--plain-green)' : habit.color">
         <div class="stat-col"><span class="stat-label">Lembrete</span><span class="stat-value">{{ habit.reminder }}</span></div>
-        <div class="stat-col"><span class="stat-label">Dias restantes</span><span class="stat-value icon-align">
-            <ion-icon name="infinite-outline" *ngIf="habit.daysLeft === 'infinite'"></ion-icon>
-            <ng-container *ngIf="habit.daysLeft !== 'infinite'">{{ habit.daysLeft }} dias</ng-container>
-          </span></div>
+        <div class="stat-col"><span class="stat-label">Restante</span><span class="stat-value">{{ habit.daysLeft }}</span></div>
         <div class="stat-col"><span class="stat-label">Recorde</span><span class="stat-value">{{ habit.record }} dias</span></div>
       </div>
     </div>
   </div>
 
-  <!-- MODAL BOTTOM SHEET -->
-  <ion-modal [isOpen]="isModalOpen" 
-             (didDismiss)="closeModal()" 
-             [initialBreakpoint]="0.35" 
-             [breakpoints]="[0, 0.35]">
+  <ion-modal [isOpen]="isModalOpen" (didDismiss)="closeModal()" [initialBreakpoint]="0.35" [breakpoints]="[0, 0.35]">
     <ng-template>
       <ion-content class="ion-padding modal-content">
         <div class="modal-header" *ngIf="selectedHabit">
@@ -66,12 +62,16 @@
             <ion-icon name="star"></ion-icon>
           </div>
           <h2 [style.color]="selectedHabit.color">{{ selectedHabit.title }}</h2>
-          <p>Deseja registrar o check-in de hoje?</p>
+          <p *ngIf="!selectedHabit.isDoneOnSelectedDate">Deseja registrar o check-in no dia selecionado?</p>
+          <p *ngIf="selectedHabit.isDoneOnSelectedDate">Deseja desfazer o check-in do dia selecionado?</p>
         </div>
         
-        <div class="modal-actions">
-          <ion-button expand="block" shape="round" color="success" (click)="confirmAction()">
-            <ion-icon slot="start" name="checkmark-circle"></ion-icon> Confirmar
+        <div class="modal-actions" *ngIf="selectedHabit">
+          <ion-button expand="block" shape="round" 
+                      [color]="selectedHabit.isDoneOnSelectedDate ? 'danger' : 'success'" 
+                      (click)="confirmAction()">
+            <ion-icon slot="start" [name]="selectedHabit.isDoneOnSelectedDate ? 'close-circle' : 'checkmark-circle'"></ion-icon> 
+            {{ selectedHabit.isDoneOnSelectedDate ? 'Desfazer check-in' : 'Confirmar check-in' }}
           </ion-button>
           <ion-button expand="block" shape="round" fill="clear" color="medium" (click)="closeModal()">
             Cancelar

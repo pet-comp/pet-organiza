@@ -4,7 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule, Router } from '@angular/router'; // Adicionado Router
 
 import { HabitService } from '../../services/habit.service'; 
-import { Habit } from '../../../../core/models/habit.model';
+import { Habit, HabitView } from '../../../../core/models/habit.model';
 import { OrganizaButtonComponent } from '../../../../shared/components/organiza-button/organiza-button.component';
 
 @Component({
@@ -14,55 +14,78 @@ import { OrganizaButtonComponent } from '../../../../shared/components/organiza-
   standalone: true,
   imports: [IonicModule, CommonModule, RouterModule, OrganizaButtonComponent]
 })
-export class HabitListPage implements OnInit {
-  habits: Habit[] = [];
-  weekDays: { name: string, day: number, isToday: boolean }[] = [];
-  
-  isModalOpen = false;
-  selectedHabit: Habit | null = null;
 
-  // Injetando o Router e o HabitService corretamente
+export class HabitListPage implements OnInit {
+  habits: HabitView[] = [];
+  weekDays: { name: string, day: number, dateObj: Date, isSelected: boolean }[] = [];
+  
+  selectedDate: Date = new Date();
+  isModalOpen = false;
+  selectedHabit: HabitView | null = null;
+
   constructor(private habitService: HabitService, private router: Router) { }
   
   ngOnInit() {
-    this.habits = this.habitService.getHabits();
+    this.selectedDate.setHours(0,0,0,0);
     this.generateWeek();
+    this.refreshHabits();
+  }
+
+  // Atualiza ao entrar na tela (caso tenha vindo da tela de criação)
+  ionViewWillEnter() {
+    this.refreshHabits();
   }
 
   handleHabitCreate() {
-      this.router.navigate(['/mainLayout/habit-create']); // Agora this.router está definido
+      this.router.navigate(['/mainLayout/habit-create']);
   }
 
+  // Calendário interativo
   generateWeek() {
+    this.weekDays = [];
     const dayNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
     const today = new Date();
+    today.setHours(0,0,0,0);
+    
     for (let i = 0; i < 6; i++) {
       const d = new Date(today);
-      d.setDate(today.getDate() - today.getDay() + 1 + i); 
+      d.setDate(today.getDate() - today.getDay() + 1 + i); // Começa na segunda
+      
       this.weekDays.push({
         name: dayNames[d.getDay()],
         day: d.getDate(),
-        isToday: d.getDate() === today.getDate()
+        dateObj: d,
+        isSelected: d.getTime() === this.selectedDate.getTime()
       });
     }
   }
 
-  // Lógica do Modal
-  openModal(habit: Habit) {
+  // Ao clicar num dia do calendário
+  selectDate(d: Date) {
+    this.selectedDate = d;
+    this.generateWeek(); // Atualiza a bolinha verde
+    this.refreshHabits(); // Atualiza as barras de progresso
+  }
+
+  refreshHabits() {
+    this.habits = this.habitService.getHabitsForDate(this.selectedDate);
+  }
+
+  // Modal interativo
+  openModal(habit: HabitView) {
     this.selectedHabit = habit;
     this.isModalOpen = true;
   }
 
   closeModal() {
     this.isModalOpen = false;
-    setTimeout(() => {
-      this.selectedHabit = null;
-    }, 300); // Aguarda a animação terminar
+    setTimeout(() => this.selectedHabit = null, 300);
   }
 
   confirmAction() {
     if (this.selectedHabit) {
-      this.habitService.toggleCheckIn(this.selectedHabit.id);
+      this.habitService.toggleCheckIn(this.selectedHabit.id, this.selectedDate);
+      this.refreshHabits(); // Recarrega visualmente
       this.closeModal();
     }
   }
