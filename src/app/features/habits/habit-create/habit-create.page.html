@@ -1,95 +1,180 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button color="dark"></ion-menu-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="custom-background">
+  <div class="page-container">
+    <div class="header-section">
+      <div class="back-link" (click)="navigateToHabitList()">
+        <ion-icon name="chevron-back-outline" class="back-icon"></ion-icon>
+        <span>Voltar ao Menu de Tarefas</span>
+      </div>
+    </div>
 
-<ion-content class="ion-padding custom-background">
-  <h1 class="page-title">Adicione um novo hábito</h1>
+    <div class="separator-bar"></div>
 
-  <div class="form-container">
+    <main class="main-content">
+    <h1 class="page-title">Adicione um novo hábito</h1>
+
+    <div class="form-container">
+
+      <div class="form-row inline-input">
+        <span class="label">Nome:</span>
+        <input class="input-text" type="text" placeholder="Insira aqui o nome do hábito" [(ngModel)]="habitName">
+      </div>
+
+      <div class="form-row">
+        <span class="label">Tipo</span>
+        <div class="pill-group">
+          <div class="pill" [class.active]="selectedType === 'incremental'" (click)="setType('incremental')">Incremental
+          </div>
+          <div class="pill" [class.active]="selectedType === 'recorrente'" (click)="setType('recorrente')">Recorrente
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <span class="label">Frequência</span>
+        <div class="pill-group frequency-group">
+          <div class="pill" [class.active]="selectedFrequency === 'diario'" (click)="setFrequency('diario')">Diário
+          </div>
+          <div class="pill" [class.active]="selectedFrequency === 'semanal'" (click)="setFrequency('semanal')">Semanal
+          </div>
+          <div class="pill" [class.active]="selectedFrequency === 'mensal'" (click)="setFrequency('mensal')">Mensal
+          </div>
+          <div class="pill" [class.active]="selectedFrequency === 'anual'" (click)="setFrequency('anual')">Anual</div>
+
+          <div class="pill icon-pill" id="open-custom-freq" [class.active]="selectedFrequency === 'personalizada'">
+            <ion-icon name="calendar-outline"></ion-icon>
+          </div>
+        </div>
+
+        <p class="custom-days-preview" *ngIf="selectedFrequency === 'personalizada'">
+          Repetição: <strong>{{ getCustomDaysLabel() }}</strong>
+        </p>
+      </div>
+
+      <ion-popover trigger="open-custom-freq" triggerAction="click" [dismissOnSelect]="false"
+        class="organiza-popover auto-height-popover">
+        <ng-template>
+          <div class="ion-padding popover-custom-freq-content">
+            <h4 class="popover-title">Frequência personalizada</h4>
+
+            <div class="sub-pill-group">
+              <div class="sub-pill" [class.active]="customFreqType === 'dias_semana'"
+                (click)="setCustomFreqType('dias_semana')">Dias específicos</div>
+              <div class="sub-pill" [class.active]="customFreqType === 'intervalo'"
+                (click)="setCustomFreqType('intervalo')">Por intervalo</div>
+            </div>
+
+            <div class="days-checkbox-list" *ngIf="customFreqType === 'dias_semana'">
+              <div class="day-checkbox-item" *ngFor="let day of weekDaysList">
+                <ion-checkbox [checked]="customDays.includes(day.value)"
+                  (ionChange)="toggleCustomDay(day.value)"></ion-checkbox>
+                <ion-label class="checkbox-label">{{ day.label }}</ion-label>
+              </div>
+            </div>
+
+            <div class="interval-input-container" *ngIf="customFreqType === 'intervalo'">
+              <p class="interval-hint">Repetir a cada:</p>
+              <div class="interval-fields">
+                <input type="number" [(ngModel)]="customIntervalValue" min="1" class="organiza-number-input">
+                <select [(ngModel)]="customIntervalUnit" class="organiza-select">
+                  <option value="dias">Dias</option>
+                  <option value="semanas">Semanas</option>
+                  <option value="meses">Meses</option>
+                  <option value="anos">Anos</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ion-popover>
+
+      <div class="divider"></div>
+
+      <div class="form-row toggle-row">
+        <span class="label">Notificação Diária</span>
+        <ion-toggle color="success" [(ngModel)]="notificationEnabled"></ion-toggle>
+      </div>
+
+      <div class="form-row" *ngIf="notificationEnabled">
+        <div class="time-picker-banner" id="open-time-picker">
+          <span>Selecionar horário</span>
+          <div class="time-value">
+            {{ notificationTime }} <ion-icon name="chevron-down-outline"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+      <ion-popover trigger="open-time-picker" triggerAction="click" class="organiza-popover datetime-popover">
+        <ng-template>
+          <ion-datetime presentation="time" mode="md" [(ngModel)]="notificationTime"
+            (ionChange)="onTimeChanged($event)">
+          </ion-datetime>
+        </ng-template>
+      </ion-popover>
+
+      <div class="divider"></div>
+
+      <div class="form-row color-row">
+        <span class="label">Cor:</span>
+        <div class="color-palette">
+          <div class="color-circle" *ngFor="let color of availableColors" [style.backgroundColor]="color"
+            [class.selected]="selectedColor === color" (click)="setColor(color)">
+          </div>
+          <div class="color-circle add-color">
+            <ion-icon name="add"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="form-row">
+        <span class="label">Concluir meta após</span>
+        <div class="pill-group">
+          <div class="pill" [class.active]="completionType === 'numero'" (click)="setCompletionType('numero')">Número
+          </div>
+          <div class="pill" [class.active]="completionType === 'data'" (click)="setCompletionType('data')">Data</div>
+        </div>
+      </div>
+
+      <div class="form-row inline-input" *ngIf="completionType === 'numero'">
+        <span class="label" style="font-weight: 500;">Quantidade alvo:</span>
+        <input type="number" placeholder="Ex: 50" [(ngModel)]="completionTargetNumber" style="text-align: right;">
+      </div>
+
+      <div class="form-row inline-input" *ngIf="completionType === 'data'">
+        <span class="label" style="font-weight: 500;">Data limite:</span>
+        <input type="date" [(ngModel)]="completionTargetDate" style="text-align: right;">
+      </div>
+
+    </div>
+    </main>
+
+    <div class="separator-bar"></div>
+
+      <section class="reward-section main-content">
+      <p class="section-subtitle">Recompensa por conclusão</p>
+      <h3 class="reward-title">Este hábito atualmente concede</h3>
+
+      <div class="arest-display">
+        <div class="icon-circle">
+          <ion-icon name="git-network-outline" class="temp-icon"></ion-icon>
+        </div>
+        <span class="arest-text">0 arestas</span>
+      </div>
+
+      <h3 class="reward-title">se concluído no prazo determinado.</h3>
+      <p class="info-text">Para modificar seu ganho de arestas por tarefa, acesse o menu de Configurações > Recompensas
+        por hábito</p>
+
+      <div class="submit-btn-wrapper">
+        <app-organiza-button label="✓" type="button" (click)="saveHabit()"></app-organiza-button>
+      </div>
+    </section>
+  </div>
     
-    <!-- Nome -->
-    <div class="form-row inline-input">
-      <span class="label">Nome:</span>
-      <input type="text" placeholder="Insira aqui o nome do hábito" [(ngModel)]="habitName">
-    </div>
-
-    <!-- Tipo -->
-    <div class="form-row">
-      <span class="label">Tipo</span>
-      <div class="pill-group">
-        <div class="pill" [class.active]="selectedType === 'incremental'" (click)="setType('incremental')">Incremental</div>
-        <div class="pill" [class.active]="selectedType === 'recorrente'" (click)="setType('recorrente')">Recorrente</div>
-      </div>
-    </div>
-
-    <!-- Frequência -->
-    <div class="form-row">
-      <span class="label">Frequência</span>
-      <div class="pill-group frequency-group">
-        <div class="pill" [class.active]="selectedFrequency === 'diario'" (click)="setFrequency('diario')">Diário</div>
-        <div class="pill" [class.active]="selectedFrequency === 'semanal'" (click)="setFrequency('semanal')">Semanal</div>
-        <div class="pill" [class.active]="selectedFrequency === 'mensal'" (click)="setFrequency('mensal')">Mensal</div>
-        <div class="pill" [class.active]="selectedFrequency === 'anual'" (click)="setFrequency('anual')">Anual</div>
-        <div class="pill icon-pill"><ion-icon name="calendar-outline"></ion-icon></div>
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- Notificação Diária -->
-    <div class="form-row notification-row">
-      <span class="label">Notificação Diária</span>
-      <ion-toggle color="success" [(ngModel)]="notificationEnabled"></ion-toggle>
-    </div>
-
-    <!-- Seletor de Horário -->
-    <div class="time-picker-banner" *ngIf="notificationEnabled">
-      <span>Selecionar horário</span>
-      <div class="time-value">
-        {{ notificationTime }} <ion-icon name="chevron-down-outline"></ion-icon>
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- Cor -->
-    <div class="form-row color-row">
-      <span class="label">Cor:</span>
-      <div class="color-palette">
-        <div class="color-circle" 
-             *ngFor="let color of availableColors" 
-             [style.backgroundColor]="color"
-             [class.selected]="selectedColor === color"
-             (click)="setColor(color)">
-        </div>
-        <div class="color-circle add-color">
-          <ion-icon name="add"></ion-icon>
-        </div>
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- Concluir Meta -->
-    <div class="form-row">
-      <span class="label">Concluir meta após</span>
-      <div class="pill-group">
-        <div class="pill" [class.active]="completionType === 'numero'" (click)="setCompletionType('numero')">Número</div>
-        <div class="pill" [class.active]="completionType === 'data'" (click)="setCompletionType('data')">Data</div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Botão Flutuante de Confirmar -->
-  <div class="fab-container">
-    <ion-button class="submit-btn" shape="round" (click)="saveHabit()">
-      <ion-icon name="checkmark" slot="icon-only"></ion-icon>
-    </ion-button>
-  </div>
-
+    <!-- <div class="fab-container">
+      <ion-button class="submit-btn" shape="round" (click)="saveHabit()">
+        <ion-icon name="checkmark" slot="icon-only"></ion-icon>
+      </ion-button>
+    </div> -->
 </ion-content>

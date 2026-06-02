@@ -1,3 +1,36 @@
+.header-section {
+  padding: 0 24px 16px 24px;
+  background: var(--background-white);
+  border: 0;
+
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #7b8390;
+  font-family: 'Montserrat Bold', sans-serif;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.back-icon {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.separator-bar {
+  width: 100%;
+  height: 10px;
+  background-color: var(--input-background);
+}
+
+.page-container {
+  font-family: 'Montserrat SemiBold', sans-serif;
+  padding-bottom: 40px;
+}
+
 .page-title {
   font-family: 'Montserrat Bold', sans-serif;
   font-size: 24px;
@@ -6,28 +39,51 @@
   margin-top: 0;
 }
 
+.main-content {
+  padding: 24px;
+}
+
 .form-container {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding-bottom: 100px; 
+  gap: 20px;
+  // padding-bottom: 100px; 
+}
+
+// Container mestre de cada linha do formulário
+.form-row {
+  display: flex;
+  flex-direction: column; 
+  align-items: flex-start;
+  width: 100%;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  color-scheme: light;
 }
 
 .label {
   font-family: 'Montserrat Bold', sans-serif;
   font-size: 14px;
   color: #555; 
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   display: block;
 }
 
+
 // Input de Nome
+.input-text { 
+  padding-bottom: 10px;
+  padding-left: 5px;
+}
+
 .inline-input {
-  display: flex;
+  flex-direction: row !important; 
   align-items: center;
-  gap: 8px;
-  
-  .label { margin-bottom: 0; }
+  border-bottom: 1px solid var(--input-background);
+  padding-bottom: 8px;
+  margin-bottom: 10px;
   
   input {
     flex: 1;
@@ -38,28 +94,25 @@
     color: #333;
     outline: none;
     
-    &::placeholder {
-      color: #999;
-      font-family: 'Montserrat SemiBold', sans-serif;
-    }
+    &::placeholder { color: #999; }
   }
 }
 
-// Botões "Pílula" 
+// Grupo de Pílulas com quebra de linha responsiva
 .pill-group {
   display: flex;
-  gap: 12px;
-  
-  &.frequency-group {
-    flex-wrap: wrap;
-  }
+  flex-wrap: wrap; 
+  gap: 10px;
+  width: 100%;
 
   .pill {
+    flex: 1;
+    min-width: 75px;
     background: var(--input-background);
     color: var(--disable-gray);
     font-family: 'Montserrat SemiBold', sans-serif;
     font-size: 13px;
-    padding: 10px 18px;
+    padding: 10px 14px;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s;
@@ -73,28 +126,21 @@
     }
 
     &.icon-pill {
-      padding: 10px 12px;
+      max-width: 50px;
       font-size: 18px;
     }
   }
 }
 
-// Divisórias
-.divider {
-  height: 1px;
-  background: var(--input-background);
-  margin: 2px 0;
-}
-
-// Toggle da Notificação
-.notification-row {
-  display: flex;
+// Customização da linha do Toggle de Notificação
+.toggle-row {
+  flex-direction: row !important;
   justify-content: space-between;
   align-items: center;
+  
   .label { margin-bottom: 0; }
   
   ion-toggle {
-    padding: 0;
     --handle-background: var(--pure-white);
     --background: var(--input-background);
     --background-checked: var(--forest-green);
@@ -112,6 +158,7 @@
   align-items: center;
   font-family: 'Montserrat SemiBold', sans-serif;
   font-size: 14px;
+  width: 100%;
 
   .time-value {
     font-family: 'Montserrat Bold', sans-serif;
@@ -122,9 +169,9 @@
   }
 }
 
-// Seletor de Cor
+// Seletor de Cores
 .color-row {
-  display: flex;
+  flex-direction: row !important;
   align-items: center;
   gap: 15px;
   .label { margin-bottom: 0; }
@@ -158,11 +205,19 @@
   }
 }
 
-// Botão Inferior
+// Divisórias Transparentes para Espaçamento Estável
+.divider {
+  height: 1px;
+  background: transparent;
+  margin: 4px 0;
+}
+
+// Botão Confirmar
 .fab-container {
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-top: 20px;
 
   .submit-btn {
     --background: var(--plain-green);
@@ -173,4 +228,229 @@
     --border-radius: 12px;
     --box-shadow: none;
   }
+}
+
+.custom-days-preview {
+  font-family: 'Montserrat Medium', sans-serif;
+  font-size: 13px;
+  color: var(--forest-green);
+  margin: 10px 0 0 0;
+  strong { font-family: 'Montserrat Bold', sans-serif; }
+}
+
+// Customização de Popovers Nativos (Light/Dark Mode Resilient)
+ion-popover.organiza-popover {
+  --background: var(--pure-white) !important;
+  --box-shadow: 0 8px 24px rgba(1, 100, 56, 0.15) !important;
+  
+  &.auto-height-popover {
+    --height: 290px !important; // FIXA a altura para o popover NUNCA flutuar ou pular ao trocar abas
+  }
+  
+  &::part(content) {
+    background: var(--pure-white) !important;
+    border-radius: 16px;
+    border: 2px solid var(--pastel-green);
+  }
+}
+
+// Estilização Interna da Frequência Customizada
+.popover-custom-freq-content {
+  padding: 16px;
+
+  .popover-title {
+    margin: 0 0 16px 0;
+    font-family: 'Montserrat Bold', sans-serif;
+    font-size: 15px;
+    color: var(--forest-green);
+    text-align: center;
+  }
+
+  .sub-pill-group {
+    display: flex;
+    background: var(--input-background);
+    padding: 4px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    gap: 4px;
+
+    .sub-pill {
+      flex: 1;
+      text-align: center;
+      padding: 8px 0;
+      font-family: 'Montserrat SemiBold', sans-serif;
+      font-size: 12px;
+      color: var(--disable-gray);
+      border-radius: 6px;
+      cursor: pointer;
+
+      &.active {
+        background: var(--pure-white);
+        color: var(--forest-green);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      }
+    }
+  }
+
+  .days-checkbox-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 180px;
+    overflow-y: auto;
+    
+    .day-checkbox-item {
+      display: flex;
+      align-items: center;
+      
+      ion-checkbox {
+        --size: 20px;
+        --checkbox-background: var(--pure-white) !important;
+        --checkbox-background-checked: var(--plain-green) !important;
+        --border-color: var(--disable-gray) !important;
+        --border-color-checked: var(--plain-green) !important;
+        --checkmark-color: var(--pure-white) !important;
+        border-radius: 4px;
+      }
+
+      .checkbox-label {
+        font-family: 'Montserrat Medium', sans-serif;
+        font-size: 13px;
+        color: #333;
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .interval-input-container {
+    padding: 10px 0;
+    
+    .interval-hint {
+      font-family: 'Montserrat SemiBold', sans-serif;
+      font-size: 13px;
+      color: #666;
+      margin: 0 0 15px 0;
+    }
+
+    .interval-fields {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+
+      .organiza-number-input {
+        width: 70px;
+        height: 44px;
+        background: var(--input-background);
+        border: none;
+        border-radius: 8px;
+        text-align: center;
+        font-family: 'Montserrat Bold', sans-serif;
+        font-size: 16px;
+        color: var(--forest-green);
+        outline: none;
+      }
+
+      .organiza-select {
+        flex: 1;
+        height: 44px;
+        background: var(--input-background);
+        border: none;
+        border-radius: 8px;
+        padding: 0 12px;
+        font-family: 'Montserrat SemiBold', sans-serif;
+        font-size: 14px;
+        color: var(--forest-green);
+        outline: none;
+      }
+    }
+  }
+}
+
+// Estilização do Relógio Nativo
+ion-popover.datetime-popover {
+  --width: 280px !important;
+  
+  ion-datetime {
+    --background: var(--pure-white) !important;
+    --background-rgb: 255, 255, 255 !important;
+    --title-color: var(--forest-green) !important;
+    --wheel-fade-background-rgb: 255, 255, 255 !important; 
+    --wheel-highlight-background: var(--pastel-green) !important; 
+    
+    background: var(--pure-white) !important;
+    color: var(--forest-green) !important;
+    font-family: 'Montserrat SemiBold', sans-serif;
+    
+    &::part(time-column) {
+      font-family: 'Montserrat Bold', sans-serif;
+      color: var(--forest-green);
+    }
+    &::part(active) {
+      color: var(--plain-green);
+      font-family: 'Montserrat Bold', sans-serif;
+    }
+  }
+}
+
+.reward-section {
+  padding-top: 24px;
+}
+
+.reward-title {
+  font-family: 'Montserrat Bold', sans-serif;
+  color: #5d6778;
+  font-size: 17px;
+  margin: 12px 0;
+}
+
+.arest-display {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--lime-green);
+  border-radius: 8px;
+  padding: 10px 20px;
+  gap: 12px;
+  margin: 12px 0;
+}
+
+.icon-circle {
+  background: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-circle .temp-icon {
+  color: var(--lime-green);
+  font-size: 22px;
+}
+
+.arest-text {
+  color: var(--forest-green);
+  font-family: 'Montserrat Bold', sans-serif;
+  font-size: 20px;
+}
+
+.info-text {
+  font-family: 'Montserrat Bold', sans-serif;
+  font-size: 12px;
+  color: #9aa5b1;
+  line-height: 1.5;
+  margin-top: 16px;
+  margin-bottom: 32px;
+}
+
+.submit-btn-wrapper {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.section-subtitle {
+  font-family: 'Montserrat Bold', sans-serif;
+  color: var(--lime-green);
+  font-size: 15px;
+  margin: 0 0 16px 0;
 }
