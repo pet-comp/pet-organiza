@@ -160,7 +160,7 @@
 }
 
 .unlock-card {
-  background: white;
+  background: #E6E9F2;
   border-radius: 20px;
   padding: 40px 20px;
   width: 90%;
@@ -221,8 +221,8 @@
     mask: radial-gradient(150px circle at center, #000 70%, transparent 100%);
 
     background:
-      repeating-conic-gradient(#FFF 0 15deg,
-        #F0F2F5 15deg 30deg);
+      repeating-conic-gradient(rgba(255,255,255, 0.4) 0 20deg,
+        transparent 20deg 40deg);
     animation: spinGlow 10s linear infinite;
     z-index: 0;
   }
@@ -235,8 +235,8 @@
     mask: radial-gradient(150px circle at center, #000 70%, transparent 100%);
 
     background:
-      repeating-conic-gradient(#dcf2ff 0 15deg,
-        #FFF 15deg 30deg);
+      repeating-conic-gradient(#90caf9 0 20deg,
+        transparent 20deg 40deg);
     animation: spinGlow 10s linear infinite;
     z-index: 0;
   }
@@ -249,8 +249,8 @@
     mask: radial-gradient(150px circle at center, #000 70%, transparent 100%);
 
     background:
-      repeating-conic-gradient(#ebd4ff 0 15deg,
-        #FFF 15deg 30deg);
+      repeating-conic-gradient(#ce93d8 0 20deg,
+        transparent 20deg 40deg);
     animation: spinGlow 10s linear infinite;
     z-index: 0;
   }
@@ -263,8 +263,8 @@
     mask: radial-gradient(150px circle at center, #000 70%, transparent 100%);
 
     background:
-      repeating-conic-gradient(#fff2cc 0 15deg,
-        #FFF 15deg 30deg);
+      repeating-conic-gradient(#ffe082 0 20deg,
+        transparent 20deg 40deg);
     animation: spinGlow 10s linear infinite;
     z-index: 0;
   }

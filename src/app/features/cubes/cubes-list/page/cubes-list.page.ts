@@ -21,14 +21,19 @@ export class CubesListPage implements OnInit {
   unlockedCubeIsRepeated: boolean = false;
   cubes = [
     { id: 1, name: 'Cubo de Gelo', rarity: 'comuns', img: 'assets/cubes/ice.svg', locked: false },
-    { id: 2, name: 'Cubo Gamer', rarity: 'comuns', img: 'assets/cubes/gamer.svg', locked: false },
-    { id: 3, name: 'Cubo Nerd', rarity: 'comuns', img: 'assets/cubes/nerd.svg', locked: false },
-    { id: 4, name: 'Cubo Punk', rarity: 'raros', img: 'assets/cubes/punk.svg', locked: false },
-    { id: 5, name: 'Cubo Kids', rarity: 'comuns', img: 'assets/cubes/kids.svg', locked: false },
+    { id: 2, name: 'Cubo Gamer', rarity: 'comuns', img: 'assets/cubes/gamer.svg', locked: true },
+    { id: 3, name: 'Cubo Nerd', rarity: 'comuns', img: 'assets/cubes/nerd.svg', locked: true },
+    { id: 4, name: 'Cubo Punk', rarity: 'raros', img: 'assets/cubes/punk.svg', locked: true },
+    { id: 5, name: 'Cubo Kids', rarity: 'comuns', img: 'assets/cubes/kids.svg', locked: true },
     { id: 6, name: 'Cubo Bruxo', rarity: 'epicos', img: 'assets/cubes/wizard.svg', locked: true },
     { id: 7, name: 'Clubo Penguin', rarity: 'lendarios', img: 'assets/cubes/penguin.svg', locked: true },
     { id: 8, name: 'Cubo Mágico', rarity: 'raros', img: 'assets/cubes/rubiks.svg', locked: true },
     { id: 9, name: 'Cubo Terrestre', rarity: 'lendarios', img: 'assets/cubes/earth.svg', locked: true },
+    { id: 10, name: 'Cube of Duty', rarity: 'epicos', img: 'assets/cubes/cube_of_duty.svg', locked: true },
+    { id: 11, name: 'Cubo Aquário', rarity: 'raros', img: 'assets/cubes/cubo_aquario.svg', locked: true },
+    { id: 12, name: 'Cubo Soneca', rarity: 'raros', img: 'assets/cubes/cubo_soneca.svg', locked: true },
+    { id: 13, name: 'Cubo Fantasma', rarity: 'raros', img: 'assets/cubes/cubo_fantasma.svg', locked: true },
+    { id: 14, name: 'Cubo Imersão', rarity: 'epicos', img: 'assets/cubes/cubo_imersao.svg', locked: true },
   ];
 
   constructor(private router: Router) { }
@@ -42,8 +47,18 @@ export class CubesListPage implements OnInit {
   }
 
   get filteredCubes() {
-    if (this.selectedCategory === 'todos') return this.cubes;
+    if (this.selectedCategory === 'todos') return this.cubes.sort((a, b) => this.getRarityOrder(a.rarity) - this.getRarityOrder(b.rarity));
     return this.cubes.filter(cube => cube.rarity === this.selectedCategory);
+  }
+
+  getRarityOrder(rarity: string): number {
+    switch (rarity) {
+      case 'comuns': return 0;
+      case 'raros': return 1;
+      case 'epicos': return 2;
+      case 'lendarios': return 3;
+      default: return 4;
+    }
   }
 
   rollRarity(): string {
