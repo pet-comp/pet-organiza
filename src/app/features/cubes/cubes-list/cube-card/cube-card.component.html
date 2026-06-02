@@ -1,10 +1,11 @@
 <div class="cube-item" [class.is-locked]="cube.locked">
   <div class="cube-card">
-    <img [src]="cube.locked ? 'assets/cubes/locked_cube.svg' : cube.img" [alt]="cube.locked ? 'Bloqueado' : cube.name" class="cube-img">
+    <img [src]="cube.locked ? 'assets/cubes/locked_cube.svg' : cube.img" [alt]="cube.locked ? 'Bloqueado' : cube.name"
+      class="cube-img">
     <div class="lock-overlay" *ngIf="cube.locked">
       <ion-icon name="lock-closed"></ion-icon>
     </div>
-    <span class="cube-name" *ngIf="!cube.locked">Cubo <br>{{ cube.name }}</span>
-    <span class="cube-name" *ngIf="cube.locked">Cubo <br>Bloqueado</span>
+    <span class="cube-name" *ngIf="!cube.locked"> <br>{{ cube.name }}</span>
+    <span class="cube-name" *ngIf="cube.locked"><br>Bloqueado</span>
   </div>
 </div>

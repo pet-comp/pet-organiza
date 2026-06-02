@@ -9,10 +9,10 @@
 .hero-card {
   background: #d4edda;
   border-radius: 16px;
-  padding: 20px;
+  padding: 20px 20px 80px 20px;
   text-align: center;
   position: relative;
-  margin-bottom: 40px;
+  margin-bottom: 80px;
 
   .mascot-img {
     width: 120px;
@@ -37,19 +37,28 @@
 
 .balance-badge {
   position: absolute;
-  bottom: -30px;
+  bottom: 0;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, 50%);
   background: white;
   border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  padding: 6px 16px;
-  width: 230px;
+  border-radius: 16px;
+  padding: 12px 20px;
+  width: max-content;
+  max-width: 90vw;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   white-space: nowrap;
+
+  .balance-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
 
   .edges-icon {
     width: 40px;
@@ -64,8 +73,46 @@
   .m-bold {
     font-family: "Montserrat Bold";
   }
+
+  .button-text {
+    font-family: "Montserrat Bold";
+    color: white;
+    margin: 0px;
+  }
+
+  .unlock-btn {
+    background: #0d6b38;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 5px;
+    font-family: "Montserrat Bold";
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    transition: opacity 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &:active {
+      opacity: 0.8;
+    }
+  }
 }
 
+.edges-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0px;
+}
+
+.edges-inlinetext-icon {
+  width: 30px;
+}
 
 .custom-segment {
   --background: transparent;
@@ -85,7 +132,7 @@
     flex: 1;
 
     ion-label {
-      font-size: 16px;
+      font-size: 12px;
       font-family: "Montserrat SemiBold";
       text-transform: capitalize;
       letter-spacing: 0.5px;
@@ -95,5 +142,206 @@
     &::part(indicator-background) {
       margin-bottom: -2px;
     }
+  }
+}
+
+.custom-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(5px);
+}
+
+.unlock-card {
+  background: white;
+  border-radius: 20px;
+  padding: 40px 20px;
+  width: 90%;
+  max-width: 350px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+
+  .cube-animation-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 160px;
+    margin-bottom: 60px;
+
+    p {
+      z-index: 1;
+      margin: 15px 0 0 0;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 1.5px;
+
+      &.comuns-text {
+        font-family: "Montserrat Bold";
+        color: #676f7e;
+      }
+
+      &.raros-text {
+        font-family: "Montserrat Bold";
+        color: #3c82f6;
+      }
+
+      &.epicos-text {
+        font-family: "Montserrat Bold";
+        color: #a855f7;
+      }
+
+      &.lendarios-text {
+        font-family: "Montserrat Bold";
+        color: #f59e0b;
+      }
+
+      &.repeated-cube {
+        font-family: "Montserrat Bold";
+        color: #f34343;
+      }
+    }
+  }
+
+  .comuns-glow-effect-bg {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    -webkit-mask: radial-gradient(150px circle at center, #000 70%, transparent 100%);
+    mask: radial-gradient(150px circle at center, #000 70%, transparent 100%);
+
+    background:
+      repeating-conic-gradient(#FFF 0 15deg,
+        #F0F2F5 15deg 30deg);
+    animation: spinGlow 10s linear infinite;
+    z-index: 0;
+  }
+
+  .raros-glow-effect-bg {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    -webkit-mask: radial-gradient(150px circle at center, #000 70%, transparent 100%);
+    mask: radial-gradient(150px circle at center, #000 70%, transparent 100%);
+
+    background:
+      repeating-conic-gradient(#dcf2ff 0 15deg,
+        #FFF 15deg 30deg);
+    animation: spinGlow 10s linear infinite;
+    z-index: 0;
+  }
+
+  .epicos-glow-effect-bg {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    -webkit-mask: radial-gradient(150px circle at center, #000 70%, transparent 100%);
+    mask: radial-gradient(150px circle at center, #000 70%, transparent 100%);
+
+    background:
+      repeating-conic-gradient(#ebd4ff 0 15deg,
+        #FFF 15deg 30deg);
+    animation: spinGlow 10s linear infinite;
+    z-index: 0;
+  }
+
+  .lendarios-glow-effect-bg {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    -webkit-mask: radial-gradient(150px circle at center, #000 70%, transparent 100%);
+    mask: radial-gradient(150px circle at center, #000 70%, transparent 100%);
+
+    background:
+      repeating-conic-gradient(#fff2cc 0 15deg,
+        #FFF 15deg 30deg);
+    animation: spinGlow 10s linear infinite;
+    z-index: 0;
+  }
+
+  .animated-cube-img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+    animation: floatCube 3s ease-in-out infinite;
+  }
+
+  h2 {
+    color: #0d6b38;
+    font-weight: 800;
+    font-size: 26px;
+    margin: 0 0 10px 0;
+    font-family: "Montserrat Bold";
+    position: relative;
+    z-index: 1;
+  }
+
+  p {
+    font-size: 16px;
+    color: #3b4256;
+    margin: 0 0 25px 0;
+    font-family: "Montserrat Medium";
+    position: relative;
+    z-index: 1;
+  }
+
+  app-organiza-button {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.unlocked-cube-name {
+  font-family: "Montserrat Bold";
+  color: #0d6b38;
+}
+
+
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes floatCube {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes spinGlow {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
   }
 }
