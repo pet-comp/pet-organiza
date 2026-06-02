@@ -153,4 +153,17 @@ export class HabitService {
 
     return { currentStreak, maxStreak };
   }
+
+  // Busca uma única instância para a tela de edição
+  getHabitById(id: string): Habit | undefined {
+    return this.habits.find(h => h.id === id);
+  }
+
+  // Remove o hábito permanentemente da lista mestre
+  deleteHabit(id: string) {
+    const index = this.habits.findIndex(h => h.id === id);
+    if (index > -1) {
+      this.habits.splice(index, 1);
+    }
+  }
 }

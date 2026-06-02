@@ -207,3 +207,74 @@ ion-modal {
     }
   }
 }
+
+// Alinhamento da linha de cabeçalho do calendário
+.calendar-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  .section-title {
+    margin-bottom: 0; // Remove a margem antiga para alinhar perfeitamente com os botões
+  }
+}
+
+// Estilização das setas de navegação
+.calendar-navigation {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  .button-nav {
+    margin: 0;
+    --padding-start: 4px;
+    --padding-end: 4px;
+    font-size: 20px;
+    color: var(--forest-green);
+    
+    ion-icon {
+      font-weight: bold;
+    }
+  }
+}
+
+// Ajuste para o componente de deslizamento (Sliding)
+.organiza-sliding-item {
+  background: transparent !important;
+  margin-bottom: 16px; // Transfere a margem do card para o container deslizante
+}
+
+.organiza-item-card {
+  --background: transparent !important;
+  --inner-padding-end: 0px !important;
+  --padding-start: 0px !important;
+  width: 100%;
+  
+  .habit-card {
+    width: 100%;
+    margin-bottom: 0px !important; // Zera a margem interna do card
+  }
+}
+
+// Botões ocultos revelados ao arrastar
+.btn-option {
+  font-family: 'Montserrat Bold', sans-serif;
+  color: var(--pure-white) !important;
+  border-radius: 12px;
+  margin-left: 6px;
+  width: 60px;
+  --box-shadow: none;
+
+  ion-icon {
+    font-size: 22px;
+  }
+
+  &.btn-edit {
+    --background: var(--middle-pink) !important; // Cor rosa médio global do app
+  }
+
+  &.btn-delete {
+    --background: #e53935 !important; // Vermelho destrutivo para exclusão
+  }
+}
