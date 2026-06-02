@@ -1,5 +1,7 @@
 <div class="cube-item" [class.is-locked]="cube.locked">
-  <div class="cube-card">
+  <div class="cube-card" [class.raros-border]="cube.rarity === 'raros' && !cube.locked"
+    [class.epicos-border]="cube.rarity === 'epicos' && !cube.locked"
+    [class.lendarios-border]="cube.rarity === 'lendarios' && !cube.locked">
     <img [src]="cube.locked ? 'assets/cubes/locked_cube.svg' : cube.img" [alt]="cube.locked ? 'Bloqueado' : cube.name"
       class="cube-img" [class.locked-cube-img]="cube.locked">
     <div class="lock-overlay" *ngIf="cube.locked">

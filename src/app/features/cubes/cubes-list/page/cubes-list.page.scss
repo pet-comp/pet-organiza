@@ -235,7 +235,7 @@
     mask: radial-gradient(150px circle at center, #000 70%, transparent 100%);
 
     background:
-      repeating-conic-gradient(#90caf9 0 20deg,
+      repeating-conic-gradient(rgba(144, 202, 249, 0.4) 0 20deg,
         transparent 20deg 40deg);
     animation: spinGlow 10s linear infinite;
     z-index: 0;
@@ -249,7 +249,7 @@
     mask: radial-gradient(150px circle at center, #000 70%, transparent 100%);
 
     background:
-      repeating-conic-gradient(#ce93d8 0 20deg,
+      repeating-conic-gradient(rgba(206, 147, 216, 0.4) 0 20deg,
         transparent 20deg 40deg);
     animation: spinGlow 10s linear infinite;
     z-index: 0;
@@ -263,7 +263,7 @@
     mask: radial-gradient(150px circle at center, #000 70%, transparent 100%);
 
     background:
-      repeating-conic-gradient(#ffe082 0 20deg,
+      repeating-conic-gradient(rgba(255, 224, 130, 0.4) 0 20deg,
         transparent 20deg 40deg);
     animation: spinGlow 10s linear infinite;
     z-index: 0;
