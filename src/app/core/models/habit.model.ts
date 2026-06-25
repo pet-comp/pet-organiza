@@ -1,11 +1,29 @@
 export interface Habit {
   id: string;
   title: string;
-  color: string;              // Cor principal (borda, texto, fundo inferior)
-  lightColor: string;         // Cor clara para a barra de progresso superior
-  reminder: string;           // Ex: "Diário", "Semanal", "Ter, Qui"
-  daysLeft: string | number;  // Ex: 36, 140, ou 'infinite'
-  record: number;             // Quantidade de dias do recorde
-  progressPercentage: number; // De 0 a 100
-  isInfinity: boolean;        // Exibe o ícone do infinito no lugar da %
+  color: string;
+  lightColor: string;
+  
+  // Lógica Funcional
+  type: 'incremental' | 'recorrente';
+  frequency: 'diario' | 'semanal' | 'mensal' | 'anual';
+  completionType: 'numero' | 'data';
+  completionTarget?: number | string; // Ex: 100 (vezes) ou '2026-12-31'
+  
+  notificationEnabled: boolean;
+  notificationTime?: string;
+  
+  createdAt: string; // 'YYYY-MM-DD'
+  checkIns: string[]; // Array de datas 'YYYY-MM-DD' em que o hábito foi feito
+}
+
+// Interface auxiliar para a tela (View Model) calculada dinamicamente
+export interface HabitView extends Habit {
+  reminder: string;
+  daysLeft: string | number;
+  record: number; // Maior streak
+  currentStreak: number; // Streak atual
+  progressPercentage: number;
+  isInfinity: boolean;
+  isDoneOnSelectedDate: boolean; // Indica se foi feito na data selecionada
 }
