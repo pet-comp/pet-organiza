@@ -74,33 +74,40 @@
     font-family: "Montserrat Bold";
   }
 
-  .button-text {
-    font-family: "Montserrat Bold";
-    color: white;
-    margin: 0px;
-  }
 
-  .unlock-btn {
-    background: #0d6b38;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 5px;
-    font-family: "Montserrat Bold";
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    width: 100%;
-    transition: opacity 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+}
 
-    &:active {
-      opacity: 0.8;
-    }
+.unlock-btn {
+  background: #0d6b38;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 5px;
+  font-family: "Montserrat Bold";
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  transition: opacity 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+
+  &:active {
+    opacity: 0.8;
   }
+}
+
+.button-text {
+  font-family: "Montserrat Bold";
+  color: white;
+  margin: 5px;
+}
+
+.edges-icon {
+  width: 30px;
 }
 
 .edges-container {
@@ -399,4 +406,69 @@
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7), -1px -1px 1px rgba(0, 0, 0, 0.7), 1px -1px 1px rgba(0, 0, 0, 0.7), -1px 1px 1px rgba(0, 0, 0, 0.7);
     font-family: "Montserrat Bold";
   }
+}
+
+.cubes-box-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 24px;
+
+  .box-card {
+    background-color: #ffffff;
+    flex: 1 1 calc(50% - 16px);
+    min-width: 140px;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    .box-text {
+      font-family: "Montserrat Bold";
+      font-size: 16px;
+      color: #0d6b38;
+      text-align: center;
+      margin: 0 0 10px 0;
+    }
+
+    .box-card-image {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .box-description {
+      font-family: "Montserrat Medium";
+      font-size: 13px;
+      color: #6b7280;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+
+    .unlock-btn {
+      width: 100%;
+      margin-top: auto;
+    }
+  }
+}
+
+.cubes-box-title {
+  color: #0d6b38;
+  font-family: "Montserrat Bold";
+  font-size: 22px;
+  font-weight: 800;
+  margin: 16px 0 16px 0;
+  text-align: center;
+  margin: 10px;
+  margin-top: 30px;
 }

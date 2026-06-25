@@ -15,7 +15,7 @@ import { OrganizaButtonComponent } from 'src/app/shared/components/organiza-butt
 })
 export class CubesListPage implements OnInit {
   selectedCategory: string = 'todos';
-  arestasSaldo: number = 150;
+  arestasSaldo: number = 1500;
   showUnlockCard: boolean = false;
   unlockedCube: any = null;
   unlockedCubeIsRepeated: boolean = false;
@@ -85,8 +85,33 @@ export class CubesListPage implements OnInit {
 
   }
 
-  unlockCube() {
-    const rarity = this.rollRarity();
+  rollPremiumRarity(): string {
+    const roll = Math.random() * 100;
+
+    if (roll < 20) {
+      return 'comuns';
+    }
+
+    if (roll < 60) {
+      return 'raros';
+    }
+
+    if (roll < 90) {
+      return 'epicos';
+    }
+
+    return 'lendarios';
+  }
+
+  unlockCube(isPremium: boolean = false) {
+
+    let rarity;
+    if (isPremium) {
+      rarity = this.rollPremiumRarity();
+    } else {
+      rarity = this.rollRarity();
+    }
+
     const rarityCubes = this.cubes.filter(cube => cube.rarity === rarity);
 
     const randomIndex = Math.floor(Math.random() * rarityCubes.length);
@@ -108,11 +133,24 @@ export class CubesListPage implements OnInit {
     this.showUnlockAnimationForCube(newCube, true, leveledUp);
   }
 
+  displayQueue: any[] = [];
+
   showUnlockAnimationForCube(cube: any, repeated: boolean = false, leveledUp: boolean = false) {
-    this.unlockedCube = cube;
-    this.unlockedCubeIsRepeated = repeated;
-    this.unlockedCubeLeveledUp = leveledUp;
-    this.showUnlockCard = true;
+    this.displayQueue.push({ cube, repeated, leveledUp });
+
+    if (!this.showUnlockCard) {
+      this.showNextCubeFromQueue();
+    }
+  }
+
+  showNextCubeFromQueue() {
+    if (this.displayQueue.length > 0) {
+      const next = this.displayQueue.shift();
+      this.unlockedCube = next.cube;
+      this.unlockedCubeIsRepeated = next.repeated;
+      this.unlockedCubeLeveledUp = next.leveledUp;
+      this.showUnlockCard = true;
+    }
   }
 
   closeUnlockAnimation() {
@@ -120,5 +158,15 @@ export class CubesListPage implements OnInit {
     this.unlockedCube = null;
     this.unlockedCubeIsRepeated = false;
     this.unlockedCubeLeveledUp = false;
+
+    setTimeout(() => {
+      this.showNextCubeFromQueue();
+    }, 150);
+  }
+
+  buyLargeBox() {
+    for (let i = 0; i < 10; i++) {
+      this.unlockCube();
+    }
   }
 }

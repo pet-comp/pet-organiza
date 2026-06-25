@@ -4,10 +4,29 @@
     [class.lendarios-border]="cube.rarity === 'lendarios' && !cube.locked">
     <img [src]="cube.locked ? 'assets/cubes/locked_cube.svg' : cube.img" [alt]="cube.locked ? 'Bloqueado' : cube.name"
       class="cube-img" [class.locked-cube-img]="cube.locked">
+    <span class="cube-name" *ngIf="!cube.locked">{{ cube.name }}</span>
+    <div class="xp-container" *ngIf="!cube.locked">
+      <div class="xp-header">
+        <span class="xp-level">Nível {{ cube.level || 1 }}</span>
+      </div>
+      <div class="xp-bar-wrapper">
+        <div class="xp-bar">
+          <div class="xp-fill" [style.width]="(cube.xp / 1000) * 100 + '%' "></div>
+        </div>
+        <span class="xp-text">{{ cube.xp }}/1000</span>
+      </div>
+    </div>
+    <div class="xp-container" *ngIf="cube.locked" style="visibility: hidden; pointer-events: none;">
+      <div class="xp-header">
+        <span class="xp-level">Nível 1</span>
+      </div>
+      <div class="xp-bar-wrapper">
+      </div>
+    </div>
+
     <div class="lock-overlay" *ngIf="cube.locked">
       <ion-icon name="lock-closed"></ion-icon>
     </div>
-    <span class="cube-name" *ngIf="!cube.locked"> <br>{{ cube.name }}</span>
-    <span class="cube-name" *ngIf="cube.locked"><br>???</span>
+    <span class="cube-name" *ngIf="cube.locked">???</span>
   </div>
 </div>

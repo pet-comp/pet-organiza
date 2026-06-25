@@ -11,12 +11,49 @@
         <img src="assets/edges.svg" alt="Arestas" class="edges-icon">
         <span><span class="m-bold">Saldo:</span> {{ arestasSaldo }} arestas</span>
       </div>
-      <button class="unlock-btn" (click)="unlockCube()">
-        <p class="button-text">Desbloquear cubo:</p>
-        <div class="edges-container"><img src="assets/edges.svg" alt="Arestas" class="edges-inlinetext-icon">150</div>
-      </button>
     </div>
   </div>
+
+  <p class="cubes-box-title">Caixas de cubos</p>
+
+  <div class="cubes-box-container">
+
+    <div class="box-card">
+      <p class="box-text">Caixa padrão</p>
+      <img src="assets/cube_box.svg" alt="Cubo Padrão" class="box-card-image">
+      <p class="box-description">1 cubo aleatório</p>
+      <button class="unlock-btn" (click)="unlockCube()">
+        <p class="button-text">Comprar caixa:</p>
+        <div class="edges-container"><img src="assets/edges.svg" alt="Arestas" class="edges-inlinetext-icon">150
+        </div>
+      </button>
+    </div>
+
+    <div class="box-card">
+      <p class="box-text">Caixa grande</p>
+      <img src="assets/cube_box.svg" alt="Cubo Grande" class="box-card-image">
+      <p class="box-description">10 cubos aleatórios</p>
+      <button class="unlock-btn" (click)="buyLargeBox()">
+        <p class="button-text">Comprar caixa:</p>
+        <div class="edges-container"><img src="assets/edges.svg" alt="Arestas" class="edges-inlinetext-icon">1350
+        </div>
+      </button>
+    </div>
+
+    <div class="box-card">
+      <p class="box-text">Caixa premium</p>
+      <img src="assets/cube_box.svg" alt="Cubo Premium" class="box-card-image">
+      <p class="box-description">Chances de raridades maiores</p>
+      <button class="unlock-btn" (click)="unlockCube(true)">
+        <p class="button-text">Comprar caixa:</p>
+        <div class="edges-container"><img src="assets/edges.svg" alt="Arestas" class="edges-inlinetext-icon">300
+        </div>
+      </button>
+    </div>
+
+  </div>
+
+  <p class="cubes-box-title">Coleção de cubos</p>
 
   <ion-segment [(ngModel)]="selectedCategory" mode="md" class="custom-segment">
     <ion-segment-button value="todos">
@@ -58,7 +95,8 @@
         <p *ngIf="!unlockedCubeIsRepeated" class="unlock-message">Novo!🎉</p>
         <div class="xp-bar-wrapper" *ngIf="unlockedCubeIsRepeated">
           <div class="xp-bar">
-            <div class="xp-fill" [style.width]="unlockedCubeLeveledUp ? '100%' : (unlockedCube.xp / 1000) * 100 + '%' "></div>
+            <div class="xp-fill" [style.width]="unlockedCubeLeveledUp ? '100%' : (unlockedCube.xp / 1000) * 100 + '%' ">
+            </div>
           </div>
           <p class="xp-text">{{ unlockedCubeLeveledUp ? '1000/1000 XP' : unlockedCube.xp + '/1000 XP' }}</p>
         </div>

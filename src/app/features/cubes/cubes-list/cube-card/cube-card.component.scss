@@ -17,7 +17,7 @@
     align-items: center;
     justify-content: flex-start;
     position: relative;
-    padding: 20px 10px;
+    padding: 10px 10px;
     flex-direction: column;
     gap: 10px;
     flex: 1;
@@ -50,8 +50,11 @@
     font-weight: 700;
     color: #55596A;
     font-family: "Montserrat Bold";
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     line-height: 1.2;
+    min-height: 2.4em;
   }
 
   &.is-locked {
@@ -95,4 +98,67 @@
   aspect-ratio: 1/1;
   object-fit: contain;
   opacity: .3;
+}
+
+.xp-container {
+  width: 100%;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+
+  .xp-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4px;
+
+    .xp-label {
+      font-size: 11px;
+      color: #3b4256;
+      font-family: "Montserrat Bold";
+      font-weight: 700;
+    }
+
+    .xp-level {
+      font-size: 11px;
+      color: #3b4256;
+      font-family: "Montserrat Bold";
+      font-weight: 700;
+    }
+  }
+
+  .xp-bar-wrapper {
+    position: relative;
+    height: 14px;
+    width: 100%;
+    background: white;
+    border-radius: 7px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .xp-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      .xp-fill {
+        height: 100%;
+        background: #38a14f;
+        border-radius: 7px;
+      }
+    }
+
+    .xp-text {
+      position: relative;
+      z-index: 1;
+      font-size: 9px;
+      font-weight: 700;
+      color: #ffffff;
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7), -1px -1px 1px rgba(0, 0, 0, 0.7), 1px -1px 1px rgba(0, 0, 0, 0.7), -1px 1px 1px rgba(0, 0, 0, 0.7);
+      font-family: "Montserrat Bold";
+    }
+  }
 }
