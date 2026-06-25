@@ -58,7 +58,11 @@ export class CarouselPage implements OnInit, AfterViewInit {
 
   async finish() {
     const uid = this.auth.currentUser?.uid;
-    if (uid) await this.firebaseservice.tutorialVisto(uid);
+    if (uid) {
+      await this.firebaseservice.tutorialVisto(uid);
+      await this.firebaseservice.criarCategoriasDefault(uid);
+    }
+
     this.router.navigate(['mainLayout/home']);
   }
 }

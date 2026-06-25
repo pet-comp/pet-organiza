@@ -14,30 +14,53 @@
         <h1 class="page-title">Nova Categoria</h1>
         <p class="section-subtitle">Informações gerais</p>
 
-        <div class="form-item">
-          <span class="title-label">Título:</span>
-          <input [(ngModel)]="category.name" type="text" class="custom-input" placeholder="Insira aqui o título da categoria">
+        <div class="form-item-wrapper">
+          <div class="form-item">
+            <span class="title-label">Título:</span>
+            <input type="text" class="custom-input"
+              placeholder="Insira aqui o título da categoria"
+              [value]="category.name"
+              (input)="onNameChange($any($event.target).value)"
+              (blur)="onNameBlur()">
+          </div>
+          <span class="campo-erro">{{ erros['name'] }}</span>
         </div>
 
-        <div class="form-item">
-          <ion-icon name="reorder-two-outline" class="input-icon"></ion-icon>
-          <input type="text" class="custom-input" placeholder="Descreva a categoria (opcional)">
+        <div class="form-item-wrapper">
+          <div class="form-item">
+            <ion-icon name="reorder-two-outline" class="input-icon"></ion-icon>
+            <textarea class="custom-input custom-textarea"
+              placeholder="Descreva a categoria (opcional)"
+              [value]="category.descricao"
+              (input)="onDescricaoChange($any($event.target).value); autoResize($event)"
+              rows="1">
+            </textarea>
+          </div>
+          <span class="campo-erro">{{ erros['descricao'] }}</span>
         </div>
-
 
         <div class="form-item color-selection-item">
           <span class="item-label">Cor:</span>
           <div class="color-options">
-            <div (click)="setColor(340)" class="color-box bg-pink" [class.selected]="category.colorHue === 340"></div>
-            <div (click)="setColor(230)" class="color-box bg-blue" [class.selected]="category.colorHue === 230"></div>
-            <div (click)="setColor(10)" class="color-box bg-salmon" [class.selected]="category.colorHue === 10"></div>
-            <div (click)="setColor(60)" class="color-box bg-yellow" [class.selected]="category.colorHue === 60"></div>
-            <div (click)="setColor(150)" class="color-box bg-light-green" [class.selected]="category.colorHue === 150"></div>
-            <div (click)="setColor(210)" class="color-box bg-grey" [class.selected]="category.colorHue === 210"></div>
-            <div class="color-box add-color">
+            <div (click)="selecionarCor(340)" class="color-box bg-pink" [class.selected]="category.colorHue === 340 && !corPersonalizada"></div>
+            <div (click)="selecionarCor(230)" class="color-box bg-blue" [class.selected]="category.colorHue === 230 && !corPersonalizada"></div>
+            <div (click)="selecionarCor(10)" class="color-box bg-salmon" [class.selected]="category.colorHue === 10 && !corPersonalizada"></div>
+            <div (click)="selecionarCor(60)" class="color-box bg-yellow" [class.selected]="category.colorHue === 60 && !corPersonalizada"></div>
+            <div (click)="selecionarCor(150)" class="color-box bg-light-green" [class.selected]="category.colorHue === 150 && !corPersonalizada"></div>
+            <div (click)="selecionarCor(210)" class="color-box bg-grey" [class.selected]="category.colorHue === 210 && !corPersonalizada"></div>
+            <div class="color-box add-color"
+              [class.selected]="corPersonalizada"
+              [style.background-color]="corPersonalizada ? 'hsl(' + category.colorHue + ', 80%, 85%)' : null"
+              (click)="toggleHuePicker()">
               <ion-icon name="add"></ion-icon>
             </div>
           </div>
+        </div>
+
+        <div *ngIf="mostrarHuePicker" class="hue-picker-wrapper">
+          <input type="range" min="0" max="360" value="0"
+            (input)="onHueChange($any($event.target).value)"
+            class="hue-slider">
         </div>
 
         <div class="form-item borderless pb-0 mt-3">
@@ -73,8 +96,10 @@
       </div>
     </main>
 
-    <div class="submit-btn-wrapper">
-      <app-organiza-button label="✓" type="button"></app-organiza-button>
-    </div>
+    <app-organiza-button 
+      label="✓" 
+      type="button"
+      (onClick)="handleSalvarCategoria()">
+    </app-organiza-button>
   </div>
 </ion-content>

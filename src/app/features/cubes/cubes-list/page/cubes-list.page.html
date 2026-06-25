@@ -5,10 +5,16 @@
     <img src="assets/cubes/bright-chupacubo.svg" alt="Chupa-cubo" class="mascot-img">
     <h2>Chupa-cubo</h2>
     <p>Recompensa por obter todos os cubos do aplicativo!</p>
-    
+
     <div class="balance-badge">
-      <img src="assets/edges.svg" alt="Arestas" class="edges-icon">
-      <span><span class="m-bold">Saldo:</span> {{ arestasSaldo }} arestas</span>
+      <div class="balance-info">
+        <img src="assets/edges.svg" alt="Arestas" class="edges-icon">
+        <span><span class="m-bold">Saldo:</span> {{ arestasSaldo }} arestas</span>
+      </div>
+      <button class="unlock-btn" (click)="unlockCube()">
+        <p class="button-text">Desbloquear cubo:</p>
+        <div class="edges-container"><img src="assets/edges.svg" alt="Arestas" class="edges-inlinetext-icon">150</div>
+      </button>
     </div>
   </div>
 
@@ -22,6 +28,9 @@
     <ion-segment-button value="raros">
       <ion-label>Raros</ion-label>
     </ion-segment-button>
+    <ion-segment-button value="epicos">
+      <ion-label>Épicos</ion-label>
+    </ion-segment-button>
     <ion-segment-button value="lendarios">
       <ion-label>Lendários</ion-label>
     </ion-segment-button>
@@ -30,16 +39,33 @@
   <ion-grid>
     <ion-row>
       <ion-col size="4" *ngFor="let cube of filteredCubes">
-        <div class="cube-item" [class.is-locked]="cube.locked">
-          <div class="cube-card">
-            <img [src]="cube.img" [alt]="cube.name" class="cube-img">
-            <div class="lock-overlay" *ngIf="cube.locked">
-              <ion-icon name="lock-closed"></ion-icon>
-            </div>
-            <span class="cube-name">Cubo <br>{{ cube.name }}</span>
-          </div>
-        </div>
+        <app-cube-card [cube]="cube" (click)="navigateToCubeView(cube)"></app-cube-card>
       </ion-col>
     </ion-row>
   </ion-grid>
+  <div class="custom-overlay" *ngIf="showUnlockCard && unlockedCube">
+    <div class="unlock-card">
+      <div class="cube-animation-wrapper">
+        <div class="cube-image-container">
+          <div [class]="unlockedCube.rarity + '-glow-effect-bg'"></div>
+          <img [src]="unlockedCube.img" [alt]="unlockedCube.name" class="animated-cube-img">
+        </div>
+        <p [class]="unlockedCube.rarity + '-text'">{{ unlockedCube.rarity === 'comuns' ? 'Comum' : unlockedCube.rarity
+          === 'raros' ? 'Raro' :
+          unlockedCube.rarity === 'epicos' ? 'Épico' : 'Lendário' }}</p>
+        <p *ngIf="unlockedCubeLeveledUp" class="unlock-message">Subiu de nível!</p>
+        <p *ngIf="unlockedCubeIsRepeated && !unlockedCubeLeveledUp" class="unlock-message">+100 XP</p>
+        <p *ngIf="!unlockedCubeIsRepeated" class="unlock-message">Novo!🎉</p>
+        <div class="xp-bar-wrapper" *ngIf="unlockedCubeIsRepeated">
+          <div class="xp-bar">
+            <div class="xp-fill" [style.width]="unlockedCubeLeveledUp ? '100%' : (unlockedCube.xp / 1000) * 100 + '%' "></div>
+          </div>
+          <p class="xp-text">{{ unlockedCubeLeveledUp ? '1000/1000 XP' : unlockedCube.xp + '/1000 XP' }}</p>
+        </div>
+      </div>
+      <h2>Parabéns!</h2>
+      <p>Você desbloqueou o <span class="unlocked-cube-name">{{ unlockedCube.name }}</span></p>
+      <app-organiza-button label="Confirmar" type="button" (click)="closeUnlockAnimation()"></app-organiza-button>
+    </div>
+  </div>
 </ion-content>

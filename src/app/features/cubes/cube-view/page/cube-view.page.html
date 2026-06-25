@@ -1,0 +1,53 @@
+<ion-content [fullscreen]="true" class="custom-background">
+  <div *ngIf="cube" class="container-main">
+
+    <div class="header-area">
+      <ion-icon name="chevron-back" class="back-icon" (click)="goBack()"></ion-icon>
+      <div class="titles">
+        <h1>{{ cube.name }}</h1>
+        <p>Raridade: {{ cube.rarity }}</p>
+      </div>
+    </div>
+
+    <div class="cube-image-area">
+      <div class="{{cube.rarity}}-glow-effect-bg"></div>
+      <img [src]="cube.img" [alt]="cube.name" class="cube-img">
+    </div>
+
+    <div class="xp-container">
+      <div class="xp-header">
+        <span class="xp-label">XP do Cubo</span>
+        <span class="xp-level">Nível {{ cube.level || 1 }}</span>
+      </div>
+      <div class="xp-bar-wrapper">
+        <div class="xp-bar">
+          <div class="xp-fill" [style.width]="(cube.xp / 1000) * 100 + '%' "></div>
+        </div>
+        <span class="xp-text">{{ cube.xp }}/1000 XP</span>
+      </div>
+    </div>
+
+    <div class="details-card">
+      <div class="detail-section">
+        <h2>Descrição:</h2>
+        <p>{{ cube.description || 'Este cubo é o deus gamer supremo da comunidade cubística. Mestre em jogos como
+          Minecraft, Tetris e outros.' }}</p>
+      </div>
+
+      <div class="detail-row">
+        <h2>Data de Obtenção:</h2>
+        <p>15/02/2026</p>
+      </div>
+
+      <div class="detail-row">
+        <h2>Bônus:</h2>
+        <p>+10% XP em Missões</p>
+      </div>
+
+      <div class="btn-wrapper">
+        <app-organiza-button label="Usar como Avatar"></app-organiza-button>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

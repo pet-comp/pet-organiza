@@ -15,68 +15,108 @@
         <p class="section-subtitle">Informações gerais</p>
 
         <div class="form-list">
-
-          <div class="form-item">
-            <span class="title-label">Título:</span>
-            <input type="text" class="custom-input" placeholder="Insira aqui o título da tarefa">
+          <div class="form-item-wrapper">
+            <div class="form-item">
+              <span class="title-label">Título:</span>
+              <input type="text" class="custom-input"
+                placeholder="Insira aqui o título da tarefa"
+                [value]="titulo"
+                (input)="onTituloChange($any($event.target).value)"
+                (blur)="onTituloBlur()">
+            </div>
+            <span class="campo-erro">{{ erros['titulo'] }}</span>
           </div>
 
-          <div class="form-item">
-            <ion-icon name="reorder-two-outline" class="input-icon"></ion-icon>
-            <input type="text" class="custom-input" placeholder="Descreva a tarefa (opcional)">
+          <div class="form-item-wrapper">
+            <div class="form-item">
+              <ion-icon name="reorder-two-outline" class="input-icon"></ion-icon>
+              <textarea class="custom-input custom-textarea"
+                placeholder="Descreva a tarefa (opcional)"
+                [value]="descricao"
+                (input)="onDescricaoChange($any($event.target).value); autoResize($event)"
+                rows="1">
+              </textarea>
+            </div>
+            <span class="campo-erro">{{ erros['descricao'] }}</span>
           </div>
 
-          <div class="form-item" id="open-date-picker">
-            <ion-icon name="calendar-outline" class="input-icon"></ion-icon>
-            <input type="text" class="custom-input" placeholder="Prazo de finalização da tarefa" readonly
-              [value]="selectedDate ? (selectedDate | date:'dd/MM/yyyy') : ''">
+          <div class="form-item-wrapper">
+            <div class="form-item" id="open-date-picker">
+              <ion-icon name="calendar-outline" class="input-icon"></ion-icon>
+              <input type="text"
+                class="custom-input"
+                placeholder="Prazo de finalização da tarefa"
+                readonly
+                [value]="selectedDate ? (selectedDate | date:'dd/MM/yyyy') : ''">
+            </div>
+            <span class="campo-erro">{{ erros['prazo'] }}</span>
           </div>
 
           <ion-popover trigger="open-date-picker" triggerAction="click">
             <ng-template>
-              <ion-datetime presentation="date" [(ngModel)]="selectedDate" class="custom-datetime"
-                showDefaultButtons="true" doneText="Confirmar" cancelText="Cancelar"></ion-datetime>
+              <ion-datetime
+              presentation="date"
+              [(ngModel)]="selectedDate"
+              class="custom-datetime"
+              showDefaultButtons="true"
+              doneText="Confirmar"
+              cancelText="Cancelar"
+              [min]="prazoMin"
+              [max]="prazoMax"
+              (ionChange)="erros['prazo'] = ''">
+            </ion-datetime>
             </ng-template>
           </ion-popover>
 
           <div class="form-item">
             <span class="item-label">Categoria:</span>
-            <div class="chip-group">
+            <div *ngIf="carregando" class="loading-text">Carregando categorias...</div>
+            <div *ngIf="!carregando" class="chip-group chip-group-scroll">
               @for (cat of categories; track cat) {
-              <div class="chip"
-                [style.background-color]="selectedCategory === cat.name ? 'hsl(' + cat.colorHue + ', 80%, 85%)' : null"
-                [style.color]="selectedCategory === cat.name ? 'hsl(' + cat.colorHue + ', 80%, 30%)' : null"
-                (click)="selectedCategory = cat.name">
-                <span class="chip-text">{{ cat.name }}</span>
-              </div>
+                <div class="chip"
+                  [style.background-color]="selectedCategory === cat.id ? 'hsl(' + cat.colorHue + ', 80%, 85%)' : null"
+                  [style.color]="selectedCategory === cat.id ? 'hsl(' + cat.colorHue + ', 80%, 30%)' : null"
+                  (click)="selectedCategory = cat.id">
+                  <span class="chip-text">{{ cat.name }}</span>
+                </div>
               }
             </div>
           </div>
 
-          <div class="form-item">
-            <span class="item-label">Prioridade:</span>
-            <div class="chip-group">
-              @for (prio of priorities; track prio) {
-              <div class="chip" [class.chip-green]="selectedPriority === prio && prio === 'Baixa'"
-                [class.chip-yellow]="selectedPriority === prio && prio === 'Normal'"
-                [class.chip-red]="selectedPriority === prio && prio === 'Urgente'" (click)="selectedPriority = prio">
-                <span class="chip-text">{{ prio }}</span>
+          <div class="form-item-wrapper">
+            <div class="form-item">
+              <span class="item-label">Prioridade:</span>
+              <div class="chip-group">
+                @for (prio of priorities; track prio) {
+                  <div class="chip"
+                    [class.chip-green]="selectedPriority === prio && prio === 'Baixa'"
+                    [class.chip-yellow]="selectedPriority === prio && prio === 'Normal'"
+                    [class.chip-red]="selectedPriority === prio && prio === 'Urgente'"
+                    (click)="selectedPriority = prio; erros['prioridade'] = ''">
+                    <span class="chip-text">{{ prio }}</span>
+                  </div>
+                }
               </div>
-              }
             </div>
+            <span class="campo-erro">{{ erros['prioridade'] }}</span>
           </div>
 
-          <div class="form-item borderless mb-0">
-            <span class="item-label">Dificuldade:</span>
-            <div class="chip-group">
-              @for (dif of difficulties; track dif) {
-              <div class="chip" [class.chip-green]="selectedDifficulty === dif && dif === 'Tranquila'"
-                [class.chip-yellow]="selectedDifficulty === dif && dif === 'Média'"
-                [class.chip-red]="selectedDifficulty === dif && dif === 'Difícil'" (click)="selectedDifficulty = dif">
-                <span class="chip-text">{{ dif }}</span>
+          <div class="form-item-wrapper">
+            <div class="form-item borderless mb-0">
+              <span class="item-label">Dificuldade:</span>
+              <div class="chip-group">
+                @for (dif of difficulties; track dif) {
+                  <div class="chip"
+                    [class.chip-green]="selectedDifficulty === dif && dif === 'Tranquila'"
+                    [class.chip-yellow]="selectedDifficulty === dif && dif === 'Média'"
+                    [class.chip-red]="selectedDifficulty === dif && dif === 'Difícil'"
+                    (click)="selectedDifficulty = dif; erros['dificuldade'] = ''">
+                    <span class="chip-text">{{ dif }}</span>
+                  </div>
+                }
               </div>
-              }
             </div>
+            <span class="campo-erro">{{ erros['dificuldade'] }}</span>
           </div>
         </div>
       </div>
@@ -100,7 +140,7 @@
         por tarefa</p>
 
       <div class="submit-btn-wrapper">
-        <app-organiza-button label="✓" type="button"></app-organiza-button>
+        <app-organiza-button label="✓" type="button" (onClick)="handleSalvarTask()"></app-organiza-button>
       </div>
     </section>
   </div>

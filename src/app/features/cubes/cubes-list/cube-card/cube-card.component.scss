@@ -1,0 +1,98 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.cube-item {
+  text-align: center;
+  margin-bottom: 15px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .cube-card {
+    background: #E1E5F1;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    padding: 20px 10px;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  .raros-border {
+    border-color: #90caf9;
+    border-width: 2px;
+    border-style: solid;
+  }
+
+  .epicos-border {
+    border-color: #ce93d8;
+    border-width: 2px;
+    border-style: solid;
+  }
+
+  .lendarios-border {
+    border-color: #ffe082;
+    border-width: 2px;
+    border-style: solid;
+  }
+
+  .cube-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #55596A;
+    font-family: "Montserrat Bold";
+    display: block;
+    line-height: 1.2;
+  }
+
+  &.is-locked {
+    .cube-card {
+      background: #6c757d;
+      opacity: 0.8;
+    }
+
+    .lock-overlay {
+      position: absolute;
+      color: white;
+      font-size: 24px;
+      z-index: 1;
+      display: flex;
+      background: rgba(0, 0, 0, 0.5);
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+    }
+
+    .cube-name {
+      color: #dfe3e7;
+    }
+  }
+}
+
+.cube-img {
+  width: 60px;
+  height: 60px;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+}
+
+.locked-cube-img {
+  width: 60px;
+  height: 60px;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+  opacity: .3;
+}

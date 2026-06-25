@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { Component, OnInit, inject, ViewChild } from '@angular/core';
+import { AlertController, IonicModule, IonContent } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Auth } from '@angular/fire/auth';
+import { FirebaseService } from 'src/app/services/firebase.service';
 import { OrganizaButtonComponent } from '../../../../shared/components/organiza-button/organiza-button.component';
 import { OrganizaTaskComponent } from '../organiza-task/organiza-task.component';
 import { OrganizaCategoryCardComponent } from '../organiza-category-card/organiza-category-card.component';
@@ -12,71 +14,71 @@ import { OrganizaTaskGroupComponent } from '../organiza-task-group/organiza-task
   selector: 'app-task-list',
   templateUrl: './task-list.page.html',
   styleUrls: ['./task-list.page.scss'],
-  imports: [IonicModule, CommonModule, FormsModule, OrganizaButtonComponent, OrganizaTaskComponent, OrganizaCategoryCardComponent, OrganizaTaskGroupComponent],
+  imports: [IonicModule, CommonModule, FormsModule, OrganizaButtonComponent, OrganizaCategoryCardComponent, OrganizaTaskGroupComponent],
   standalone: true,
 })
 export class TaskListPage implements OnInit {
+  private auth = inject(Auth);
+  @ViewChild(IonContent) content!: IonContent;
 
-  categories = [
-    {
-      id: "cat_1",
-      name: "Estudos",
-      icon: "book-outline",
-      colorHue: 288,
-    },
-    {
-      id: "cat_2",
-      name: "Saúde",
-      icon: "pulse-outline",
-      colorHue: 220,
-    },
-    {
-      id: "cat_3",
-      name: "Trabalho",
-      icon: "briefcase-outline",
-      colorHue: 0,
-    },
-    {
-      id: "cat_4",
-      name: "Exercício",
-      icon: "barbell-outline",
-      colorHue: 30,
-    },
-    {
-      id: "cat_5",
-      name: "Playstation",
-      icon: "logo-playstation",
-      colorHue: 230,
+  categories: any[] = [];
+  allTasks: any [] = [];
+  carregando: boolean = false;
+
+  constructor(private router: Router, private firebaseservice: FirebaseService, private alertcontroller: AlertController) { }
+
+  async showAlert(titulo: string, mensagem: string) {
+    const alert = await this.alertcontroller.create({header: titulo, message: mensagem, buttons: ['OK']});
+    await alert.present();
+  }
+
+  async carregarDados() {
+    const uid = await new Promise<string | null>((resolve) => {
+      const unsub = this.auth.onAuthStateChanged(user => {
+        unsub();
+        resolve(user?.uid ?? null);
+      });
+    });
+
+    if (!uid) {
+      await this.showAlert('Erro', 'Sessão expirada. Faça login novamente.');
+      this.router.navigate(['/auth/login']);
+      return;
     }
-  ];
 
-  allTasks = [
-    { id: 't_1', name: 'Revisar lista de Álgebra Linear', completed: true, categoryId: 'cat_1' },
-    { id: 't_2', name: 'Mandar e-mail pra graduação', completed: false, categoryId: 'cat_1' },
-    { id: 't_3', name: 'Fazer a ata da reunião', completed: false, categoryId: 'cat_1' },
-    { id: 't_4', name: 'Ir no médico da UPA', completed: false, categoryId: 'cat_2' },
-    { id: 't_5', name: 'Tomar remédio', completed: false, categoryId: 'cat_2' },
-    { id: 't_6', name: 'Participar da reunião de trabalho', completed: false, categoryId: 'cat_3' },
-    { id: 't_7', name: 'Criar o novo endpoint', completed: false, categoryId: 'cat_3' },
-    { id: 't_8', name: 'Cobrar salário atrasado', completed: false, categoryId: 'cat_3' },
-    { id: 't_9', name: 'Ir à academia', completed: false, categoryId: 'cat_4' },
-    { id: 't_10', name: 'Correr 15km', completed: false, categoryId: 'cat_4' },
-    { id: 't_11', name: 'Fazer Terra com 425kg', completed: false, categoryId: 'cat_4' },
-    { id: 't_12', name: 'Jogar Division Rivals semanal no FIFA', completed: false, categoryId: 'cat_5' },
-    { id: 't_13', name: 'Farmar 5.000.000 no GTA', completed: false, categoryId: 'cat_5' },
-  ];
-
-  constructor(private router: Router) { }
-
-  ngOnInit() {
+    this.carregando = true;
+    try{
+      const [cats, tasks] = await Promise.all ([
+        this.firebaseservice.buscarCategorias(uid), 
+        this.firebaseservice.buscarTasks(uid)
+      ]);
+      this.categories = cats;
+      this.allTasks = tasks;
+    }finally{
+      this.carregando = false;
+    }
   }
 
   getTasksByCategory(categoryId: string) {
-    return this.allTasks.filter(task => task.categoryId === categoryId);
+    const filtered = this.allTasks.filter(task => task.categoriaId === categoryId);
+    return filtered;
   }
 
   getCompletedTasksByCategory(categoryId: string) {
-    return this.getTasksByCategory(categoryId).filter(task => task.completed).length;
+    return this.getTasksByCategory(categoryId).filter(task => task.status === 'concluida').length;
+  }
+
+  getTasksSemCategoria() {
+    const categoryIds = this.categories.map(cat => cat.id);
+    return this.allTasks.filter(task => !task.categoriaId || !categoryIds.includes(task.categoriaId));
+  }
+
+  ionViewWillEnter() {
+    this.content?.scrollToTop(0);
+    this.carregarDados();
+  }
+
+  ngOnInit() {
   }
 
   navigateToCreateTask() {

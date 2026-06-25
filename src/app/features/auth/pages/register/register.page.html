@@ -27,14 +27,31 @@
     </app-organiza-input>
     <span class="campo-erro">{{ erros['username'] }}</span>
 
+    <div id="open-nascimento-picker">
     <app-organiza-input
       icon="assets/icons/cake.svg"
       placeholder="Data de nascimento"
       [value]="nascimento"
-      (valueChange)="onNascimentoChange($event)"
-      (blur)="onNascimentoBlur()">
+      [readonly]="true">
     </app-organiza-input>
-    <span class="campo-erro">{{ erros['nascimento'] }}</span>
+  </div>
+  <span class="campo-erro">{{ erros['nascimento'] }}</span>
+
+  <ion-popover trigger="open-nascimento-picker" triggerAction="click">
+    <ng-template>
+      <ion-datetime
+        presentation="date"
+        [(ngModel)]="nascimentoDate"
+        class="custom-datetime"
+        showDefaultButtons="true"
+        doneText="Confirmar"
+        cancelText="Cancelar"
+        [min]="anoMinNascimento"
+        [max]="anoMaxNascimento"
+        (ionChange)="onNascimentoDateChange($event)">
+      </ion-datetime>
+    </ng-template>
+  </ion-popover>
 
     <app-organiza-input
       icon="assets/icons/mail.svg"

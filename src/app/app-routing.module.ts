@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: 'loader',
-    loadComponent: () => import('./public/loader/loader.page').then( m => m.LoaderPage)
+    loadComponent: () => import('./public/loader/loader.page').then(m => m.LoaderPage)
   },
   {
     path: 'auth',
@@ -21,10 +21,15 @@ const routes: Routes = [
   },
   {
     path: 'mainLayout',
-    loadChildren: () => import('./features/layout/main-layout/main-layout.module').then( m => m.MainLayoutPageModule)
-  },  {
+    loadChildren: () => import('./features/layout/main-layout/main-layout.module').then(m => m.MainLayoutPageModule)
+  },
+  {
     path: 'habit-create',
-    loadChildren: () => import('./features/habits/habit-create/habit-create.module').then( m => m.HabitCreatePageModule)
+    loadChildren: () => import('./features/habits/habit-create/habit-create.module').then(m => m.HabitCreatePageModule)
+  },
+  {
+    path: 'cube-view',
+    loadChildren: () => import('./features/cubes/cube-view/cube-view.module').then(m => m.CubeViewPageModule)
   },
 
 ];
@@ -34,4 +39,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

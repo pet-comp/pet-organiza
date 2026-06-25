@@ -13,6 +13,7 @@ export class OrganizaInputComponent  implements OnInit {
   @Input() placeholder: string = '';
   @Input() type: string = 'text';
   @Input() value: string = '';
+  @Input() readonly: boolean = false;
   @Output() valueChange = new EventEmitter<string>();
   @Output() blur = new EventEmitter<void>();
 

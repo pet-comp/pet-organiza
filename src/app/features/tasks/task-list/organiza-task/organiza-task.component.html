@@ -1,8 +1,8 @@
 <ion-item lines="full">
-  <ion-checkbox slot="start" [(ngModel)]="task.completed"></ion-checkbox>
+  <ion-checkbox slot="start" [checked]="task.status === 'concluida'"></ion-checkbox>
 
-  <ion-label [class.line-through]="task.completed">
-    <h2>{{task.name}}</h2>
+  <ion-label [class.line-through]="task.status === 'concluida'">
+    <h2>{{ task.titulo }}</h2>
   </ion-label>
 
   <ion-icon slot="end" name="ellipsis-horizontal" class="menu-icon"></ion-icon>
