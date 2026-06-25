@@ -19,25 +19,26 @@ export class CubesListPage implements OnInit {
   showUnlockCard: boolean = false;
   unlockedCube: any = null;
   unlockedCubeIsRepeated: boolean = false;
+  unlockedCubeLeveledUp: boolean = false;
   cubes = [
-    { id: 0, name: 'PET Computação', rarity: 'comuns', img: 'assets/cubes/cubo_pet_computacao.png', locked: false },
-    { id: 1, name: 'Cubo de Gelo', rarity: 'comuns', img: 'assets/cubes/ice.svg', locked: true },
-    { id: 2, name: 'Cubo Gamer', rarity: 'comuns', img: 'assets/cubes/gamer.svg', locked: true },
-    { id: 3, name: 'Cubo Nerd', rarity: 'comuns', img: 'assets/cubes/nerd.svg', locked: true },
-    { id: 4, name: 'Cubo Punk', rarity: 'comuns', img: 'assets/cubes/punk.svg', locked: true },
-    { id: 5, name: 'Cubo Kids', rarity: 'comuns', img: 'assets/cubes/kids.svg', locked: true },
-    { id: 6, name: 'Cubo Bruxo', rarity: 'raros', img: 'assets/cubes/wizard.svg', locked: true },
-    { id: 7, name: 'Clubo Penguin', rarity: 'lendarios', img: 'assets/cubes/penguin.svg', locked: true },
-    { id: 8, name: 'Cubo Mágico', rarity: 'raros', img: 'assets/cubes/rubiks.svg', locked: true },
-    { id: 9, name: 'Cubo Terrestre', rarity: 'lendarios', img: 'assets/cubes/earth.svg', locked: true },
-    { id: 10, name: 'Cube of Duty', rarity: 'epicos', img: 'assets/cubes/cube_of_duty.svg', locked: true },
-    { id: 11, name: 'Cubo Aquário', rarity: 'raros', img: 'assets/cubes/cubo_aquario.svg', locked: true },
-    { id: 12, name: 'Cubo Soneca', rarity: 'raros', img: 'assets/cubes/cubo_soneca.svg', locked: true },
-    { id: 13, name: 'Cubo Fantasma', rarity: 'raros', img: 'assets/cubes/cubo_fantasma.svg', locked: true },
-    { id: 14, name: 'Cubo Imersão', rarity: 'epicos', img: 'assets/cubes/cubo_imersao.svg', locked: true },
-    { id: 15, name: 'Cubo Medieval', rarity: 'raros', img: 'assets/cubes/cubo_medieval.svg', locked: true },
-    { id: 16, name: 'Cubo Cowboy', rarity: 'raros', img: 'assets/cubes/cubo_cowboy.svg', locked: true },
-    { id: 17, name: 'Cubo Tóxico', rarity: 'epicos', img: 'assets/cubes/cubo_toxico.svg', locked: true },
+    { id: 0, name: 'PET Computação', rarity: 'comuns', img: 'assets/cubes/cubo_pet_computacao.png', locked: false, xp: 0, level: 1 },
+    { id: 1, name: 'Cubo de Gelo', rarity: 'comuns', img: 'assets/cubes/ice.svg', locked: true, xp: 0, level: 1 },
+    { id: 2, name: 'Cubo Gamer', rarity: 'comuns', img: 'assets/cubes/gamer.svg', locked: true, xp: 0, level: 1 },
+    { id: 3, name: 'Cubo Nerd', rarity: 'comuns', img: 'assets/cubes/nerd.svg', locked: true, xp: 0, level: 1 },
+    { id: 4, name: 'Cubo Punk', rarity: 'comuns', img: 'assets/cubes/punk.svg', locked: true, xp: 0, level: 1 },
+    { id: 5, name: 'Cubo Kids', rarity: 'comuns', img: 'assets/cubes/kids.svg', locked: true, xp: 0, level: 1 },
+    { id: 6, name: 'Cubo Bruxo', rarity: 'raros', img: 'assets/cubes/wizard.svg', locked: true, xp: 0, level: 1 },
+    { id: 7, name: 'Clubo Penguin', rarity: 'lendarios', img: 'assets/cubes/penguin.svg', locked: true, xp: 0, level: 1 },
+    { id: 8, name: 'Cubo Mágico', rarity: 'raros', img: 'assets/cubes/rubiks.svg', locked: true, xp: 0, level: 1 },
+    { id: 9, name: 'Cubo Terrestre', rarity: 'lendarios', img: 'assets/cubes/earth.svg', locked: true, xp: 0, level: 1 },
+    { id: 10, name: 'Cube of Duty', rarity: 'epicos', img: 'assets/cubes/cube_of_duty.svg', locked: true, xp: 0, level: 1 },
+    { id: 11, name: 'Cubo Aquário', rarity: 'raros', img: 'assets/cubes/cubo_aquario.svg', locked: true, xp: 0, level: 1 },
+    { id: 12, name: 'Cubo Soneca', rarity: 'raros', img: 'assets/cubes/cubo_soneca.svg', locked: true, xp: 0, level: 1 },
+    { id: 13, name: 'Cubo Fantasma', rarity: 'raros', img: 'assets/cubes/cubo_fantasma.svg', locked: true, xp: 0, level: 1 },
+    { id: 14, name: 'Cubo Imersão', rarity: 'epicos', img: 'assets/cubes/cubo_imersao.svg', locked: true, xp: 0, level: 1 },
+    { id: 15, name: 'Cubo Medieval', rarity: 'raros', img: 'assets/cubes/cubo_medieval.svg', locked: true, xp: 0, level: 1 },
+    { id: 16, name: 'Cubo Cowboy', rarity: 'raros', img: 'assets/cubes/cubo_cowboy.svg', locked: true, xp: 0, level: 1 },
+    { id: 17, name: 'Cubo Tóxico', rarity: 'epicos', img: 'assets/cubes/cubo_toxico.svg', locked: true, xp: 0, level: 1 },
   ];
 
   constructor(private router: Router) { }
@@ -86,28 +87,31 @@ export class CubesListPage implements OnInit {
 
   unlockCube() {
     const rarity = this.rollRarity();
-    const rarityCubes = this.cubes.filter(cube => cube.locked && cube.rarity === rarity);
-
-    if (rarityCubes.length === 0) {
-      const repeatRarityCubes = this.cubes.filter(cube => cube.rarity === rarity);
-      if (repeatRarityCubes.length > 0) {
-        const randomIndex = Math.floor(Math.random() * repeatRarityCubes.length);
-        const newCube = repeatRarityCubes[randomIndex];
-        this.showUnlockAnimationForCube(newCube, true);
-      }
-      return;
-    }
+    const rarityCubes = this.cubes.filter(cube => cube.rarity === rarity);
 
     const randomIndex = Math.floor(Math.random() * rarityCubes.length);
     const newCube = rarityCubes[randomIndex];
 
-    newCube.locked = false;
-    this.showUnlockAnimationForCube(newCube);
+    if (newCube.locked) {
+      newCube.locked = false;
+      this.showUnlockAnimationForCube(newCube);
+      return;
+    }
+
+    newCube.xp += 100;
+    let leveledUp = false;
+    if (newCube.xp >= 1000) {
+      newCube.xp = 0;
+      newCube.level += 1;
+      leveledUp = true;
+    }
+    this.showUnlockAnimationForCube(newCube, true, leveledUp);
   }
 
-  showUnlockAnimationForCube(cube: any, repeated: boolean = false) {
+  showUnlockAnimationForCube(cube: any, repeated: boolean = false, leveledUp: boolean = false) {
     this.unlockedCube = cube;
     this.unlockedCubeIsRepeated = repeated;
+    this.unlockedCubeLeveledUp = leveledUp;
     this.showUnlockCard = true;
   }
 
@@ -115,5 +119,6 @@ export class CubesListPage implements OnInit {
     this.showUnlockCard = false;
     this.unlockedCube = null;
     this.unlockedCubeIsRepeated = false;
+    this.unlockedCubeLeveledUp = false;
   }
 }

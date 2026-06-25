@@ -176,8 +176,17 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 160px;
-    margin-bottom: 60px;
+    min-height: 230px;
+    margin-bottom: 40px;
+
+    .cube-image-container {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
     p {
       z-index: 1;
@@ -206,22 +215,24 @@
         color: #f59e0b;
       }
 
-      &.repeated-cube {
+      &.unlock-message {
         font-family: "Montserrat Bold";
-        color: #f34343;
+        color: #0d6b38;
       }
     }
   }
 
   .comuns-glow-effect-bg {
     position: absolute;
+    top: -140px;
+    left: -140px;
     width: 400px;
     height: 400px;
     -webkit-mask: radial-gradient(150px circle at center, #000 70%, transparent 100%);
     mask: radial-gradient(150px circle at center, #000 70%, transparent 100%);
 
     background:
-      repeating-conic-gradient(rgba(255,255,255, 0.4) 0 20deg,
+      repeating-conic-gradient(rgba(255, 255, 255, 0.4) 0 20deg,
         transparent 20deg 40deg);
     animation: spinGlow 10s linear infinite;
     z-index: 0;
@@ -229,6 +240,8 @@
 
   .raros-glow-effect-bg {
     position: absolute;
+    top: -140px;
+    left: -140px;
     width: 400px;
     height: 400px;
     -webkit-mask: radial-gradient(150px circle at center, #000 70%, transparent 100%);
@@ -243,6 +256,8 @@
 
   .epicos-glow-effect-bg {
     position: absolute;
+    top: -140px;
+    left: -140px;
     width: 400px;
     height: 400px;
     -webkit-mask: radial-gradient(150px circle at center, #000 70%, transparent 100%);
@@ -257,6 +272,8 @@
 
   .lendarios-glow-effect-bg {
     position: absolute;
+    top: -140px;
+    left: -140px;
     width: 400px;
     height: 400px;
     -webkit-mask: radial-gradient(150px circle at center, #000 70%, transparent 100%);
@@ -343,5 +360,43 @@
 
   100% {
     transform: rotate(360deg);
+  }
+}
+
+.xp-bar-wrapper {
+  position: relative;
+  height: 24px;
+  width: 85%;
+  margin-top: 15px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .xp-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    .xp-fill {
+      height: 100%;
+      background: #38a14f;
+      border-radius: 12px;
+    }
+  }
+
+  .xp-text {
+    position: relative;
+    z-index: 1;
+    margin: 0 !important;
+    font-size: 12px;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7), -1px -1px 1px rgba(0, 0, 0, 0.7), 1px -1px 1px rgba(0, 0, 0, 0.7), -1px 1px 1px rgba(0, 0, 0, 0.7);
+    font-family: "Montserrat Bold";
   }
 }

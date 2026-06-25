@@ -46,12 +46,22 @@
   <div class="custom-overlay" *ngIf="showUnlockCard && unlockedCube">
     <div class="unlock-card">
       <div class="cube-animation-wrapper">
-        <div [class]="unlockedCube.rarity + '-glow-effect-bg'"></div>
-        <img [src]="unlockedCube.img" [alt]="unlockedCube.name" class="animated-cube-img">
+        <div class="cube-image-container">
+          <div [class]="unlockedCube.rarity + '-glow-effect-bg'"></div>
+          <img [src]="unlockedCube.img" [alt]="unlockedCube.name" class="animated-cube-img">
+        </div>
         <p [class]="unlockedCube.rarity + '-text'">{{ unlockedCube.rarity === 'comuns' ? 'Comum' : unlockedCube.rarity
           === 'raros' ? 'Raro' :
           unlockedCube.rarity === 'epicos' ? 'Épico' : 'Lendário' }}</p>
-        <p *ngIf="unlockedCubeIsRepeated" class="repeated-cube">Repetido! 😢</p>
+        <p *ngIf="unlockedCubeLeveledUp" class="unlock-message">Subiu de nível!</p>
+        <p *ngIf="unlockedCubeIsRepeated && !unlockedCubeLeveledUp" class="unlock-message">+100 XP</p>
+        <p *ngIf="!unlockedCubeIsRepeated" class="unlock-message">Novo!🎉</p>
+        <div class="xp-bar-wrapper" *ngIf="unlockedCubeIsRepeated">
+          <div class="xp-bar">
+            <div class="xp-fill" [style.width]="unlockedCubeLeveledUp ? '100%' : (unlockedCube.xp / 1000) * 100 + '%' "></div>
+          </div>
+          <p class="xp-text">{{ unlockedCubeLeveledUp ? '1000/1000 XP' : unlockedCube.xp + '/1000 XP' }}</p>
+        </div>
       </div>
       <h2>Parabéns!</h2>
       <p>Você desbloqueou o <span class="unlocked-cube-name">{{ unlockedCube.name }}</span></p>
