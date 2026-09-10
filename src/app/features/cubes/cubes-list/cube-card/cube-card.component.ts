@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
+import { Cube } from 'src/app/core/models/cube.model';
 
 @Component({
   selector: 'app-cube-card',
@@ -9,8 +10,8 @@ import { IonicModule } from '@ionic/angular';
   standalone: true,
   imports: [CommonModule, IonicModule]
 })
-export class CubeCardComponent  implements OnInit {
-  @Input() cube: any;
+export class CubeCardComponent implements OnInit {
+  @Input() cube!: Cube;
 
   constructor() { }
 
