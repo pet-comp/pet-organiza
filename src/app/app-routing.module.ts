@@ -31,7 +31,10 @@ const routes: Routes = [
     path: 'cube-view',
     loadChildren: () => import('./features/cubes/cube-view/cube-view.module').then(m => m.CubeViewPageModule)
   },
-
+  {
+    path: 'profile',
+    loadComponent: () => import('./features/profile/page/profile.page').then(m => m.ProfilePage)
+  },
 ];
 @NgModule({
   imports: [

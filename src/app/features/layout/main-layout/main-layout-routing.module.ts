@@ -44,6 +44,10 @@ const routes: Routes = [
         loadComponent: () => import('src/app/features/tasks/new-category/page/new-category.page').then(m => m.NewCategoryPage)
       },
       {
+        path: 'profile',
+        loadComponent: () => import('src/app/features/profile/page/profile.page').then(m => m.ProfilePage)
+      },
+      {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'

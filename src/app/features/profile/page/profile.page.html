@@ -1,0 +1,185 @@
+<ion-content [fullscreen]="true" class="custom-background">
+  <div class="profile-container">
+
+    <!-- Top Header Bar -->
+    <header class="header-area">
+      <ion-icon name="chevron-back" class="back-icon" (click)="goBack()"></ion-icon>
+      <h1 class="header-title">Meu Perfil</h1>
+      <ion-icon name="log-out-outline" class="quick-logout-icon" (click)="confirmLogout()"></ion-icon>
+    </header>
+
+    <!-- User Hero Card -->
+    <div class="hero-card">
+      <div class="avatar-wrapper">
+        <div class="avatar-ring">
+          <img [src]="user.avatarUrl" [alt]="user.name" class="avatar-img">
+        </div>
+      </div>
+
+      <h2 class="user-display-name">{{ user.name }}</h2>
+      <p class="user-handle">&#64;{{ user.username }}</p>
+
+      <div class="badges-row">
+        <div class="level-pill">
+          <ion-icon name="trophy" class="pill-icon"></ion-icon>
+          <span>Coleção Nível {{ user.collectionLevel }}</span>
+        </div>
+        <div class="balance-pill">
+          <img src="assets/edges.svg" alt="Arestas" class="edges-icon">
+          <span>{{ user.arestas }} arestas</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Personal Information Card -->
+    <section class="section-card">
+      <div class="section-header">
+        <div class="section-icon-bg">
+          <ion-icon name="person-outline" class="section-icon"></ion-icon>
+        </div>
+        <div>
+          <h2 class="section-title">Informações Pessoais</h2>
+          <p class="section-subtitle">Visualize e altere seus dados cadastrais</p>
+        </div>
+      </div>
+
+      <div class="form-fields">
+        <div class="input-group">
+          <label class="input-label">Nome Completo</label>
+          <app-organiza-input
+            icon="assets/icons/user.svg"
+            placeholder="Seu nome completo"
+            [value]="user.name"
+            (valueChange)="user.name = $event">
+          </app-organiza-input>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Nome de Usuário</label>
+          <app-organiza-input
+            icon="assets/icons/user.svg"
+            placeholder="Nome de usuário"
+            [value]="user.username"
+            (valueChange)="user.username = $event">
+          </app-organiza-input>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">E-mail</label>
+          <app-organiza-input
+            icon="assets/icons/mail.svg"
+            type="email"
+            placeholder="Seu e-mail"
+            [value]="user.email"
+            (valueChange)="user.email = $event">
+          </app-organiza-input>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Data de Nascimento</label>
+          <app-organiza-input
+            icon="assets/icons/cake.svg"
+            placeholder="DD/MM/AAAA"
+            [value]="user.birthDate || ''"
+            (valueChange)="user.birthDate = $event">
+          </app-organiza-input>
+        </div>
+      </div>
+
+      <div class="action-btn-wrapper">
+        <app-organiza-button
+          label="Salvar Alterações"
+          type="button"
+          (onClick)="saveChanges()">
+        </app-organiza-button>
+      </div>
+    </section>
+
+    <!-- App Configurations Card -->
+    <section class="section-card">
+      <div class="section-header">
+        <div class="section-icon-bg">
+          <ion-icon name="settings-outline" class="section-icon"></ion-icon>
+        </div>
+        <div>
+          <h2 class="section-title">Configurações do App</h2>
+          <p class="section-subtitle">Preferências e ajustes de experiência</p>
+        </div>
+      </div>
+
+      <div class="settings-list">
+        <!-- Dark Mode Toggle -->
+        <div class="setting-item">
+          <div class="setting-leading">
+            <ion-icon name="moon-outline" class="setting-icon"></ion-icon>
+            <div class="setting-texts">
+              <span class="setting-name">Tema Escuro</span>
+              <span class="setting-hint">Alternar cores para modo noturno</span>
+            </div>
+          </div>
+          <ion-toggle [(ngModel)]="settings.darkMode" mode="md" class="custom-toggle"></ion-toggle>
+        </div>
+
+        <!-- Push Notifications Toggle -->
+        <div class="setting-item">
+          <div class="setting-leading">
+            <ion-icon name="notifications-outline" class="setting-icon"></ion-icon>
+            <div class="setting-texts">
+              <span class="setting-name">Notificações</span>
+              <span class="setting-hint">Alertas de prazos e novidades</span>
+            </div>
+          </div>
+          <ion-toggle [(ngModel)]="settings.notifications" mode="md" class="custom-toggle"></ion-toggle>
+        </div>
+
+        <!-- Habit Reminders Toggle -->
+        <div class="setting-item">
+          <div class="setting-leading">
+            <ion-icon name="repeat-outline" class="setting-icon"></ion-icon>
+            <div class="setting-texts">
+              <span class="setting-name">Lembretes de Hábitos</span>
+              <span class="setting-hint">Lembrar nos horários agendados</span>
+            </div>
+          </div>
+          <ion-toggle [(ngModel)]="settings.habitReminders" mode="md" class="custom-toggle"></ion-toggle>
+        </div>
+
+        <!-- Sound Effects Toggle -->
+        <div class="setting-item">
+          <div class="setting-leading">
+            <ion-icon name="volume-high-outline" class="setting-icon"></ion-icon>
+            <div class="setting-texts">
+              <span class="setting-name">Efeitos Sonoros</span>
+              <span class="setting-hint">Sons ao completar conquistas</span>
+            </div>
+          </div>
+          <ion-toggle [(ngModel)]="settings.soundEffects" mode="md" class="custom-toggle"></ion-toggle>
+        </div>
+
+        <!-- Password Change Row -->
+        <div class="setting-item clickable-row">
+          <div class="setting-leading">
+            <ion-icon name="lock-closed-outline" class="setting-icon"></ion-icon>
+            <div class="setting-texts">
+              <span class="setting-name">Segurança e Senha</span>
+              <span class="setting-hint">Alterar senha de acesso</span>
+            </div>
+          </div>
+          <ion-icon name="chevron-forward-outline" class="chevron-icon"></ion-icon>
+        </div>
+      </div>
+    </section>
+
+    <!-- Logout & Danger Zone -->
+    <div class="logout-section">
+      <button class="logout-btn" (click)="confirmLogout()">
+        <ion-icon name="log-out-outline" class="logout-icon"></ion-icon>
+        <span>Sair da Conta</span>
+      </button>
+
+      <p class="app-version">Organiza v1.0.0 • PET Computação</p>
+    </div>
+
+  </div>
+</ion-content>
+

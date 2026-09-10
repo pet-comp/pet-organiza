@@ -1,0 +1,313 @@
+.custom-background {
+  --background: var(--background-white, #f2f5ff);
+}
+
+.profile-container {
+  padding: 16px 20px 40px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.header-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+
+  .back-icon {
+    font-size: 28px;
+    color: var(--forest-green, #016438);
+    cursor: pointer;
+  }
+
+  .header-title {
+    color: var(--forest-green, #016438);
+    font-size: 22px;
+    font-weight: 800;
+    font-family: 'Montserrat Bold', sans-serif;
+    margin: 0;
+  }
+
+  .quick-logout-icon {
+    font-size: 24px;
+    color: #d32f2f;
+    cursor: pointer;
+  }
+}
+
+.hero-card {
+  background: var(--pastel-green, #d3edd5);
+  border-radius: 20px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(1, 100, 56, 0.08);
+
+  .avatar-wrapper {
+    position: relative;
+    margin-bottom: 12px;
+
+    .avatar-ring {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: white;
+      border: 4px solid var(--clear-green, #abdaab);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+
+      .avatar-img {
+        width: 76px;
+        height: 76px;
+        object-fit: contain;
+      }
+    }
+
+    .avatar-edit-badge {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--forest-green, #016438);
+      color: white;
+      border: 2px solid white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      transition: transform 0.15s ease;
+
+      &:active {
+        transform: scale(0.92);
+      }
+    }
+  }
+
+  .user-display-name {
+    color: var(--forest-green, #016438);
+    font-family: 'Montserrat Bold', sans-serif;
+    font-size: 20px;
+    margin: 0 0 4px 0;
+  }
+
+  .user-handle {
+    color: #4a5568;
+    font-family: 'Montserrat Medium', sans-serif;
+    font-size: 14px;
+    margin: 0 0 16px 0;
+  }
+
+  .badges-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .level-pill,
+    .balance-pill {
+      background: white;
+      border-radius: 16px;
+      padding: 6px 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Montserrat SemiBold', sans-serif;
+      font-size: 13px;
+      color: var(--forest-green, #016438);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+
+      .pill-icon {
+        font-size: 16px;
+        color: #f59e0b;
+      }
+
+      .edges-icon {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+}
+
+.section-card {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+
+    .section-icon-bg {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--pastel-green, #d3edd5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .section-icon {
+        font-size: 22px;
+        color: var(--forest-green, #016438);
+      }
+    }
+
+    .section-title {
+      font-family: 'Montserrat Bold', sans-serif;
+      font-size: 16px;
+      color: var(--forest-green, #016438);
+      margin: 0 0 2px 0;
+    }
+
+    .section-subtitle {
+      font-family: 'Montserrat Regular', sans-serif;
+      font-size: 12px;
+      color: #64748b;
+      margin: 0;
+    }
+  }
+}
+
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    .input-label {
+      font-family: 'Montserrat SemiBold', sans-serif;
+      font-size: 13px;
+      color: var(--forest-green, #016438);
+      padding-left: 2px;
+    }
+  }
+}
+
+.action-btn-wrapper {
+  margin-top: 20px;
+}
+
+.settings-list {
+  display: flex;
+  flex-direction: column;
+
+  .setting-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f5f9;
+
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .setting-leading {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      .setting-icon {
+        font-size: 20px;
+        color: var(--forest-green, #016438);
+      }
+
+      .setting-texts {
+        display: flex;
+        flex-direction: column;
+
+        .setting-name {
+          font-family: 'Montserrat SemiBold', sans-serif;
+          font-size: 14px;
+          color: #1e293b;
+        }
+
+        .setting-hint {
+          font-family: 'Montserrat Regular', sans-serif;
+          font-size: 11px;
+          color: #64748b;
+        }
+      }
+    }
+
+    .chevron-icon {
+      font-size: 18px;
+      color: #94a3b8;
+    }
+
+    &.clickable-row {
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+
+      &:active {
+        opacity: 0.7;
+      }
+    }
+
+    .custom-toggle {
+      --track-background-checked: var(--forest-green, #016438);
+      --handle-background-checked: white;
+    }
+  }
+}
+
+.logout-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+
+  .logout-btn {
+    width: 100%;
+    padding: 16px;
+    border-radius: 16px;
+    background: #fef2f2;
+    border: 1.5px solid #fecaca;
+    color: #dc2626;
+    font-family: 'Montserrat SemiBold', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    .logout-icon {
+      font-size: 20px;
+    }
+
+    &:active {
+      background: #fee2e2;
+      transform: scale(0.98);
+    }
+  }
+
+  .app-version {
+    font-family: 'Montserrat Regular', sans-serif;
+    font-size: 12px;
+    color: #94a3b8;
+    margin: 0;
+  }
+}
+
