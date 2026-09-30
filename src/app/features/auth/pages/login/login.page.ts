@@ -7,7 +7,6 @@ import { OrganizaInputComponent } from '../../../../shared/components/organiza-i
 import { OrganizaButtonComponent } from '../../../../shared/components/organiza-button/organiza-button.component';
 import { FirebaseService } from '../../../../services/firebase.service';
 import { AlertController } from '@ionic/angular';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -32,7 +31,7 @@ export class LoginPage implements OnInit {
 
     this.firebaseservice.login(this.identificador, this.senha)
       .then(async (cred) => {
-        const primeiro = await this.firebaseservice.primeiroAcesso(cred.user.uid);
+        const primeiro = await this.firebaseservice.primeiroAcesso(cred.user.uid); 
         if (primeiro) {
           this.router.navigate(['/onboarding/carousel']);
         } else {

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserProfile } from 'src/app/core/models/user.model';
+import { AuthService } from 'src/app/core/services/auth.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -15,17 +16,8 @@ export class HomePage implements OnInit {
 
   ngOnInit() {}
 
-  user: UserProfile = {
-    id: 'user_01',
-    name: 'Inserir Texto',
-    username: 'inserir.texto',
-    email: 'inserir.texto@email.com',
-    birthDate: '15/05/2002',
-    collectionLevel: 5,
-    arestas: 1500,
-    equippedCube: 'Clubo Penguin',
-    avatarUrl: 'assets/cubes/penguin.svg',
-  };
+  private authService = inject(AuthService);
+  user = this.authService.currentUser;
 
   navigateToTasks() {
     this.router.navigate(['/mainLayout/tasks']);

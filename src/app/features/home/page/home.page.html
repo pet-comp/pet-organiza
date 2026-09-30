@@ -2,16 +2,16 @@
   <div class="user-header clickable" (click)="navigateToProfile()">
     <div class="avatar-wrapper">
       <div class="avatar-ring">
-        <img [src]="user.avatarUrl" [alt]="user.name" class="avatar-img" />
+        <img [src]="user()?.avatarUrl || 'assets/cubes/cubo_pet_computacao.png'" [alt]="user()?.name || 'Avatar'" class="avatar-img" />
       </div>
     </div>
-    <span class="user-name">Inserir Texto</span>
+    <span class="user-name">{{ user()?.name || 'Usuário'}}</span>
     <ion-icon name="create-outline" class="edit-icon"></ion-icon>
   </div>
 
   <h1 class="welcome-message">
     <span class="dark-text">Olá, </span>
-    <span class="light-text">Inserir Texto</span
+    <span class="light-text">{{ user()?.name || 'Usuário'}}</span
     ><span class="dark-text">!</span>
   </h1>
 
