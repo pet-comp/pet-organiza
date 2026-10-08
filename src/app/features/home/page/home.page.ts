@@ -1,10 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, computed, signal } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserProfile } from 'src/app/core/models/user.model';
 import { AuthService } from 'src/app/core/services/auth.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -12,12 +12,30 @@ import { AuthService } from 'src/app/core/services/auth.service';
   imports: [IonicModule, CommonModule, FormsModule],
 })
 export class HomePage implements OnInit {
-  constructor(private router: Router) {}
+  private router = inject(Router);
+  private authService = inject(AuthService);
+
+  user = this.authService.currentUser;
+  isClaiming = signal<boolean>(false);
+
+  showDailyReward = computed(() => {
+    const u = this.user();
+    return u !== null && !u.dailyReward;
+  });
 
   ngOnInit() {}
 
-  private authService = inject(AuthService);
-  user = this.authService.currentUser;
+  async claimDailyReward() {
+    if (this.isClaiming()) return;
+    this.isClaiming.set(true);
+    try {
+      await this.authService.resgatarRecompensaDiaria(12);
+    } catch (error) {
+      console.error('Erro ao resgatar recompensa diária:', error);
+    } finally {
+      this.isClaiming.set(false);
+    }
+  }
 
   navigateToTasks() {
     this.router.navigate(['/mainLayout/tasks']);

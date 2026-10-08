@@ -8,6 +8,8 @@ export interface UserProfile {
   arestas: number;
   equippedCube?: string;
   avatarUrl?: string;
+  dailyReward?: boolean;
+  lastDailyRewardDate?: string;
 }
 
 export interface AppSettings {

@@ -2,7 +2,11 @@
   <div class="user-header clickable" (click)="navigateToProfile()">
     <div class="avatar-wrapper">
       <div class="avatar-ring">
-        <img [src]="user()?.avatarUrl || 'assets/cubes/cubo_pet_computacao.png'" [alt]="user()?.name || 'Avatar'" class="avatar-img" />
+        <img
+          [src]="user()?.avatarUrl || 'assets/cubes/cubo_pet_computacao.png'"
+          [alt]="user()?.name || 'Avatar'"
+          class="avatar-img"
+        />
       </div>
     </div>
     <span class="user-name">{{ user()?.name || 'Usuário'}}</span>
@@ -28,6 +32,37 @@
     <div class="mission-details">
       <ion-icon name="flag" class="mission-flag"></ion-icon>
       <p>Conclua pelo menos uma tarefa para hoje!</p>
+    </div>
+  </div>
+
+  <div class="custom-overlay" *ngIf="showDailyReward()">
+    <div class="daily-reward-card">
+      <h2 class="reward-title">
+        Parabéns por entrar<br />
+        no aplicativo!
+      </h2>
+
+      <p class="reward-message">
+        Sua luta por uma <span class="highlight">rotina</span><br />
+        <span class="highlight">melhor</span> já começou — e<br />
+        pela sua iniciativa, você<br />
+        ganhou <span class="highlight">12 arestas</span>!
+      </p>
+
+      <p class="reward-submessage">
+        com 12 arestas você já tem um cubo! :)
+      </p>
+
+      <button
+        class="reward-button"
+        type="button"
+        (click)="claimDailyReward()"
+        [disabled]="isClaiming()"
+      >
+        <span class="btn-text">Receber</span>
+        <img src="assets/edges.svg" alt="Arestas" class="btn-icon" />
+        <span class="btn-text">12 arestas</span>
+      </button>
     </div>
   </div>
 

@@ -27,6 +27,16 @@ export class AuthService {
   async carregarUsuario(uid: string) {
     const dados = await this.firebaseService.buscarPerfil(uid);
     if (dados) {
+      const hoje = new Date().toISOString().split('T')[0];
+      let jaRecebeuHoje = false;
+
+      if (dados.lastDailyRewardDate) {
+        jaRecebeuHoje =
+          dados.lastDailyRewardDate === hoje && dados.dailyReward === true;
+      } else {
+        jaRecebeuHoje = dados.dailyReward === true;
+      }
+
       this.currentUser.set({
         id: uid,
         name: dados.nome || dados.name,
@@ -37,8 +47,27 @@ export class AuthService {
         arestas: dados.arestas ?? 0,
         equippedCube: dados.equippedCube,
         avatarUrl: dados.avatarUrl ?? 'assets/cubes/cubo_pet_computacao.png',
+        dailyReward: jaRecebeuHoje,
+        lastDailyRewardDate: dados.lastDailyRewardDate,
       });
     }
+  }
+
+  // Resgata a recompensa diária de arestas
+  async resgatarRecompensaDiaria(arestas: number = 12): Promise<void> {
+    const user = this.currentUser();
+    if (!user) return;
+
+    const novasArestas = (user.arestas ?? 0) + arestas;
+    const hoje = new Date().toISOString().split('T')[0];
+
+    await this.firebaseService.resgatarRecompensaDiaria(user.id, arestas);
+
+    this.atualizarDadosLocais({
+      dailyReward: true,
+      lastDailyRewardDate: hoje,
+      arestas: novasArestas,
+    });
   }
 
   // Atualiza os dados do estado global localmente

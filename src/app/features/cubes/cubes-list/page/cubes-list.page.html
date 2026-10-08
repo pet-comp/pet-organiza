@@ -9,7 +9,7 @@
     <div class="balance-badge">
       <div class="balance-info">
         <img src="assets/edges.svg" alt="Arestas" class="edges-icon">
-        <span><span class="m-bold">Saldo:</span> {{ arestasSaldo }} arestas</span>
+        <span><span class="m-bold">Saldo:</span> {{ user()?.arestas || 0 }} arestas</span>
       </div>
     </div>
   </div>
@@ -24,7 +24,7 @@
       <p class="box-description">1 cubo aleatório</p>
       <button class="unlock-btn" (click)="unlockCube()">
         <p class="button-text">Comprar caixa:</p>
-        <div class="edges-container"><img src="assets/edges.svg" alt="Arestas" class="edges-inlinetext-icon">150
+        <div class="edges-container"><img src="assets/edges.svg" alt="Arestas" class="edges-inlinetext-icon">12
         </div>
       </button>
     </div>
@@ -35,7 +35,7 @@
       <p class="box-description">10 cubos aleatórios</p>
       <button class="unlock-btn" (click)="buyLargeBox()">
         <p class="button-text">Comprar caixa:</p>
-        <div class="edges-container"><img src="assets/edges.svg" alt="Arestas" class="edges-inlinetext-icon">1350
+        <div class="edges-container"><img src="assets/edges.svg" alt="Arestas" class="edges-inlinetext-icon">108
         </div>
       </button>
     </div>
@@ -46,7 +46,7 @@
       <p class="box-description">Chances de raridades maiores</p>
       <button class="unlock-btn" (click)="unlockCube(true)">
         <p class="button-text">Comprar caixa:</p>
-        <div class="edges-container"><img src="assets/edges.svg" alt="Arestas" class="edges-inlinetext-icon">300
+        <div class="edges-container"><img src="assets/edges.svg" alt="Arestas" class="edges-inlinetext-icon">36
         </div>
       </button>
     </div>

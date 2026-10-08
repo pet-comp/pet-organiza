@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { CubeCardComponent } from '../cube-card/cube-card.component';
 import { OrganizaButtonComponent } from 'src/app/shared/components/organiza-button/organiza-button.component';
 import { Cube, CubeRarity } from 'src/app/core/models/cube.model';
-
+import { AuthService } from 'src/app/core/services/auth.service';
 interface UnlockQueueItem {
   cube: Cube;
   repeated: boolean;
@@ -21,12 +21,15 @@ interface UnlockQueueItem {
   imports: [IonicModule, CommonModule, FormsModule, CubeCardComponent, OrganizaButtonComponent],
 })
 export class CubesListPage implements OnInit {
+  private authService = inject(AuthService);
+
+  
   selectedCategory: string = 'todos';
-  arestasSaldo: number = 1500;
   showUnlockCard: boolean = false;
   unlockedCube: Cube | null = null;
   unlockedCubeIsRepeated: boolean = false;
   unlockedCubeLeveledUp: boolean = false;
+  user = this.authService.currentUser
   cubes: Cube[] = [
     {
       id: 0,

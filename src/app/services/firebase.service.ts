@@ -235,4 +235,26 @@ export class FirebaseService {
       await Promise.all(promises);
     });
   }
+
+  // Mecânica de Recompensa Diária
+  async resgatarRecompensaDiaria(
+    uid: string,
+    arestasGanhas: number = 12,
+  ): Promise<void> {
+    return runInInjectionContext(this.injector, async () => {
+      const hoje = new Date().toISOString().split('T')[0];
+      const userRef = doc(this.firestore, 'users', uid);
+      const snap = await getDoc(userRef);
+      const arestasAtuais = snap.exists() ? (snap.data()['arestas'] ?? 0) : 0;
+      await setDoc(
+        userRef,
+        {
+          dailyReward: true,
+          lastDailyRewardDate: hoje,
+          arestas: arestasAtuais + arestasGanhas,
+        },
+        { merge: true },
+      );
+    });
+  }
 }
