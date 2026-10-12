@@ -1,3 +1,7 @@
+.header-section {
+  padding: 0 24px 16px 0px;
+}
+
 .title-div {
   display: flex;
   justify-content: space-between;
@@ -11,6 +15,21 @@
   color: var(--forest-green);
   margin: 0;
   font-family: 'Montserrat Bold', sans-serif;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #7b8390;
+  font-family: 'Montserrat Bold', sans-serif;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.back-icon {
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .categories-card-display {

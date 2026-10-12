@@ -1,7 +1,18 @@
 <ion-content [fullscreen]="true" class="ion-padding custom-background" #content>
+  <header class="header-section">
+    <div class="back-link" (click)="navigateToHomepage()">
+      <ion-icon name="chevron-back-outline" class="back-icon"></ion-icon>
+      <span>Voltar para Home</span>
+    </div>
+  </header>
+
   <div class="title-div">
     <h1 class="page-title">Tarefas</h1>
-    <app-organiza-button label="+ Criar Tarefa" type="button" (onClick)="navigateToCreateTask()"></app-organiza-button>
+    <app-organiza-button
+      label="+ Criar Tarefa"
+      type="button"
+      (onClick)="navigateToCreateTask()"
+    ></app-organiza-button>
   </div>
 
   <div *ngIf="carregando" class="loading-text">Carregando...</div>
@@ -17,7 +28,8 @@
         *ngFor="let cat of categories"
         [category]="cat"
         [totalTasks]="getTasksByCategory(cat.id).length"
-        [completedTasks]="getCompletedTasksByCategory(cat.id)">
+        [completedTasks]="getCompletedTasksByCategory(cat.id)"
+      >
       </app-organiza-category-card>
     </div>
 
@@ -25,13 +37,15 @@
       <app-organiza-task-group
         *ngFor="let cat of categories"
         [category]="cat"
-        [taskList]="getTasksByCategory(cat.id)">
+        [taskList]="getTasksByCategory(cat.id)"
+      >
       </app-organiza-task-group>
 
       <div *ngIf="getTasksSemCategoria().length > 0">
         <app-organiza-task-group
           [category]="{ name: 'Sem categoria', icon: '', colorHue: 0, semCategoria: true }"
-          [taskList]="getTasksSemCategoria()">
+          [taskList]="getTasksSemCategoria()"
+        >
         </app-organiza-task-group>
       </div>
     </div>

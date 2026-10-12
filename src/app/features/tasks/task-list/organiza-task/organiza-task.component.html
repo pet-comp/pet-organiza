@@ -1,13 +1,58 @@
-<ion-item lines="full">
-  <ion-checkbox
-    slot="start"
-    [checked]="task.status === 'concluida'"
-    (ionChange)="changeTaskStatus()"
-  ></ion-checkbox>
+<div class="card">
+  <ion-item lines="none">
+    <ion-checkbox
+      slot="start"
+      [checked]="task.status === 'concluida'"
+      (ionChange)="changeTaskStatus()"
+    ></ion-checkbox>
 
-  <ion-label [class.line-through]="task.status === 'concluida'">
-    <h2>{{ task.titulo }}</h2>
-  </ion-label>
+    <ion-label [class.line-through]="task.status === 'concluida'">
+      <h2 class="titulo">{{ task.titulo }}</h2>
+    </ion-label>
 
-  <ion-icon slot="end" name="ellipsis-horizontal" class="menu-icon"></ion-icon>
-</ion-item>
+    <div slot="end" class="task-end">
+      <div class="date-priority" *ngIf="task.prioridade || task.prazo">
+        <span *ngIf="task.prioridade" class="priority-badge" [ngClass]="priorityClass">
+          {{ task.prioridade }}
+        </span>
+        <div class="deadline" *ngIf="task.prazo">
+          <ion-icon name="calendar-outline" class="calendar-icon"></ion-icon>
+          <span class="deadline-text">{{ formattedPrazo }}</span>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="toggle-btn"
+        (click)="toggleDetails($event)"
+        [attr.aria-expanded]="isExpanded"
+        aria-label="Ver detalhes da tarefa"
+      >
+        <ion-icon
+          [name]="isExpanded ? 'chevron-up-outline' : 'chevron-down-outline'"
+          class="menu-icon"
+        ></ion-icon>
+      </button>
+    </div>
+  </ion-item>
+
+  <!-- Card rosa com descrição e dificuldade -->
+  <div class="details" *ngIf="isExpanded">
+    <p class="details-desc">
+      <strong>Descrição:</strong> {{ task.descricao || 'Sem descrição.' }}
+    </p>
+
+    <div class="details-difficulty" *ngIf="task.dificuldade">
+      <span class="difficulty-text">
+        <strong>Dificuldade:</strong> {{ task.dificuldade }}
+      </span>
+      <div class="difficulty-bars" [attr.aria-label]="'Dificuldade: ' + task.dificuldade">
+        <span class="bar bar-1" [class.filled]="difficultyLevel >= 1"></span>
+        <span class="bar bar-2" [class.filled]="difficultyLevel >= 2"></span>
+        <span class="bar bar-3" [class.filled]="difficultyLevel >= 3"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="task-divider"></div>
+</div>

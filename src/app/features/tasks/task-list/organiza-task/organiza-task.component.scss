@@ -1,13 +1,22 @@
+:host {
+    display: block;
+}
+
+.card {
+    background: transparent;
+    padding-bottom: 2px;
+}
+
 ion-item {
     --padding-start: 20px;
     --inner-padding-end: 20px;
-    --min-height: 60px;
-    --border-color: #e6e6e6;
+    --min-height: 52px;
+    --border-color: transparent;
     --background: var(--background-white);
 
     // Gemini fez essa parte porque eu não tava conseguindo estilizar o checkbox do Ionic, cuidado se for mexer pq nem eu sei como tá funcionando
     ion-checkbox {
-        margin-right: 16px;
+        margin-right: 14px;
 
         /* 1. O ESTADO DESMARCADO: Acessa o quadrado (container) direto na raiz */
         &::part(container) {
@@ -39,11 +48,16 @@ ion-item {
     }
 
     ion-label {
+        margin: 8px 0;
+        white-space: normal;
+
         h2 {
-            font-size: 1rem;
-            color: #555;
-            font-weight: 500;
+            font-size: 0.95rem;
+            color: #2b3445;
+            font-weight: bold;
+            line-height: 1.35;
             transition: all 0.3s ease;
+            margin: 0;
         }
     }
 
@@ -52,9 +66,171 @@ ion-item {
         color: #a5a5a5;
     }
 
-    .menu-icon {
-        color: #999;
-        font-size: 1.2rem;
-        cursor: pointer;
+    .task-end {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-inline-start: 10px;
+        flex-shrink: 0;
+
+        .date-priority {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            min-width: 60px;
+
+            .priority-badge {
+                font-size: 0.75rem;
+                font-weight: 700;
+                padding: 2.5px 9px;
+                border-radius: 6px;
+                text-align: center;
+                line-height: 1.25;
+                letter-spacing: 0.3px;
+
+                &.prio-normal {
+                    background-color: #f0a500;
+                    color: #241400;
+                }
+
+                &.prio-urgente {
+                    background-color: #d32f2f;
+                    color: #ffffff;
+                }
+
+                &.prio-baixa {
+                    background-color: #22863a;
+                    color: #ffffff;
+                }
+            }
+
+            .deadline {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+
+                .calendar-icon {
+                    font-size: 0.95rem;
+                    color: #7b2d69;
+                }
+
+                .deadline-text {
+                    font-size: 0.8rem;
+                    font-weight: 600;
+                    color: #2d3748;
+                    line-height: 1;
+                }
+            }
+        }
+
+        .toggle-btn {
+            background: transparent;
+            border: none;
+            padding: 4px;
+            margin: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            outline: none;
+            border-radius: 50%;
+            transition: background-color 0.2s ease;
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.05);
+            }
+
+            .menu-icon {
+                color: #718096;
+                font-size: 1.25rem;
+                transition: transform 0.2s ease;
+            }
+        }
+    }
+}
+
+.details {
+    margin: 4px 20px 14px 20px;
+    padding: 14px 18px;
+
+    background-color: #f7edf8;
+    border: 1.5px solid #d5a9da;
+    border-radius: 16px;
+
+    animation: slideDown 0.2s ease-out;
+
+    .details-desc {
+        font-size: 0.88rem;
+        color: #2b3445;
+        font-weight: 400;
+        line-height: 1.45;
+        margin: 0 0 8px 0;
+
+        strong {
+            font-weight: 700;
+            color: #1a202c;
+        }
+    }
+
+    .details-difficulty {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.88rem;
+        color: #2b3445;
+
+        strong {
+            font-weight: 700;
+            color: #1a202c;
+        }
+
+        .difficulty-bars {
+            display: inline-flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 15px;
+            margin-left: 2px;
+
+            .bar {
+                width: 4.5px;
+                border-radius: 2px;
+                background-color: #e2c8e6;
+                transition: background-color 0.2s ease;
+
+                &.bar-1 {
+                    height: 7px;
+                }
+
+                &.bar-2 {
+                    height: 11px;
+                }
+
+                &.bar-3 {
+                    height: 15px;
+                }
+
+                &.filled {
+                    background-color: #8a388c;
+                }
+            }
+        }
+    }
+}
+
+.task-divider {
+    height: 1px;
+    background-color: #dce3ed;
+    margin: 4px 20px 0 20px;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
