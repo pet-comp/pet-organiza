@@ -110,7 +110,7 @@
                     [class.chip-green]="selectedDifficulty === dif && dif === 'Tranquila'"
                     [class.chip-yellow]="selectedDifficulty === dif && dif === 'Média'"
                     [class.chip-red]="selectedDifficulty === dif && dif === 'Difícil'"
-                    (click)="selectedDifficulty = dif; erros['dificuldade'] = ''">
+                    (click)="changeDiff(dif); erros['dificuldade'] = ''">
                     <span class="chip-text">{{ dif }}</span>
                   </div>
                 }
@@ -132,7 +132,7 @@
         <div class="icon-circle">
           <ion-icon name="git-network-outline" class="temp-icon"></ion-icon>
         </div>
-        <span class="arest-text">0 arestas</span>
+        <span class="arest-text">{{currentEdges}} arestas</span>
       </div>
 
       <h3 class="reward-title">se concluída no prazo determinado.</h3>

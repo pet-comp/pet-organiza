@@ -29,6 +29,15 @@ export class NewTaskPage implements OnInit {
   priorities = ['Baixa', 'Normal', 'Urgente'];
   difficulties = ['Tranquila', 'Média', 'Difícil'];
 
+  difficultiesToEdges = new Map<string, number>([
+    ['', 0],
+    ['Tranquila', 6],
+    ['Média', 9],
+    ['Difícil', 12]
+  ]);
+  currentEdges: any = this.difficultiesToEdges.get(this.selectedDifficulty);
+
+
   carregando: boolean = false;
   erros: {[key: string]: string} = {};
   tocado: {[key: string]: boolean} = {};
@@ -118,6 +127,11 @@ export class NewTaskPage implements OnInit {
     return Object.keys(this.erros).length === 0;
   }
 
+  changeDiff(diff: string) {
+    this.selectedDifficulty = diff;
+    this.currentEdges = this.difficultiesToEdges.get(this.selectedDifficulty);
+  }
+
   //warning inline (dnv aqueles mini textos vermelhos de erro po)
   onTituloChange(valor: string) {
     this.titulo = valor;
@@ -160,7 +174,7 @@ export class NewTaskPage implements OnInit {
     }
 
     try {
-    await this.firebaseservice.criarTask(uid, {titulo: this.titulo.trim(), descricao: this.descricao.trim(), categoriaId: this.selectedCategory, prazo: this.selectedDate, prioridade: this.selectedPriority, dificuldade: this.selectedDifficulty, });
+    await this.firebaseservice.criarTask(uid, {titulo: this.titulo.trim(), descricao: this.descricao.trim(), categoriaId: this.selectedCategory, prazo: this.selectedDate, prioridade: this.selectedPriority, dificuldade: this.selectedDifficulty, arestas: this.currentEdges});
     await this.showAlert('Sucesso', 'Tarefa criada com sucesso!');
     this.ngOnInit();
     this.router.navigate(['/mainLayout/tasks']);

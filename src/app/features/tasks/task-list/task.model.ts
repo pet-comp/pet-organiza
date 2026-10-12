@@ -16,6 +16,7 @@ export interface Task {
   prazo: string;
   prioridade: string;
   dificuldade: string;
+  arestas?: number;
   status: string;
   recompensaPaga: boolean;
   criadaEm?: any;

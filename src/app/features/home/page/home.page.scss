@@ -179,11 +179,11 @@
     opacity: 0.85;
   }
 
-  .light-card{
+  &.light-card {
     background-color: var(--pastel-green);
   }
 
-  .dark-card{
+  &.dark-card {
     background-color: var(--clear-green);
   }
 }

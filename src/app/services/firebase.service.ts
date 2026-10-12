@@ -20,6 +20,7 @@ import {
   serverTimestamp,
   getDocs,
 } from '@angular/fire/firestore';
+import { getLocalTodayString } from '../core/utils/date.utils';
 
 @Injectable({
   providedIn: 'root',
@@ -133,6 +134,7 @@ export class FirebaseService {
       prazo: string;
       prioridade: string;
       dificuldade: string;
+      arestas: number;
     },
   ) {
     return runInInjectionContext(this.injector, async () => {
@@ -143,6 +145,67 @@ export class FirebaseService {
         recompensaPaga: false,
         criadaEm: serverTimestamp(),
       });
+    });
+  }
+
+  async concluirTask(
+    uid: string,
+    taskId: string,
+  ): Promise<{ arestasRecebidas: number; recompensaPaga: boolean }> {
+    return runInInjectionContext(this.injector, async () => {
+      const taskRef = doc(this.firestore, 'users', uid, 'tasks', taskId);
+      const taskSnap = await getDoc(taskRef);
+
+      if (!taskSnap.exists()) {
+        throw new Error('Tarefa não encontrada.');
+      }
+
+      const taskData = taskSnap.data();
+      const recompensaJaPaga = taskData['recompensaPaga'] === true;
+
+      const arestasMap: Record<string, number> = {
+        'Tranquila': 6,
+        'Média': 9,
+        'Difícil': 12,
+      };
+
+      const arestasTask =
+        taskData['arestas'] ??
+        (taskData['dificuldade'] ? arestasMap[taskData['dificuldade']] ?? 0 : 0);
+
+      let arestasRecebidas = 0;
+
+      if (!recompensaJaPaga) {
+        arestasRecebidas = arestasTask;
+
+        if (arestasRecebidas > 0) {
+          const userRef = doc(this.firestore, 'users', uid);
+          const userSnap = await getDoc(userRef);
+          const arestasAtuais = userSnap.exists()
+            ? (userSnap.data()['arestas'] ?? 0)
+            : 0;
+
+          await setDoc(
+            userRef,
+            { arestas: arestasAtuais + arestasRecebidas },
+            { merge: true },
+          );
+        }
+
+        await updateDoc(taskRef, {
+          status: 'concluida',
+          recompensaPaga: true,
+        });
+      } else {
+        await updateDoc(taskRef, {
+          status: 'concluida',
+        });
+      }
+
+      return {
+        arestasRecebidas,
+        recompensaPaga: true,
+      };
     });
   }
 
@@ -236,13 +299,20 @@ export class FirebaseService {
     });
   }
 
+  // Atualização genérica de dados do usuário
+  async atualizarUsuario(uid: string, dados: Partial<any>): Promise<void> {
+    return runInInjectionContext(this.injector, async () => {
+      await setDoc(doc(this.firestore, 'users', uid), dados, { merge: true });
+    });
+  }
+
   // Mecânica de Recompensa Diária
   async resgatarRecompensaDiaria(
     uid: string,
     arestasGanhas: number = 12,
   ): Promise<void> {
     return runInInjectionContext(this.injector, async () => {
-      const hoje = new Date().toISOString().split('T')[0];
+      const hoje = getLocalTodayString();
       const userRef = doc(this.firestore, 'users', uid);
       const snap = await getDoc(userRef);
       const arestasAtuais = snap.exists() ? (snap.data()['arestas'] ?? 0) : 0;

@@ -3,6 +3,7 @@ import { Injectable, signal, inject } from '@angular/core';
 import { Auth, authState } from '@angular/fire/auth';
 import { UserProfile } from '../models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { isToday, getLocalTodayString } from '../utils/date.utils';
 
 @Injectable({
   providedIn: 'root',
@@ -24,17 +25,21 @@ export class AuthService {
     });
   }
 
+  getUid(): string | null {
+    return this.currentUser()?.id || this.auth.currentUser?.uid || null;
+  }
+
   async carregarUsuario(uid: string) {
     const dados = await this.firebaseService.buscarPerfil(uid);
     if (dados) {
-      const hoje = new Date().toISOString().split('T')[0];
-      let jaRecebeuHoje = false;
+      // Verifica se a recompensa foi resgatada hoje (considerando o fuso horário local)
+      const jaRecebeuHoje =
+        isToday(dados.lastDailyRewardDate) && dados.dailyReward === true;
 
-      if (dados.lastDailyRewardDate) {
-        jaRecebeuHoje =
-          dados.lastDailyRewardDate === hoje && dados.dailyReward === true;
-      } else {
-        jaRecebeuHoje = dados.dailyReward === true;
+      // Se no Firestore dailyReward estiver true mas a data for de outro dia,
+      // reseta no Firestore para manter o documento consistente com o novo dia.
+      if (dados.dailyReward === true && !jaRecebeuHoje) {
+        this.firebaseService.atualizarUsuario(uid, { dailyReward: false });
       }
 
       this.currentUser.set({
@@ -59,7 +64,7 @@ export class AuthService {
     if (!user) return;
 
     const novasArestas = (user.arestas ?? 0) + arestas;
-    const hoje = new Date().toISOString().split('T')[0];
+    const hoje = getLocalTodayString();
 
     await this.firebaseService.resgatarRecompensaDiaria(user.id, arestas);
 

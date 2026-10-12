@@ -23,7 +23,20 @@ export class HomePage implements OnInit {
     return u !== null && !u.dailyReward;
   });
 
-  ngOnInit() {}
+  async ionViewWillEnter() {
+    await this.carregarDadosUsuario();
+  }
+
+  async ngOnInit() {
+    await this.carregarDadosUsuario();
+  }
+
+  private async carregarDadosUsuario() {
+    const uid = this.authService.getUid();
+    if (uid) {
+      await this.authService.carregarUsuario(uid);
+    }
+  }
 
   async claimDailyReward() {
     if (this.isClaiming()) return;

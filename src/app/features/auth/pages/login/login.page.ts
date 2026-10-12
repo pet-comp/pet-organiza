@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { OrganizaInputComponent } from '../../../../shared/components/organiza-input/organiza-input.component';
 import { OrganizaButtonComponent } from '../../../../shared/components/organiza-button/organiza-button.component';
 import { FirebaseService } from '../../../../services/firebase.service';
+import { AuthService } from '../../../../core/services/auth.service';
 import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-login',
@@ -16,7 +17,12 @@ import { AlertController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
   identificador: string = ''; senha: string = '';
-  constructor(private router: Router, private firebaseservice: FirebaseService, private alertcontroller: AlertController) { }
+  constructor(
+    private router: Router,
+    private firebaseservice: FirebaseService,
+    private authService: AuthService,
+    private alertcontroller: AlertController
+  ) { }
 
   async showAlert(titulo: string, mensagem: string) {
     const alert = await this.alertcontroller.create({header: titulo, message: mensagem, buttons: ['OK']});
@@ -31,6 +37,7 @@ export class LoginPage implements OnInit {
 
     this.firebaseservice.login(this.identificador, this.senha)
       .then(async (cred) => {
+        await this.authService.carregarUsuario(cred.user.uid);
         const primeiro = await this.firebaseservice.primeiroAcesso(cred.user.uid); 
         if (primeiro) {
           this.router.navigate(['/onboarding/carousel']);
