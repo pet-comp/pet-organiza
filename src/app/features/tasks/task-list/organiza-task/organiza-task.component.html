@@ -1,5 +1,10 @@
 <ion-item lines="full">
-  <ion-checkbox slot="start" [checked]="task.status === 'concluida'"></ion-checkbox>
+  <ion-checkbox
+    slot="start"
+    [checked]="task.status === 'concluida'"
+    [disabled]="task.status === 'concluida'"
+    (ionChange)="completeTask()"
+  ></ion-checkbox>
 
   <ion-label [class.line-through]="task.status === 'concluida'">
     <h2>{{ task.titulo }}</h2>
