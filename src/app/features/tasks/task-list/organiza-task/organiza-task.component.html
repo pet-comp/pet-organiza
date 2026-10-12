@@ -2,8 +2,7 @@
   <ion-checkbox
     slot="start"
     [checked]="task.status === 'concluida'"
-    [disabled]="task.status === 'concluida'"
-    (ionChange)="completeTask()"
+    (ionChange)="changeTaskStatus()"
   ></ion-checkbox>
 
   <ion-label [class.line-through]="task.status === 'concluida'">

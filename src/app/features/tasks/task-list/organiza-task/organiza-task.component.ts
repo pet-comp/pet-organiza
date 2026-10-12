@@ -17,13 +17,16 @@ export class OrganizaTaskComponent {
 
   @Input() task!: Task;
 
-  async completeTask() {
-    if (this.task.status === 'concluida') return;
-
+  async changeTaskStatus() {
     const uid = this.authService.getUid();
-    if(!uid || !this.task.id) return;
+    if (!uid || !this.task.id) return;
 
-    await this.firebaseService.concluirTask(uid, this.task.id);
-    this.task.status = 'concluida';
+    if (this.task.status === 'concluida') {
+      await this.firebaseService.desconcluirTask(uid, this.task.id);
+      this.task.status = 'pendente';
+    } else {
+      await this.firebaseService.concluirTask(uid, this.task.id);
+      this.task.status = 'concluida';
+    }
   }
-};
+}

@@ -164,14 +164,16 @@ export class FirebaseService {
       const recompensaJaPaga = taskData['recompensaPaga'] === true;
 
       const arestasMap: Record<string, number> = {
-        'Tranquila': 6,
-        'Média': 9,
-        'Difícil': 12,
+        Tranquila: 6,
+        Média: 9,
+        Difícil: 12,
       };
 
       const arestasTask =
         taskData['arestas'] ??
-        (taskData['dificuldade'] ? arestasMap[taskData['dificuldade']] ?? 0 : 0);
+        (taskData['dificuldade']
+          ? (arestasMap[taskData['dificuldade']] ?? 0)
+          : 0);
 
       let arestasRecebidas = 0;
 
@@ -206,6 +208,19 @@ export class FirebaseService {
         arestasRecebidas,
         recompensaPaga: true,
       };
+    });
+  }
+
+  async desconcluirTask(uid: string, taskId: string): Promise<any> {
+    const taskRef = doc(this.firestore, 'users', uid, 'tasks', taskId);
+    const taskSnap = await getDoc(taskRef);
+
+    if (!taskSnap.exists()) {
+      throw new Error('Tarefa não encontrada.');
+    }
+
+    await updateDoc(taskRef, {
+      status: 'pendente',
     });
   }
 
