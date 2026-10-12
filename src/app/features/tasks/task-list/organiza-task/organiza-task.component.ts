@@ -16,6 +16,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class OrganizaTaskComponent {
   private authService = inject(AuthService);
   private firebaseService = inject(FirebaseService);
+  toastOpen = false;
 
   @Input() task!: Task;
 
@@ -114,6 +115,12 @@ export class OrganizaTaskComponent {
     } else {
       await this.firebaseService.concluirTask(uid, this.task.id);
       this.task.status = 'concluida';
+      this.exibirToast();
     }
+  }
+
+  // TODO: Implementar mensagem customizada para cada aresta de tarefas
+  exibirToast() {
+    this.toastOpen = true;
   }
 }

@@ -12,7 +12,11 @@
 
     <div slot="end" class="task-end">
       <div class="date-priority" *ngIf="task.prioridade || task.prazo">
-        <span *ngIf="task.prioridade" class="priority-badge" [ngClass]="priorityClass">
+        <span
+          *ngIf="task.prioridade"
+          class="priority-badge"
+          [ngClass]="priorityClass"
+        >
           {{ task.prioridade }}
         </span>
         <div class="deadline" *ngIf="task.prazo">
@@ -39,14 +43,17 @@
   <!-- Card rosa com descrição e dificuldade -->
   <div class="details" *ngIf="isExpanded">
     <p class="details-desc">
-      <strong>Descrição:</strong> {{ task.descricao || 'Sem descrição.' }}
+      <strong>Descrição:</strong> {{ task.descricao || "Sem descrição." }}
     </p>
 
     <div class="details-difficulty" *ngIf="task.dificuldade">
       <span class="difficulty-text">
         <strong>Dificuldade:</strong> {{ task.dificuldade }}
       </span>
-      <div class="difficulty-bars" [attr.aria-label]="'Dificuldade: ' + task.dificuldade">
+      <div
+        class="difficulty-bars"
+        [attr.aria-label]="'Dificuldade: ' + task.dificuldade"
+      >
         <span class="bar bar-1" [class.filled]="difficultyLevel >= 1"></span>
         <span class="bar bar-2" [class.filled]="difficultyLevel >= 2"></span>
         <span class="bar bar-3" [class.filled]="difficultyLevel >= 3"></span>
@@ -55,4 +62,14 @@
   </div>
 
   <div class="task-divider"></div>
+
+  <ion-toast
+    class="custom-card-toast"
+    [isOpen]="toastOpen"
+    [duration]="2000"
+    position="bottom"
+    message="Tarefa Concluída!"
+    icon="assets/chupa-cubo.svg"
+    (didDismiss)="toastOpen = false"
+  ></ion-toast>
 </div>

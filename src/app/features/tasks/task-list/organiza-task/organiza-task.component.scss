@@ -234,3 +234,37 @@ ion-item {
         transform: translateY(0);
     }
 }
+
+.custom-card-toast {
+  --background: var(--pure-white, #ffffff);
+  --color: #2b3445;
+  --border-radius: 16px;
+  --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --border-color: #dce3ed;
+  --border-width: 1px;
+  --border-style: solid;
+
+  // Tamanho do toast (largura e altura mínima)
+  --width: 90%;
+  --max-width: 380px;
+  --min-height: 64px;
+
+  margin-bottom: 24px;
+
+  &::part(container) {
+    padding: 12px 18px;
+  }
+
+  &::part(message) {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #2b3445;
+  }
+
+  &::part(icon) {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    margin-inline-end: 12px;
+  }
+}
