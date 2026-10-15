@@ -59,9 +59,46 @@
         <span class="bar bar-3" [class.filled]="difficultyLevel >= 3"></span>
       </div>
     </div>
+
+    <ion-icon
+      name="trash-outline"
+      class="delete-btn"
+      aria-label="Excluir tarefa"
+      (click)="showDeleteCard($event)"
+    ></ion-icon>
   </div>
 
   <div class="task-divider"></div>
+
+  <ion-modal
+    [isOpen]="deleteCard"
+    (didDismiss)="closeDeleteCard()"
+    class="delete-task-modal"
+  >
+    <ng-template>
+      <div class="delete-card">
+        <div class="delete-modal-icon">
+          <img src="assets/chupa-cubo.svg" alt="Chupa-cubo">
+        </div>
+        <h3 class="confirm-title">Excluir Tarefa?</h3>
+        <p class="confirm-message">Tem certeza que deseja excluir esta tarefa?</p>
+        <div class="buttons-container">
+          <app-organiza-button
+            label="Não"
+            type="button"
+            class="btn-cancel"
+            (onClick)="closeDeleteCard()"
+          ></app-organiza-button>
+          <app-organiza-button
+            label="Sim"
+            type="button"
+            class="btn-confirm"
+            (onClick)="deleteTask()"
+          ></app-organiza-button>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
 
   <ion-toast
     class="custom-card-toast"

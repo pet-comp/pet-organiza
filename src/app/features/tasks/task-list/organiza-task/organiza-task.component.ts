@@ -5,12 +5,12 @@ import { CommonModule } from '@angular/common';
 import { Task } from '../task.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { AuthService } from 'src/app/core/services/auth.service';
-
+import { OrganizaButtonComponent } from 'src/app/shared/components/organiza-button/organiza-button.component';
 @Component({
   selector: 'app-organiza-task',
   templateUrl: './organiza-task.component.html',
   styleUrls: ['./organiza-task.component.scss'],
-  imports: [IonicModule, FormsModule, CommonModule],
+  imports: [IonicModule, FormsModule, CommonModule, OrganizaButtonComponent],
   standalone: true,
 })
 export class OrganizaTaskComponent {
@@ -21,6 +21,7 @@ export class OrganizaTaskComponent {
   @Input() task!: Task;
 
   isExpanded: boolean = false;
+  deleteCard: boolean = false;
 
   toggleDetails(event?: Event) {
     if (event) {
@@ -117,6 +118,21 @@ export class OrganizaTaskComponent {
       this.task.status = 'concluida';
       this.exibirToast();
     }
+  }
+
+  showDeleteCard(event?: Event) {
+    if (event) {
+      event.stopPropagation();
+    }
+    this.deleteCard = true;
+  }
+
+  closeDeleteCard() {
+    this.deleteCard = false;
+  }
+
+  async deleteTask() {
+    this.closeDeleteCard();
   }
 
   // TODO: Implementar mensagem customizada para cada aresta de tarefas

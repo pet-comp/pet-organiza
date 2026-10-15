@@ -151,6 +151,7 @@ ion-item {
 }
 
 .details {
+    position: relative;
     margin: 4px 20px 14px 20px;
     padding: 14px 18px;
 
@@ -165,7 +166,8 @@ ion-item {
         color: #2b3445;
         font-weight: 400;
         line-height: 1.45;
-        margin: 0 0 8px 0;
+        margin: 0;
+        padding-right: 30px;
 
         strong {
             font-weight: 700;
@@ -174,11 +176,13 @@ ion-item {
     }
 
     .details-difficulty {
+        margin-top: 8px;
         display: flex;
         align-items: center;
         gap: 6px;
         font-size: 0.88rem;
         color: #2b3445;
+        padding-right: 30px;
 
         strong {
             font-weight: 700;
@@ -214,6 +218,21 @@ ion-item {
                     background-color: #8a388c;
                 }
             }
+        }
+    }
+
+    .delete-btn {
+        position: absolute;
+        bottom: 10px;
+        right: 14px;
+        font-size: 1.5rem;
+        color: #710d0d;
+        cursor: pointer;
+        transition: transform 0.2s ease, color 0.2s ease;
+
+        &:hover {
+            color: #9c1414;
+            transform: scale(1.1);
         }
     }
 }
@@ -266,5 +285,95 @@ ion-item {
     width: 32px;
     height: 32px;
     margin-inline-end: 12px;
+  }
+}
+
+.delete-card {
+  background-color: var(--pure-white, #ffffff);
+  border-radius: 24px;
+  padding: 28px 20px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+
+  .delete-modal-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+
+    img {
+      width: 75px;
+      height: 75px;
+      object-fit: contain;
+    }
+
+    ion-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background-color: #fde8e8;
+      color: #c81e1e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+    }
+  }
+
+  .confirm-title {
+    font-family: 'Montserrat Bold', sans-serif;
+    font-size: 1.3rem;
+    color: #1a202c;
+    margin: 0 0 8px 0;
+  }
+
+  .confirm-message {
+    font-family: 'Montserrat Medium', sans-serif;
+    font-size: 0.95rem;
+    color: #595959;
+    line-height: 1.45;
+    margin: 0 0 20px 0;
+  }
+
+  .buttons-container {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+
+    .btn-cancel,
+    .btn-confirm {
+      flex: 1;
+    }
+
+    .btn-cancel {
+      ::ng-deep .main-button {
+        background-color: #e2ebf5;
+        color: #2b3445;
+        font-size: 15px;
+        padding: 13px 8px;
+        border-radius: 12px;
+
+        &:active:not(:disabled) {
+          background-color: #d0dceb;
+        }
+      }
+    }
+
+    .btn-confirm {
+      ::ng-deep .main-button {
+        background-color: #c81e1e;
+        color: #ffffff;
+        font-size: 15px;
+        padding: 13px 8px;
+        border-radius: 12px;
+
+        &:active:not(:disabled) {
+          background-color: #a51717;
+        }
+      }
+    }
   }
 }
