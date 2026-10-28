@@ -1,26 +1,34 @@
 <div class="card">
   <ion-item lines="none">
-    <ion-checkbox
-      slot="start"
-      [checked]="task.status === 'concluida'"
-      (ionChange)="changeTaskStatus()"
-    ></ion-checkbox>
+    <div slot="start" class="checkbox-wrapper" [class.overdue]="isAtrasada">
+      <ion-checkbox
+        [checked]="task.status === 'concluida'"
+        (ionChange)="changeTaskStatus()"
+      ></ion-checkbox>
+      <span *ngIf="isAtrasada" class="overdue-checkbox-badge" aria-hidden="true">!</span>
+    </div>
 
-    <ion-label [class.line-through]="task.status === 'concluida'">
+    <ion-label
+      [class.line-through]="task.status === 'concluida'"
+      [class.overdue-text]="isAtrasada"
+    >
       <h2 class="titulo">{{ task.titulo }}</h2>
     </ion-label>
 
     <div slot="end" class="task-end">
-      <div class="date-priority" *ngIf="task.prioridade || task.prazo">
+      <div class="date-priority" *ngIf="task.prioridade || task.prazo || isAtrasada">
         <span
-          *ngIf="task.prioridade"
+          *ngIf="isAtrasada || task.prioridade"
           class="priority-badge"
           [ngClass]="priorityClass"
         >
-          {{ task.prioridade }}
+          {{ isAtrasada ? 'Atrasada' : task.prioridade }}
         </span>
-        <div class="deadline" *ngIf="task.prazo">
-          <ion-icon name="calendar-outline" class="calendar-icon"></ion-icon>
+        <div class="deadline" [class.overdue-deadline]="isAtrasada" *ngIf="task.prazo">
+          <ion-icon
+            [name]="isAtrasada ? 'warning' : 'calendar-outline'"
+            class="calendar-icon"
+          ></ion-icon>
           <span class="deadline-text">{{ formattedPrazo }}</span>
         </div>
       </div>

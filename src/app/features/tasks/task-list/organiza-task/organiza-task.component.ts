@@ -84,7 +84,55 @@ export class OrganizaTaskComponent {
     return raw;
   }
 
+  get isAtrasada(): boolean {
+    if (!this.task || this.task.status === 'concluida') {
+      return false;
+    }
+    if (this.task.status === 'atrasada') {
+      return true;
+    }
+    if (!this.task.prazo) {
+      return false;
+    }
+
+    const raw = this.task.prazo.trim();
+    const lower = raw.toLowerCase();
+
+    if (lower === 'hoje' || lower === 'amanhã' || lower === 'amanha') {
+      return false;
+    }
+    if (lower === 'ontem') {
+      return true;
+    }
+
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+
+    const isoMatch = raw.match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (isoMatch) {
+      const year = parseInt(isoMatch[1], 10);
+      const month = parseInt(isoMatch[2], 10);
+      const day = parseInt(isoMatch[3], 10);
+      const taskDate = new Date(year, month - 1, day).getTime();
+      return taskDate < today;
+    }
+
+    const slashMatch = raw.match(/^(\d{1,2})\/(\d{1,2})(?:\/(\d{4}))?/);
+    if (slashMatch) {
+      const day = parseInt(slashMatch[1], 10);
+      const month = parseInt(slashMatch[2], 10);
+      const year = slashMatch[3] ? parseInt(slashMatch[3], 10) : now.getFullYear();
+      const taskDate = new Date(year, month - 1, day).getTime();
+      return taskDate < today;
+    }
+
+    return false;
+  }
+
   get priorityClass(): string {
+    if (this.isAtrasada) {
+      return 'prio-atrasada';
+    }
     const prio = (this.task?.prioridade || '').toLowerCase().trim();
     if (prio.includes('urgente') || prio.includes('alta')) {
       return 'prio-urgente';
@@ -131,6 +179,7 @@ export class OrganizaTaskComponent {
     this.deleteCard = false;
   }
 
+  // TODO: Finalizar função de excluir tasks
   async deleteTask() {
     this.closeDeleteCard();
   }

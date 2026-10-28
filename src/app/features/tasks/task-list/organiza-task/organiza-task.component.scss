@@ -14,9 +14,39 @@ ion-item {
     --border-color: transparent;
     --background: var(--background-white);
 
+    .checkbox-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-right: 14px;
+
+        &.overdue ion-checkbox::part(container) {
+            border-color: #d32f2f;
+        }
+
+        .overdue-checkbox-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: #d32f2f;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 800;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 2;
+        }
+    }
+
     // Gemini fez essa parte porque eu não tava conseguindo estilizar o checkbox do Ionic, cuidado se for mexer pq nem eu sei como tá funcionando
     ion-checkbox {
-        margin-right: 14px;
+        margin: 0;
 
         /* 1. O ESTADO DESMARCADO: Acessa o quadrado (container) direto na raiz */
         &::part(container) {
@@ -61,6 +91,10 @@ ion-item {
         }
     }
 
+    .overdue-text h2 {
+        color: #7f1d1d;
+    }
+
     .line-through h2 {
         text-decoration: line-through;
         color: #a5a5a5;
@@ -94,7 +128,8 @@ ion-item {
                     color: #241400;
                 }
 
-                &.prio-urgente {
+                &.prio-urgente,
+                &.prio-atrasada {
                     background-color: #d32f2f;
                     color: #ffffff;
                 }
@@ -120,6 +155,17 @@ ion-item {
                     font-weight: 600;
                     color: #2d3748;
                     line-height: 1;
+                }
+
+                &.overdue-deadline {
+                    .calendar-icon {
+                        color: #d32f2f;
+                    }
+
+                    .deadline-text {
+                        color: #a31515;
+                        font-weight: 700;
+                    }
                 }
             }
         }

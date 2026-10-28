@@ -224,6 +224,8 @@ export class FirebaseService {
     });
   }
 
+  // TODO: Função de excluir Taks
+
   //Mecânicas de categorias
   async buscarCategorias(uid: string): Promise<any[]> {
     return runInInjectionContext(this.injector, async () => {
