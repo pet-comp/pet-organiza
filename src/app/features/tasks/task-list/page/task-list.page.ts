@@ -49,7 +49,7 @@ export class TaskListPage implements OnInit {
 
     if (!uid) {
       await this.showAlert('Erro', 'Sessão expirada. Faça login novamente.');
-      this.router.navigate(['/auth/login']);
+      await this.router.navigate(['/auth/login']);
       return;
     }
 

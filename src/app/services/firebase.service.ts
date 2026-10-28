@@ -22,7 +22,6 @@ import {
   getDocs,
 } from '@angular/fire/firestore';
 import { getLocalTodayString, isPastDate } from '../core/utils/date.utils';
-import { or } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -180,7 +179,8 @@ export class FirebaseService {
       }
 
       const taskData = taskSnap.data();
-      const recompensaJaPaga = taskData['recompensaPaga'] || isPastDate(taskData['prazo']) === true;
+      const recompensaJaPaga =
+        taskData['recompensaPaga'] || isPastDate(taskData['prazo']) === true;
 
       const arestasMap: Record<string, number> = {
         Tranquila: 6,
@@ -243,7 +243,6 @@ export class FirebaseService {
     });
   }
 
-  // TODO: Função de excluir Taks
   async deleteTask(uid: string, taskId: string): Promise<void> {
     return runInInjectionContext(this.injector, async () => {
       const taskRef = doc(this.firestore, 'users', uid, 'tasks', taskId);
@@ -369,4 +368,40 @@ export class FirebaseService {
       );
     });
   }
+
+  // Mecânica de Hábitos
+  async buscarHabitos(uid: string): Promise<any[]> {
+    return runInInjectionContext(this.injector, async () => {
+      const habitosRef = collection(this.firestore, 'users', uid, 'habits');
+      const snap = await getDocs(habitosRef);
+      const habits = snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      return habits.sort(
+        (a: any, b: any) => (a.ordem ?? 999) - (b.ordem ?? 999),
+      );
+    });
+  }
+
+  async criarHabito(
+    uid: string,
+    habito: {
+      title: string; 
+      color: string; 
+      lightColor: string;
+      type: string; 
+      frequency: string;
+      completionType: string; 
+      completionTarget: string | number | undefined;
+      notificationEnabled: boolean; 
+      createdAt: string;
+      checkIns: string[];
+    },
+  ) {
+    return runInInjectionContext(this.injector, async () => {
+      const habitRef = collection(this.firestore, 'users', uid, 'habits');
+      await addDoc(habitRef, {
+        ...habito,
+      });
+    });
+  }
+
 }

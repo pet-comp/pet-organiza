@@ -32,7 +32,8 @@ export class HabitListPage implements OnInit {
     this.refreshHabits();
   }
 
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
+    await this.habitService.carregarDados();
     this.refreshHabits();
   }
 

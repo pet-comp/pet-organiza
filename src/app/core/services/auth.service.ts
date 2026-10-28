@@ -29,6 +29,18 @@ export class AuthService {
     return this.currentUser()?.id || this.auth.currentUser?.uid || null;
   }
 
+  async waitForUid(): Promise<string | null> {
+    const existingUid = this.getUid();
+    if (existingUid) return existingUid;
+
+    return new Promise<string | null>((resolve) => {
+      const unsub = this.auth.onAuthStateChanged((user) => {
+        unsub();
+        resolve(user?.uid ?? null);
+      });
+    });
+  }
+
   async carregarUsuario(uid: string) {
     const dados = await this.firebaseService.buscarPerfil(uid);
     if (dados) {
