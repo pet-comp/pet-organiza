@@ -7,6 +7,7 @@ export interface Habit {
   // Lógica Funcional
   type: 'incremental' | 'recorrente';
   frequency: 'diario' | 'semanal' | 'mensal' | 'anual';
+  customDays?: number[]; // Ex: [1, 3, 5] para Seg, Qua, Sex (0 = Dom ... 6 = Sab)
   completionType: 'numero' | 'data';
   completionTarget?: number | string; // Ex: 100 (vezes) ou '2026-12-31'
   

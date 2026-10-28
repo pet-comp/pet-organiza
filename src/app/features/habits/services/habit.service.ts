@@ -49,8 +49,16 @@ export class HabitService {
   // Gera a visualização dos hábitos para uma data ESPECÍFICA do calendário
   getHabitsForDate(selectedDate: Date): HabitView[] {
     const selectedDateStr = this.dateToString(selectedDate);
+    const dayOfWeek = selectedDate.getDay();
 
-    return this.habits.map((habit) => {
+    return this.habits
+      .filter((habit) => {
+        if (habit.customDays && habit.customDays.length > 0) {
+          return habit.customDays.includes(dayOfWeek);
+        }
+        return true;
+      })
+      .map((habit) => {
       const isDone = habit.checkIns.includes(selectedDateStr);
       const isInfinity = habit.type === 'recorrente';
 
@@ -112,9 +120,11 @@ export class HabitService {
       lightColor: habitData.lightColor,
       type: habitData.type,
       frequency: habitData.frequency,
+      customDays: habitData.customDays ?? [],
       completionType: habitData.completionType,
       completionTarget: habitData.completionTarget,
       notificationEnabled: habitData.notificationEnabled,
+      notificationTime: habitData.notificationTime,
       createdAt: habitData.createdAt,
       checkIns: habitData.checkIns,
     });

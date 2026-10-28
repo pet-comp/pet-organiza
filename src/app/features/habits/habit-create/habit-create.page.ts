@@ -65,8 +65,14 @@ export class HabitCreatePage implements OnInit {
           this.habitName = habit.title;
           this.selectedColor = habit.color;
           this.selectedType = habit.type;
-          // Se a frequência guardada não for um dos padrões, assume personalizada
-          this.selectedFrequency = habit.frequency as any;
+          // Se tiver dias customizados, ativa o modo personalizado
+          if (habit.customDays && habit.customDays.length > 0) {
+            this.selectedFrequency = 'personalizada';
+            this.customFreqType = 'dias_semana';
+            this.customDays = [...habit.customDays];
+          } else {
+            this.selectedFrequency = habit.frequency as any;
+          }
           this.completionType = habit.completionType;
           this.notificationEnabled = habit.notificationEnabled;
           this.notificationTime = habit.notificationTime || '07:00';
@@ -127,7 +133,7 @@ export class HabitCreatePage implements OnInit {
     }
   }
 
-  saveHabit() {
+  async saveHabit() {
     if (!this.habitName.trim()) {
       alert('Por favor, dê um nome ao seu hábito!');
       return;
@@ -143,19 +149,21 @@ export class HabitCreatePage implements OnInit {
         existingHabit.type = this.selectedType;
         // Faz o mapeamento correto igual ao modo criação
         existingHabit.frequency = this.selectedFrequency === 'personalizada' ? 'semanal' : this.selectedFrequency;
+        existingHabit.customDays = this.selectedFrequency === 'personalizada' ? [...this.customDays] : [];
         existingHabit.completionType = this.completionType;
         existingHabit.notificationEnabled = this.notificationEnabled;
         existingHabit.notificationTime = this.notificationTime;
       }
     } else {
       // MODO CRIAÇÃO PADRÃO: Cria um novo registro mestre
-      this.habitService.addHabit({
+      await this.habitService.addHabit({
         id: Date.now().toString(),
         title: this.habitName,
         color: this.selectedColor,
         lightColor: this.selectedColor + '33',
         type: this.selectedType,
         frequency: this.selectedFrequency === 'personalizada' ? 'semanal' : this.selectedFrequency,
+        customDays: this.selectedFrequency === 'personalizada' ? [...this.customDays] : [],
         completionType: this.completionType,
         completionTarget: this.completionType === 'numero' ? this.completionTargetNumber : this.completionTargetDate,
         notificationEnabled: this.notificationEnabled,

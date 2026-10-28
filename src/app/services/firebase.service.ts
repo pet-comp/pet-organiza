@@ -389,9 +389,11 @@ export class FirebaseService {
       lightColor: string;
       type: string; 
       frequency: string;
+      customDays?: number[];
       completionType: string; 
       completionTarget: string | number | undefined;
       notificationEnabled: boolean; 
+      notificationTime?: string;
       createdAt: string;
       checkIns: string[];
     },
