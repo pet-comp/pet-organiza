@@ -1,10 +1,11 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Task } from '../task.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { isPastDate } from 'src/app/core/utils/date.utils';
 import { OrganizaButtonComponent } from 'src/app/shared/components/organiza-button/organiza-button.component';
 @Component({
   selector: 'app-organiza-task',
@@ -19,6 +20,7 @@ export class OrganizaTaskComponent {
   toastOpen = false;
 
   @Input() task!: Task;
+  @Output() taskDeleted = new EventEmitter<string>();
 
   isExpanded: boolean = false;
   deleteCard: boolean = false;
@@ -35,7 +37,8 @@ export class OrganizaTaskComponent {
     const raw = this.task.prazo.trim();
 
     if (raw.toLowerCase() === 'hoje') return 'Hoje';
-    if (raw.toLowerCase() === 'amanhã' || raw.toLowerCase() === 'amanha') return 'Amanhã';
+    if (raw.toLowerCase() === 'amanhã' || raw.toLowerCase() === 'amanha')
+      return 'Amanhã';
 
     // Matches YYYY-MM-DD
     const isoMatch = raw.match(/^(\d{4})-(\d{2})-(\d{2})/);
@@ -49,12 +52,24 @@ export class OrganizaTaskComponent {
       const currentMonth = now.getMonth() + 1;
       const currentDay = now.getDate();
 
-      if (year === currentYear && month === currentMonth && day === currentDay) {
+      if (
+        year === currentYear &&
+        month === currentMonth &&
+        day === currentDay
+      ) {
         return 'Hoje';
       }
 
-      const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-      if (year === tomorrow.getFullYear() && month === (tomorrow.getMonth() + 1) && day === tomorrow.getDate()) {
+      const tomorrow = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate() + 1,
+      );
+      if (
+        year === tomorrow.getFullYear() &&
+        month === tomorrow.getMonth() + 1 &&
+        day === tomorrow.getDate()
+      ) {
         return 'Amanhã';
       }
 
@@ -66,15 +81,29 @@ export class OrganizaTaskComponent {
     if (slashMatch) {
       const day = parseInt(slashMatch[1], 10);
       const month = parseInt(slashMatch[2], 10);
-      const year = slashMatch[3] ? parseInt(slashMatch[3], 10) : new Date().getFullYear();
+      const year = slashMatch[3]
+        ? parseInt(slashMatch[3], 10)
+        : new Date().getFullYear();
 
       const now = new Date();
-      if (year === now.getFullYear() && month === (now.getMonth() + 1) && day === now.getDate()) {
+      if (
+        year === now.getFullYear() &&
+        month === now.getMonth() + 1 &&
+        day === now.getDate()
+      ) {
         return 'Hoje';
       }
 
-      const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-      if (year === tomorrow.getFullYear() && month === (tomorrow.getMonth() + 1) && day === tomorrow.getDate()) {
+      const tomorrow = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate() + 1,
+      );
+      if (
+        year === tomorrow.getFullYear() &&
+        month === tomorrow.getMonth() + 1 &&
+        day === tomorrow.getDate()
+      ) {
         return 'Amanhã';
       }
 
@@ -91,42 +120,7 @@ export class OrganizaTaskComponent {
     if (this.task.status === 'atrasada') {
       return true;
     }
-    if (!this.task.prazo) {
-      return false;
-    }
-
-    const raw = this.task.prazo.trim();
-    const lower = raw.toLowerCase();
-
-    if (lower === 'hoje' || lower === 'amanhã' || lower === 'amanha') {
-      return false;
-    }
-    if (lower === 'ontem') {
-      return true;
-    }
-
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
-
-    const isoMatch = raw.match(/^(\d{4})-(\d{2})-(\d{2})/);
-    if (isoMatch) {
-      const year = parseInt(isoMatch[1], 10);
-      const month = parseInt(isoMatch[2], 10);
-      const day = parseInt(isoMatch[3], 10);
-      const taskDate = new Date(year, month - 1, day).getTime();
-      return taskDate < today;
-    }
-
-    const slashMatch = raw.match(/^(\d{1,2})\/(\d{1,2})(?:\/(\d{4}))?/);
-    if (slashMatch) {
-      const day = parseInt(slashMatch[1], 10);
-      const month = parseInt(slashMatch[2], 10);
-      const year = slashMatch[3] ? parseInt(slashMatch[3], 10) : now.getFullYear();
-      const taskDate = new Date(year, month - 1, day).getTime();
-      return taskDate < today;
-    }
-
-    return false;
+    return isPastDate(this.task.prazo);
   }
 
   get priorityClass(): string {
@@ -145,10 +139,19 @@ export class OrganizaTaskComponent {
 
   get difficultyLevel(): number {
     const diff = (this.task?.dificuldade || '').toLowerCase().trim();
-    if (diff.includes('fácil') || diff.includes('facil') || diff.includes('tranquila') || diff.includes('baixa')) {
+    if (
+      diff.includes('fácil') ||
+      diff.includes('facil') ||
+      diff.includes('tranquila') ||
+      diff.includes('baixa')
+    ) {
       return 1;
     }
-    if (diff.includes('difícil') || diff.includes('dificil') || diff.includes('alta')) {
+    if (
+      diff.includes('difícil') ||
+      diff.includes('dificil') ||
+      diff.includes('alta')
+    ) {
       return 3;
     }
     return 2;
@@ -179,9 +182,13 @@ export class OrganizaTaskComponent {
     this.deleteCard = false;
   }
 
-  // TODO: Finalizar função de excluir tasks
   async deleteTask() {
+    const uid = this.authService.getUid();
+    if (!uid || !this.task.id) return;
+
     this.closeDeleteCard();
+    await this.firebaseService.deleteTask(uid, this.task.id);
+    this.taskDeleted.emit(this.task.id);
   }
 
   // TODO: Implementar mensagem customizada para cada aresta de tarefas

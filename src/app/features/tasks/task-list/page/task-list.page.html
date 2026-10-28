@@ -38,6 +38,7 @@
         *ngFor="let cat of categories"
         [category]="cat"
         [taskList]="getTasksByCategory(cat.id)"
+        (taskDeleted)="onTaskDeleted($event)"
       >
       </app-organiza-task-group>
 
@@ -45,6 +46,7 @@
         <app-organiza-task-group
           [category]="{ name: 'Sem categoria', icon: '', colorHue: 0, semCategoria: true }"
           [taskList]="getTasksSemCategoria()"
+          (taskDeleted)="onTaskDeleted($event)"
         >
         </app-organiza-task-group>
       </div>

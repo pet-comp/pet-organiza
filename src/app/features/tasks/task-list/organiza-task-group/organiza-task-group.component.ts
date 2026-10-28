@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -15,6 +15,7 @@ export class OrganizaTaskGroupComponent {
 
   @Input() category: any;
   @Input() taskList: any[] = [];
+  @Output() taskDeleted = new EventEmitter<string>();
 
   constructor() { }
 

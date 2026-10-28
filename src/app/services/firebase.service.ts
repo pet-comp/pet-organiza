@@ -15,12 +15,13 @@ import {
   setDoc,
   getDoc,
   updateDoc,
+  deleteDoc,
   collection,
   addDoc,
   serverTimestamp,
   getDocs,
 } from '@angular/fire/firestore';
-import { getLocalTodayString } from '../core/utils/date.utils';
+import { getLocalTodayString, isPastDate } from '../core/utils/date.utils';
 
 @Injectable({
   providedIn: 'root',
@@ -121,7 +122,24 @@ export class FirebaseService {
     return runInInjectionContext(this.injector, async () => {
       const tasksRef = collection(this.firestore, 'users', uid, 'tasks');
       const snap = await getDocs(tasksRef);
-      return snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      const todasTasks: any[] = snap.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      const tasksExpiradasConcluidas = todasTasks.filter(
+        (task) => task.status === 'concluida' && isPastDate(task.prazo),
+      );
+
+      if (tasksExpiradasConcluidas.length > 0) {
+        await Promise.all(
+          tasksExpiradasConcluidas.map((task) => this.deleteTask(uid, task.id)),
+        );
+      }
+
+      return todasTasks.filter(
+        (task) => !(task.status === 'concluida' && isPastDate(task.prazo)),
+      );
     });
   }
 
@@ -225,6 +243,12 @@ export class FirebaseService {
   }
 
   // TODO: Função de excluir Taks
+  async deleteTask(uid: string, taskId: string): Promise<void> {
+    return runInInjectionContext(this.injector, async () => {
+      const taskRef = doc(this.firestore, 'users', uid, 'tasks', taskId);
+      await deleteDoc(taskRef);
+    });
+  }
 
   //Mecânicas de categorias
   async buscarCategorias(uid: string): Promise<any[]> {

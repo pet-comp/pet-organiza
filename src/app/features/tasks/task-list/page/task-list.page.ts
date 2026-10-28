@@ -137,6 +137,10 @@ export class TaskListPage implements OnInit {
     return filtered;
   }
 
+  onTaskDeleted(taskId: string) {
+    this.allTasks = this.allTasks.filter(task => task.id !== taskId);
+  }
+
   ionViewWillEnter() {
     this.content?.scrollToTop(0);
     this.carregarDados();

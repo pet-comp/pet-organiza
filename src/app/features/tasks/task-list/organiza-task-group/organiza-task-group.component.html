@@ -19,5 +19,9 @@
 </div>
 
 <ion-list>
-  <app-organiza-task *ngFor="let t of taskList" [task]="t"></app-organiza-task>
+  <app-organiza-task
+    *ngFor="let t of taskList"
+    [task]="t"
+    (taskDeleted)="taskDeleted.emit($event)"
+  ></app-organiza-task>
 </ion-list>

@@ -50,3 +50,37 @@ export function isToday(dateStr: string | null | undefined): boolean {
   return normalized === today;
 }
 
+/**
+ * Verifica se o prazo já passou (data estritamente anterior ao dia de hoje no fuso local).
+ */
+export function isPastDate(dateStr: string | null | undefined): boolean {
+  if (!dateStr || typeof dateStr !== 'string') return false;
+  const raw = dateStr.trim();
+  if (!raw) return false;
+
+  const lower = raw.toLowerCase();
+  if (lower === 'hoje' || lower === 'amanhã' || lower === 'amanha') return false;
+  if (lower === 'ontem') return true;
+
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+
+  const isoMatch = raw.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (isoMatch) {
+    const year = parseInt(isoMatch[1], 10);
+    const month = parseInt(isoMatch[2], 10);
+    const day = parseInt(isoMatch[3], 10);
+    return new Date(year, month - 1, day).getTime() < today;
+  }
+
+  const slashMatch = raw.match(/^(\d{1,2})\/(\d{1,2})(?:\/(\d{4}))?/);
+  if (slashMatch) {
+    const day = parseInt(slashMatch[1], 10);
+    const month = parseInt(slashMatch[2], 10);
+    const year = slashMatch[3] ? parseInt(slashMatch[3], 10) : now.getFullYear();
+    return new Date(year, month - 1, day).getTime() < today;
+  }
+
+  return false;
+}
+
