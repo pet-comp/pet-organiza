@@ -22,6 +22,7 @@ import {
   getDocs,
 } from '@angular/fire/firestore';
 import { getLocalTodayString, isPastDate } from '../core/utils/date.utils';
+import { or } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -179,7 +180,7 @@ export class FirebaseService {
       }
 
       const taskData = taskSnap.data();
-      const recompensaJaPaga = taskData['recompensaPaga'] === true;
+      const recompensaJaPaga = taskData['recompensaPaga'] || isPastDate(taskData['prazo']) === true;
 
       const arestasMap: Record<string, number> = {
         Tranquila: 6,
